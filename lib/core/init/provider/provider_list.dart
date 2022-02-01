@@ -15,7 +15,7 @@ class ApplicationProvider {
   //for proxy items such as proxyprovder or streamprovider
   List<SingleChildWidget> dependItems = [
     ChangeNotifierProvider(create: (context) => ThemeNotifier()),
-    ChangeNotifierProvider(create: (context) => OnBoardAndLoginNotifier()),
+    ChangeNotifierProvider(create: (context) => LoginNotifier()),
     Provider.value(value: NavigationService.instance)
   ];
 

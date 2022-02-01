@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,7 +6,6 @@ import '../../../../core/base/view/base_view.dart';
 import '../../../../core/constants/image/image_path_svg.dart';
 import '../../../../core/extensions/context_extensions.dart';
 import '../../../../core/extensions/string_extensions.dart';
-import '../../../../core/init/lang/locale_keys.g.dart';
 import '../view_model/login_view_model.dart';
 
 class LoginView extends StatelessWidget {
@@ -64,7 +62,7 @@ class LoginView extends StatelessWidget {
             indicatorWeight: 3,
             labelStyle: context.textTheme.bodyText1,
             labelColor: context.customColors.black,
-            tabs: [Tab(icon: Text(LocaleKeys.login_tabOne.locale)), Tab(icon: Text(LocaleKeys.login_tabTwo.locale))]),
+            tabs: [Tab(icon: Text('LocaleKeys.login_tabOne.locale')), Tab(icon: Text('LocaleKeys.login_tabTwo.locale'))]),
       ),
     );
   }
@@ -87,8 +85,6 @@ class LoginView extends StatelessWidget {
             flex: 6,
           ),
           buildLoginButton(context, viewModel),
-          const Spacer(),
-          buildSignUpText(),
           const Spacer()
         ],
       ),
@@ -100,7 +96,7 @@ class LoginView extends StatelessWidget {
       controller: viewModel.emailController,
       validator: (value) => value!.isValidEmail,
       decoration: InputDecoration(
-          labelText: '${LocaleKeys.login_email.locale} (eve.holt@reqres.in)',
+          labelText: 'email (eve.holt@reqres.in)',
           icon: buildContainerIconField(context, Icons.email)),
     );
   }
@@ -108,14 +104,14 @@ class LoginView extends StatelessWidget {
   Widget buildTextFormFieldPassword(BuildContext context, LoginViewModel viewModel) => Observer(builder: (_) {
         return TextFormField(
           controller: viewModel.passwordController,
-          validator: (value) => value!.isNotEmpty ? null : LocaleKeys.login_passwordEnter.locale,
+          validator: (value) => value!.isNotEmpty ? null : 'enter password',
           obscureText: viewModel.isLockOpen,
           decoration: InputDecoration(
               suffix: GestureDetector(
                 onTap: () => viewModel.isLockStateChange(),
                 child: Icon(viewModel.isLockOpen ? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
               ),
-              labelText: '${LocaleKeys.login_password.locale} (cityslicka)',
+              labelText: 'password (cityslicka)',
               icon: buildContainerIconField(context, Icons.lock)),
         );
       });
@@ -130,7 +126,7 @@ class LoginView extends StatelessWidget {
         ));
   }
 
-  Widget buildForgotPassword() => Align(alignment: Alignment.centerRight, child: Text(LocaleKeys.login_forgot.locale));
+  Widget buildForgotPassword() => Align(alignment: Alignment.centerRight, child: Text('Forgot Password?'));
 
   Widget buildLoginButton(BuildContext context, LoginViewModel viewModel) {
     return Observer(builder: (_) {
@@ -146,18 +142,11 @@ class LoginView extends StatelessWidget {
           padding: context.paddingMediumAll,
         ),
         child: Text(
-          LocaleKeys.login_enter.tr(),
+          'Login',
           style: context.textTheme.bodyText1,
         ),
       );
     });
   }
 
-  Widget buildSignUpText() {
-    return Center(
-      child: Wrap(
-        children: [Text(LocaleKeys.login_sign.tr()), GestureDetector(child: Text(LocaleKeys.login_tabTwo.tr()))],
-      ),
-    );
-  }
 }

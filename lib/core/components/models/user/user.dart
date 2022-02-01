@@ -1,15 +1,13 @@
 class UserModel {
-  final String userName;
-  final String userSurname;
+  final String name;
+  final String password;
   UserModel({
-    required this.userName,
-    required this.userSurname,
+    required this.name,
+    required this.password,
   });
-
-  String get shortName => '${userName[0]}${userSurname[0]}';
-  String get fullName => '$userName $userSurname';
+  String get fullName => '$name $password';
 
   factory UserModel.fake() {
-    return UserModel(userName: 'Ali Riza', userSurname: 'Reisoglu');
+    return UserModel(name: 'eve.holt@reqres.in', password: 'cityslicka');
   }
 }

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:starter_project/core/constants/enums/project_platform_enum.dart';
-import 'package:starter_project/core/constants/navigation/navigation_constants.dart';
 import 'package:mobx/mobx.dart';
-
-import 'package:starter_project/core/base/model/base_view_model.dart';
-import 'package:starter_project/core/init/provider/notifiers/on_board_and_login_notifier.dart';
-import 'package:starter_project/view/authentication/splash/service/ISplashService.dart';
+import 'package:movies_catalog/core/base/model/base_view_model.dart';
+import 'package:movies_catalog/core/constants/navigation/navigation_constants.dart';
+import 'package:movies_catalog/core/init/provider/notifiers/on_board_and_login_notifier.dart';
+import 'package:movies_catalog/view/authentication/splash/service/ISplashService.dart';
 import 'package:provider/provider.dart';
 
 part 'splash_view_model.g.dart';
@@ -14,7 +12,7 @@ class SplashViewModel = _SplashViewModelBase with _$SplashViewModel;
 
 abstract class _SplashViewModelBase with Store, BaseViewModel {
   late ISplashService splashService;
-  late OnBoardAndLoginNotifier onBoardAndLoginNotifier;
+  late LoginNotifier loginNotifier;
 
   _SplashViewModelBase(this.splashService);
 
@@ -23,29 +21,12 @@ abstract class _SplashViewModelBase with Store, BaseViewModel {
   @override
   void init() {
     startAnimationOnView();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      controlAppState();
-    });
-    onBoardAndLoginNotifier = context!.watch<OnBoardAndLoginNotifier>();
+    loginNotifier = context!.watch<LoginNotifier>();
   }
 
   @observable
   bool isFirstInit = true;
 
-  Future<void> controlAppState() async {
-    final isNeedForceUpdate = _checkApversion();
-    if (isNeedForceUpdate) {
-      showAboutDialog(context: context!, children: [const Text('please update the application')]);
-    } else {
-      await navigateToScreens();
-    }
-  }
-
-  bool _checkApversion() {
-    final response =
-        splashService.checkDeviceVersionMock(version: '1.0.0', platform: '${PlatformProject.IOS.versionNumber}');
-    return response.isForceUpdate!;
-  }
 
   Future<void> startAnimationOnView() async {
     if (context == null) return;
@@ -56,12 +37,7 @@ abstract class _SplashViewModelBase with Store, BaseViewModel {
   Future<void> navigateToScreens() async {
     await Future.delayed(const Duration(milliseconds: 1000));
     await navigation.navigateToPageClear(
-      path: onBoardAndLoginNotifier.isOnBoardViewed
-          ? onBoardAndLoginNotifier.isLoggedIn
-              ? NavigationConstants.HOME
-              : NavigationConstants.LOGIN_VIEW
-          : NavigationConstants.ON_BOARD,
-    );
+        path: loginNotifier.isLoggedIn ? NavigationConstants.HOME : NavigationConstants.LOGIN_VIEW);
   }
 
   @action

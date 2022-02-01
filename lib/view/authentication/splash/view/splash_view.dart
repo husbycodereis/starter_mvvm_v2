@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:starter_project/core/base/view/base_view.dart';
-import 'package:starter_project/core/constants/image/image_constants.dart';
-import 'package:starter_project/core/extensions/context_extensions.dart';
-import 'package:starter_project/core/extensions/string_extensions.dart';
-import 'package:starter_project/core/init/lang/locale_keys.g.dart';
-import 'package:starter_project/core/init/network/vexana_manager.dart';
-import 'package:starter_project/view/authentication/splash/service/ISplashService.dart';
-import 'package:starter_project/view/authentication/splash/viewmodel/splash_view_model.dart';
+import 'package:movies_catalog/core/base/view/base_view.dart';
+import 'package:movies_catalog/core/constants/image/image_constants.dart';
+import 'package:movies_catalog/core/extensions/context_extensions.dart';
+import 'package:movies_catalog/core/init/network/vexana_manager.dart';
+import 'package:movies_catalog/view/authentication/splash/service/ISplashService.dart';
+import 'package:movies_catalog/view/authentication/splash/viewmodel/splash_view_model.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({Key? key}) : super(key: key);
@@ -43,7 +41,7 @@ class SplashView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                LocaleKeys.setting_splash_welcome.locale,
+                'Hello',
                 style: context.textTheme.headline2!
                     .copyWith(color: Colors.white, fontWeight: FontWeight.bold, letterSpacing: 1.5),
                 textAlign: TextAlign.center,

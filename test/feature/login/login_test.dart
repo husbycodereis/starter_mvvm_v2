@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:starter_project/core/constants/enums/network_route_enum.dart';
+import 'package:movies_catalog/core/constants/enums/network_route_enum.dart';
 import 'package:vexana/vexana.dart';
 
 import 'login_mock_model.dart';

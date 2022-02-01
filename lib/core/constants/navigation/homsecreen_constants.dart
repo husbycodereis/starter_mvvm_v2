@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../../../view/settings/view/settings_view.dart';
-
-enum HomeScreenConstantsEnum {SETTINGS_VIEW }
+enum HomeScreenConstantsEnum {SEARCH_VIEW, FAVORITES_VIEW, WATCHLIST_VIEW }
 
 extension HomeScreenRouteNamesExtension on HomeScreenConstantsEnum {
   Widget get rawValue {
     switch (this) {
-      case HomeScreenConstantsEnum.SETTINGS_VIEW:
-        return const SettingsView();
+      case HomeScreenConstantsEnum.SEARCH_VIEW:
+        return  Container();
+      case HomeScreenConstantsEnum.FAVORITES_VIEW:
+        return  Container();
+      case HomeScreenConstantsEnum.WATCHLIST_VIEW:
+        return  Container();
     }
   }
 }

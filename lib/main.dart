@@ -1,11 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_catalog/core/init/provider/notifiers/theme_notifier.dart';
 import 'package:provider/provider.dart';
-import 'package:starter_project/core/init/provider/notifiers/theme_notifier.dart';
-
-import 'core/constants/app/app_constants.dart';
-import 'core/init/cache/locale_manager.dart';
-import 'core/init/lang/language_manager.dart';
+import 'core/init/cache/shared_prefs_manager.dart';
 import 'core/init/navigation/navigation_routes.dart';
 import 'core/init/navigation/navigation_service.dart';
 import 'core/init/provider/provider_list.dart';
@@ -14,12 +11,7 @@ Future main() async {
   await _init();
   runApp(MultiProvider(
     providers: [...ApplicationProvider.instance.dependItems],
-    child: EasyLocalization(
-      supportedLocales: LanguageManager.instance!.supportedLocales,
-      path: ApplicationConstants.LANG_ASSETS_PATH,
-      startLocale: LanguageManager.instance!.enLocale,
-      child: const MyApp(),
-    ),
+    child: const MyApp(),
   ));
 }
 
@@ -41,6 +33,6 @@ class MyApp extends StatelessWidget {
 
 Future<void> _init() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await LocaleManager.preferencesInit();
+  await SharedPrefsManager.preferencesInit();
   await EasyLocalization.ensureInitialized();
 }

@@ -1,5 +1,5 @@
-name: starter_project
-description: A new Flutter project.
+name: movies_catalog
+description: Turkcell technical challenge written with Flutter framwork in Dart language.
 
 publish_to: "none"
 

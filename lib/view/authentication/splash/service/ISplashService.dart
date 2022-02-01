@@ -1,4 +1,4 @@
-import 'package:starter_project/view/authentication/splash/model/force_update_model.dart';
+import 'package:movies_catalog/view/authentication/splash/model/force_update_model.dart';
 import 'package:vexana/vexana.dart';
 
 part 'splash_service.dart';

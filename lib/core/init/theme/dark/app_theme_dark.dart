@@ -15,11 +15,10 @@ class AppThemeDark extends AppTheme with IDarkTheme {
   ThemeData get theme => ThemeData(
       fontFamily: '',
       primaryColor: colorThemeDark!.red,
-      accentColor: colorThemeDark!.azure,
       backgroundColor: Colors.grey[800],
       scaffoldBackgroundColor: Colors.grey[800],
       brightness: Brightness.dark,
-      textTheme: textTheme());
+      textTheme: textTheme(), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: colorThemeDark!.azure));
 
   TextTheme textTheme() {
     return TextTheme(

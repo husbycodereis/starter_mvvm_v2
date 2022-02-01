@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/constants/navigation/homsecreen_constants.dart';
-import '../../core/extensions/string_extensions.dart';
-import '../../core/init/lang/locale_keys.g.dart';
+
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -60,13 +59,13 @@ class _HomeViewState extends State<HomeView> {
   }
 
   final List<BottomNavigationBarItem> _bottomNavigationItems = [
-    BottomNavigationBarItem(
-      icon: const Icon(Icons.settings),
-      label: LocaleKeys.setting_navbar.locale,
+   const BottomNavigationBarItem(
+      icon:  Icon(Icons.settings),
+      label: '1',
     ),
-    BottomNavigationBarItem(
-      icon: const Icon(Icons.settings),
-      label: LocaleKeys.setting_navbar.locale,
+   const BottomNavigationBarItem(
+      icon:  Icon(Icons.settings),
+      label: '2',
     ),
   ];
 
