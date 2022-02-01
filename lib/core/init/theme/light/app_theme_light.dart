@@ -12,6 +12,7 @@ class AppThemeLight extends AppTheme with ILightTheme {
 
   @override
   ThemeData get theme => ThemeData(
+      brightness: Brightness.light,
       fontFamily: '',
       colorScheme: colorThemeLight!.colorScheme,
       primaryColor: colorThemeLight!.azure, //changes the color of focused label text in textfield

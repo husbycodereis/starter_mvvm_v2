@@ -24,7 +24,7 @@ class SplashView extends StatelessWidget {
             child: Stack(
           children: [
             buildAnimatedTextAndCircularProgressBar(context, viewModel),
-            buildAnimatedIcon(context, viewModel),
+            // buildAnimatedIcon(context, viewModel),
           ],
         )),
       ),
@@ -40,33 +40,14 @@ class SplashView extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'Hello',
-                style: context.textTheme.headline2!
-                    .copyWith(color: Colors.white, fontWeight: FontWeight.bold, letterSpacing: 1.5),
-                textAlign: TextAlign.center,
-              ),
-              context.sizedBoxLowVertical,
-              CircularProgressIndicator.adaptive(
-                backgroundColor: context.customColors.red,
+              Image.asset(
+                ImageConstants.instance.projectIcon,
+                width: context.dynamicWidth(0.3),
               )
             ],
           ),
         );
       }),
     );
-  }
-
-  Widget buildAnimatedIcon(BuildContext context, SplashViewModel viewModel) {
-    return Observer(builder: (_) {
-      return AnimatedAlign(
-        duration: context.shortDuration,
-        alignment: viewModel.isFirstInit ? Alignment.center : Alignment.bottomCenter,
-        child: Image.asset(
-          ImageConstants.instance.projectIcon,
-          width: context.dynamicWidth(0.3),
-        ),
-      );
-    });
   }
 }

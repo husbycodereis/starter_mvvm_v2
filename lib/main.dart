@@ -24,9 +24,6 @@ class MyApp extends StatelessWidget {
       theme: context.watch<ThemeNotifier>().currentTheme,
       navigatorKey: NavigationService.instance.navigatorKey,
       onGenerateRoute: NavigationRoute.instance.generateRoute,
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
     );
   }
 }

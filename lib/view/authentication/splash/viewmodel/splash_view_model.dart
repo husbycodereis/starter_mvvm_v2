@@ -22,11 +22,11 @@ abstract class _SplashViewModelBase with Store, BaseViewModel {
   void init() {
     startAnimationOnView();
     loginNotifier = context!.watch<LoginNotifier>();
+    navigateToScreens();
   }
 
   @observable
   bool isFirstInit = true;
-
 
   Future<void> startAnimationOnView() async {
     if (context == null) return;
@@ -35,7 +35,7 @@ abstract class _SplashViewModelBase with Store, BaseViewModel {
   }
 
   Future<void> navigateToScreens() async {
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 2000));
     await navigation.navigateToPageClear(
         path: loginNotifier.isLoggedIn ? NavigationConstants.HOME : NavigationConstants.LOGIN_VIEW);
   }
