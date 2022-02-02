@@ -38,8 +38,8 @@ class LocalDatabaseManager<T extends LocalDatabaseModel?> {
     return store.delete(await LocalDatabase.instance.database, finder: finder);
   }
 
-  Future<void> deleteAll() async {
-    await store.delete(await LocalDatabase.instance.database);
+  Future<int> deleteAll() async {
+    return store.delete(await LocalDatabase.instance.database);
   }
 
   Future<List<MovieResultModel>> getCachedRequests() async {

@@ -10,6 +10,10 @@ void main() {
   late LocalDatabaseFake localDatabaseFake;
   late Database db;
   late LocalDatabaseManager localDatabaseManagerFake;
+  final List<MovieResultModel?> movieResultList = [
+    MovieResultModel(id: 1, title: 'first'),
+    MovieResultModel(id: 2, title: 'second')
+  ];
   setUp(() async {
     localDatabaseFake = LocalDatabaseFake();
     db = await localDatabaseFake.database;
@@ -47,5 +51,55 @@ void main() {
     final key = await localDatabaseManagerFake.insert(MovieResultModel(id: 1, title: 'hello'));
     final res = await localDatabaseManagerFake.store.record(key).get(db);
     expect(res!['title'], 'hello');
+  });
+
+  test('Insert all', () async {
+    final List<int> key = await localDatabaseManagerFake.insertAll(movieResultList);
+    final res = await Future.wait(key.map((e) => localDatabaseManagerFake.store.record(e).get(db)).toList());
+    expect(res.length, 2);
+  });
+
+  test('Delete method', () async {
+    //create an object in db
+    final insertKey = await localDatabaseManagerFake.insert(MovieResultModel(id: 1, title: 'hello'));
+    final insertResult = await localDatabaseManagerFake.store.record(insertKey).get(db);
+    //expect the object value is initial
+    expect(insertResult!['title'], 'hello');
+    //delete the object
+    final deleteKey = await localDatabaseManagerFake.delete(MovieResultModel(id: 1, title: 'hello'));
+    final deleteResult = await localDatabaseManagerFake.store.record(deleteKey).get(db);
+    //expect the object value is null
+    expect(deleteResult, isNull);
+    //delete db
+    await localDatabaseFake.clear();
+  });
+
+  test('Delete All method', () async {
+    //create objects
+
+    final insertKey = await localDatabaseManagerFake.insertAll(movieResultList);
+    final insertResult =
+        await Future.wait(insertKey.map((e) => localDatabaseManagerFake.store.record(e).get(db)).toList());
+    //expect the object value is there
+    expect(insertResult[1]!['title'], 'second');
+    //delete objects
+    final deleteKey = await localDatabaseManagerFake.deleteAll();
+    final deleteResult = await localDatabaseManagerFake.store.record(deleteKey).get(db);
+    //expect the object value is now 'changed'
+    expect(deleteResult, isNull);
+    //delete db
+    await localDatabaseFake.clear();
+  });
+
+  test('Get Cached Requests method', () async {
+    //create and Add Requests
+    final insertKey = await localDatabaseManagerFake.insertAll(movieResultList);
+    final insertResult = await Future.wait(insertKey.map((e) => localDatabaseManagerFake.store.record(e).get(db)).toList());
+    //expect the Result list length is equal to added requests list
+    expect(insertResult.length, 2);
+    //get the Cached Requests
+    final cachedRequestsList = await localDatabaseManagerFake.getCachedRequests();
+    //expect the Result list length is equal to added requests list again
+    expect(cachedRequestsList.length, 2);
   });
 }
