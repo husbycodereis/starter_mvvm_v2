@@ -1,1 +1,1 @@
-enum SharedPrefKeys { TOKEN }
+enum SharedPrefKeys { TOKEN, DARKMODE }

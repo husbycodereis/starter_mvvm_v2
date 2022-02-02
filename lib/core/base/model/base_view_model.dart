@@ -8,7 +8,7 @@ abstract class BaseViewModel {
   BuildContext? context;
 
   VexanaManager vexanaManager = VexanaManager.instance;
-  SharedPrefsManager localeManager = SharedPrefsManager.instance;
+  SharedPrefsManager sharedPrefManager = SharedPrefsManager.instance;
   NavigationService navigation = NavigationService.instance;
   void setContext(BuildContext context);
   void init();

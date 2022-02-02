@@ -44,7 +44,7 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
       final response = await loginService.fetchUserControl(
           LoginModel(email: emailController.text, password: passwordController.text), context!);
       if (response != null) {
-        await localeManager.setStringValue(SharedPrefKeys.TOKEN, response.token!);
+        await sharedPrefManager.setStringValue(SharedPrefKeys.TOKEN, response.token!);
         await context!.showSnackBar('response token: ${response.token!}');
         await navigation.navigateToPage(
           path: NavigationConstants.HOME,

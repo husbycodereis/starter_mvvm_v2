@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/enums/app_theme_enum.dart';
+import 'package:movies_catalog/core/constants/enums/locale_keys_enum.dart';
+import 'package:movies_catalog/core/init/cache/shared_prefs_manager.dart';
+
 import '../../theme/dark/app_theme_dark.dart';
 import '../../theme/light/app_theme_light.dart';
 
 class ThemeNotifier extends ChangeNotifier {
-  ThemeData _currentTheme = AppThemeLight.instance.theme;
-  AppThemeEnum _currenThemeEnum = AppThemeEnum.LIGHT;
-
+  late bool isDarkMode;
+  late ThemeData _currentTheme;
+  ThemeNotifier() {
+    isDarkMode = SharedPrefsManager.instance.getBoolValue(SharedPrefKeys.DARKMODE);
+    _currentTheme = isDarkMode ? AppThemeDark.instance.theme : AppThemeLight.instance.theme;
+  }
   ThemeData get currentTheme => _currentTheme;
-  AppThemeEnum get currenThemeEnum => _currenThemeEnum;
 
   void changeTheme() {
-    print(_currentTheme);
-    print(_currenThemeEnum.name);
-    if (_currenThemeEnum == AppThemeEnum.LIGHT) {
-      _currenThemeEnum = AppThemeEnum.DARK;
-      _currentTheme = AppThemeDark.instance.theme;
+    if (!isDarkMode) {
+      toggleDarkMode(value: true);
     } else {
-      _currenThemeEnum = AppThemeEnum.LIGHT;
-      _currentTheme = AppThemeLight.instance.theme;
+      toggleDarkMode();
     }
+    debugPrint(isDarkMode.toString());
     notifyListeners();
+  }
+
+  void toggleDarkMode({bool value = false}) {
+    isDarkMode = value;
+    _currentTheme = value ? AppThemeDark.instance.theme : AppThemeLight.instance.theme;
+    SharedPrefsManager.instance.setBoolValue(SharedPrefKeys.DARKMODE, value: value);
   }
 }
