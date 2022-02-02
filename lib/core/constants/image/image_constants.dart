@@ -6,7 +6,7 @@ class ImageConstants {
 
   ImageConstants._init();
 
-  String get projectIcon => toPng('mvvm');
+  String get projectIcon => toPng('westerops');
 
   String toPng(String name) => 'assets/images/$name.png';
 }

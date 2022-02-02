@@ -9,9 +9,6 @@ class SettingsDynamicModel {
   });
 
   factory SettingsDynamicModel.fakeArchitecturePR() {
-    return SettingsDynamicModel(title: 'Project Contributors', url: ApplicationConstants.APP_WEB_SITE);
-  }
-  factory SettingsDynamicModel.fakeNull() {
-    return SettingsDynamicModel(title: 'Project Owner');
+    return SettingsDynamicModel(title: 'WesterOps', url: ApplicationConstants.APP_WEB_SITE);
   }
 }

@@ -19,7 +19,7 @@ class SplashView extends StatelessWidget {
         model.init();
       },
       onPageBuilder: (BuildContext context, SplashViewModel viewModel) => Scaffold(
-        backgroundColor: context.customColors.orange,
+        backgroundColor: context.customColors.white,
         body: SafeArea(
             child: Stack(
           children: [
@@ -42,7 +42,7 @@ class SplashView extends StatelessWidget {
             children: [
               Image.asset(
                 ImageConstants.instance.projectIcon,
-                width: context.dynamicWidth(0.3),
+                width: context.dynamicWidth(0.5),
               )
             ],
           ),
