@@ -1,14 +1,16 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:movies_catalog/core/init/cache/local_database_manager.dart';
 part 'movie_result.g.dart';
 
 @JsonSerializable()
-class MovieResultModel {
+class MovieResultModel extends LocalDatabaseModel {
   @JsonKey(name: 'poster_path')
   String? posterPath;
   bool? adult;
   String? overview;
   @JsonKey(name: 'release_date')
   String? releaseDate;
+  @override
   int? id;
   @JsonKey(name: 'original_title)')
   String? originalTitle;
@@ -43,5 +45,6 @@ class MovieResultModel {
       posterPath != null ? 'https://image.tmdb.org/t/p/w200$posterPath' : 'https://i.imgur.com/SuogN3V.png';
 
   factory MovieResultModel.fromJson(Map<String, dynamic> json) => _$MovieResultModelFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$MovieResultModelToJson(this);
 }
