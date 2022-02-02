@@ -7,5 +7,5 @@ abstract class ISearchService {
 
   ISearchService({required this.manager});
 
-  Future<SearchResultModel?> fetchSearchResults(BuildContext context, String encodedQuery);
+  Future<SearchResultModel?> fetchSearchResults(BuildContext context, String movieQuery);
 }

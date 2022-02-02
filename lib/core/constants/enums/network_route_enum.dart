@@ -14,6 +14,6 @@ extension NetworkRoutesString on NetWorkRoutes {
 
   String movieSearch(String movieQuery) {
     final String encodedQuery = Uri.encodeFull(movieQuery);
-    return '/search/multi?api_key=${ApplicationConstants.movieApi}.&query=$encodedQuery&language=en-US&page=1&include_adult=false';
+    return '/search/multi?api_key=${ApplicationConstants.movieApi}&query=$encodedQuery&language=en-US&page=1&include_adult=false';
   }
 }

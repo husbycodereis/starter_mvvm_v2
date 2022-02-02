@@ -36,7 +36,6 @@ class SettingsView extends StatelessWidget {
                     context.sizedBoxLowVertical.toSliver,
                     buildProjectCore(context, viewModel).toSliver,
                     context.sizedBoxLowVertical.toSliver,
-                    context.sizedBoxLowVertical.toSliver,
                     buildCardAbout(context, viewModel).toSliver,
                     context.sizedBoxMediumVertical.toSliver,
                     buildLogoutButton(context, viewModel).toSliver,
@@ -89,7 +88,7 @@ class SettingsView extends StatelessWidget {
             SizedBox(
               width: context.lowValue,
             ),
-            Text(viewModel.userModel.fullName)
+            Text(viewModel.userModel.name)
           ],
         ),
       ),
@@ -97,15 +96,15 @@ class SettingsView extends StatelessWidget {
   }
 
   Widget buildProjectCore(BuildContext context, SettingsViewModel viewModel) {
-    return buildCardHeader(context, viewModel, title: 'hello title', children: [
+    return buildCardHeader(context, viewModel, title: 'Tools', children: [
       ListTile(
-        title: Text('title'),
+        title: Text('App Theme'),
         trailing: IconButton(
             onPressed: viewModel.changeAppTheme,
             icon: context.watch<ThemeNotifier>().currentTheme == AppThemeLight.instance.theme
                 ? LottiePathEnum.SUN.toWidget
                 : LottiePathEnum.MOON.toWidget),
-        subtitle: Text('dfgfdg'),
+        subtitle: Text(context.watch<ThemeNotifier>().currentTheme == AppThemeLight.instance.theme ? 'Light' : 'Dark'),
       ),
     ]);
   }
@@ -131,19 +130,13 @@ class SettingsView extends StatelessWidget {
   }
 
   Widget buildCardAbout(BuildContext context, SettingsViewModel viewModel) {
-    return buildCardHeader(context, viewModel, title: 'Title', children: [
+    return buildCardHeader(context, viewModel, title: 'About', children: [
       ListTile(
         onTap: viewModel.navigateToContribution,
         leading: const Icon(Icons.favorite),
-        title: Text('Contributions'),
+        title: Text('WesterOps Home'),
         trailing: const Icon(Icons.keyboard_arrow_right_outlined),
       ),
-      ListTile(
-        onTap: viewModel.navigateToFakeContribution,
-        leading: const Icon(Icons.home),
-        title: Text('Home'),
-        trailing: const Icon(Icons.keyboard_arrow_right_outlined),
-      )
     ]);
   }
 

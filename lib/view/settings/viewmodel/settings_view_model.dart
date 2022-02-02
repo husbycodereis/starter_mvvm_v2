@@ -33,8 +33,4 @@ abstract class _SettingsViewModelBase with Store, BaseViewModel {
   Future<void> logoutApp() async {
     await navigation.navigateToPageClear(path: NavigationConstants.LOGIN_VIEW);
   }
-
-  Future<void> navigateToOnboard() async {
-    await navigation.navigateToPage(path: NavigationConstants.ON_BOARD);
-  }
 }

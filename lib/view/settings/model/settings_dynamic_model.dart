@@ -1,3 +1,5 @@
+import 'package:movies_catalog/core/constants/app/app_constants.dart';
+
 class SettingsDynamicModel {
   final String? url;
   final String title;
@@ -7,8 +9,7 @@ class SettingsDynamicModel {
   });
 
   factory SettingsDynamicModel.fakeArchitecturePR() {
-    return SettingsDynamicModel(
-        title: 'Project Contributors', url: 'https://github.com/VB10/flutter-architecture-template');
+    return SettingsDynamicModel(title: 'Project Contributors', url: ApplicationConstants.APP_WEB_SITE);
   }
   factory SettingsDynamicModel.fakeNull() {
     return SettingsDynamicModel(title: 'Project Owner');

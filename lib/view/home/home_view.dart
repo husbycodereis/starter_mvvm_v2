@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../core/constants/navigation/homsecreen_constants.dart';
 
-
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 
@@ -59,13 +58,21 @@ class _HomeViewState extends State<HomeView> {
   }
 
   final List<BottomNavigationBarItem> _bottomNavigationItems = [
-   const BottomNavigationBarItem(
-      icon:  Icon(Icons.settings),
-      label: '1',
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.search),
+      label: 'Search',
     ),
-   const BottomNavigationBarItem(
-      icon:  Icon(Icons.settings),
-      label: '2',
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.favorite),
+      label: 'Favorites',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.list),
+      label: 'Watchlist',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.settings),
+      label: 'Settings',
     ),
   ];
 

@@ -20,6 +20,7 @@ class SettingsDynamicView extends StatelessWidget {
       ),
       body: WebView(
         initialUrl: model.url ?? ApplicationConstants.APP_WEB_SITE,
+        javascriptMode: JavascriptMode.unrestricted,
       ),
     );
   }

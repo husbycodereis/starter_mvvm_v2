@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movies_catalog/core/components/exceptions/navigate_model_exception.dart';
 import 'package:movies_catalog/view/authentication/splash/view/splash_view.dart';
+import 'package:movies_catalog/view/search/model/movie_result.dart';
+import 'package:movies_catalog/view/search/view/subview/movie_details_view.dart';
+import 'package:movies_catalog/view/settings/model/settings_dynamic_model.dart';
+import 'package:movies_catalog/view/settings/view/subview/settings_dynamic_view.dart';
 import '../../../view/authentication/login/view/login_view.dart';
 import '../../../view/home/home_view.dart';
 import '../../components/widgets/cards/not_found_navigation.dart';
@@ -19,6 +24,16 @@ class NavigationRoute {
         return normalNavigate(const LoginView());
       case NavigationConstants.HOME:
         return normalNavigate(const HomeView());
+      case NavigationConstants.MOVIE_DETAILS_VIEV:
+        if (args.arguments is MovieResultModel) {
+          return normalNavigate(MovieDetailsView(model: args.arguments! as MovieResultModel));
+        }
+        throw NavigateException<SettingsDynamicModel>(args.arguments);
+      case NavigationConstants.SETTINGS_WEB_VIEW:
+        if (args.arguments is SettingsDynamicModel) {
+          return normalNavigate(SettingsDynamicView(model: args.arguments! as SettingsDynamicModel));
+        }
+        throw NavigateException<SettingsDynamicModel>(args.arguments);
 
       default:
         return normalNavigate(const NotFoundNavigation());
