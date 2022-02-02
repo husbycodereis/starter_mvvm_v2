@@ -13,7 +13,7 @@ class VexanaManager {
   VexanaManager.init();
 
   INetworkManager networkManager =
-      NetworkManager(isEnableLogger: true, options: BaseOptions(baseUrl: 'https://jsonplaceholder.typicode.com'));
+      NetworkManager(isEnableLogger: true, options: BaseOptions(baseUrl: 'https://api.themoviedb.org/3'));
   INetworkManager loginManager =
       NetworkManager(isEnableLogger: true, options: BaseOptions(baseUrl: 'https://reqres.in/api'));
 }
