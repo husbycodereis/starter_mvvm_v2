@@ -18,9 +18,9 @@ abstract class _SearchViewModelBase with Store, BaseViewModel {
   }
 
   @override
-  void init() {
+  Future init() async{
     searchService = SearchService(vexanaManager.networkManager);
-    searchWithQuery();
+   await searchWithQuery();
   }
 
   @observable
@@ -42,7 +42,7 @@ abstract class _SearchViewModelBase with Store, BaseViewModel {
     loading = !loading;
   }
 
-  navigateToDetails(MovieResultModel movie) {
+ void navigateToDetails(MovieResultModel movie) {
     navigation.navigateToPage(path: NavigationConstants.MOVIE_DETAILS_VIEV, data: movie);
   }
 }

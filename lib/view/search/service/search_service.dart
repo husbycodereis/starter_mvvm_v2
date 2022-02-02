@@ -10,7 +10,7 @@ class SearchService extends ISearchService with ServiceHelper {
   @override
   Future<SearchResultModel?> fetchSearchResults(BuildContext context, String movieQuery) async {
     final response = await manager.send<SearchResultModel, SearchResultModel>(
-      NetWorkRoutes.SEARCH.movieSearch(movieQuery),
+      NetWorkRoutes.SEARCH.value(movieQuery: movieQuery),
       method: RequestType.GET,
       parseModel: SearchResultModel(),
     );

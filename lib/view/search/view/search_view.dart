@@ -18,10 +18,12 @@ class SearchView extends StatelessWidget {
         },
         onPageBuilder: (BuildContext context, SearchViewModel viewModel) => Observer(builder: (_) {
               return Scaffold(
-                body: viewModel.loading ? const Center(child: CircularProgressIndicator()) : buildBody(viewModel),
+                body: viewModel.loading ? buildLoading() : buildBody(viewModel),
               );
             }));
   }
+
+  Center buildLoading() => const Center(child: CircularProgressIndicator());
 
   ListView buildBody(SearchViewModel viewModel) {
     return ListView.builder(

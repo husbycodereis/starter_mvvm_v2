@@ -3,10 +3,12 @@ import 'package:movies_catalog/core/constants/app/app_constants.dart';
 enum NetWorkRoutes { LOGIN,SEARCH }
 
 extension NetworkRoutesString on NetWorkRoutes {
-  String get rawValue {
+  String  value({String? movieQuery}) {
     switch (this) {
       case NetWorkRoutes.LOGIN:
         return '/login';
+      case NetWorkRoutes.SEARCH:
+        return movieSearch(movieQuery!);
       default:
         throw Exception('Route not found');
     }

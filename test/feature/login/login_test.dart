@@ -12,7 +12,8 @@ void main() {
     networkManager = NetworkManager(isEnableLogger: true, options: BaseOptions(baseUrl: 'https://reqres.in/api'));
   });
   test('Login Success', () async {
-    final data = await networkManager.send<LoginMockResponseModel, LoginMockResponseModel>(NetWorkRoutes.LOGIN.rawValue,
+    final data = await networkManager.send<LoginMockResponseModel, LoginMockResponseModel>(
+        NetWorkRoutes.LOGIN.value(),
         method: RequestType.POST,
         parseModel: LoginMockResponseModel(),
         data: LoginMockModel(email: 'eve.holt@reqres.in', password: 'cityslicka'));
