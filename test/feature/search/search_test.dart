@@ -20,7 +20,7 @@ void main() {
       parseModel: SearchResultModel(),
     );
 
-    log('total results are: ${data.data!.results!.first.overview}');
+    log('total results are: ${data.data!.results!.length}');
     expect(data.data!.results, isNotEmpty);
   });
 }
