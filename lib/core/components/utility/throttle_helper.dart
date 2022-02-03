@@ -3,7 +3,7 @@ import 'dart:async';
 class ThrottleStringHelper {
   String? _previousText;
 
-  final int _maxTimerValue = 5;
+  final int _maxTimerValue = 12;
   int _timerValue = 0;
   ThrottleStringHelper() {
     _setMaxValue();
@@ -12,7 +12,7 @@ class ThrottleStringHelper {
   void onDelayTouch(String text, Function(String? text) onComplete) {
     _previousText = text;
     if (_timerValue == _maxTimerValue) {
-      Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      Timer.periodic(const Duration(milliseconds: 150), (timer) {
         _timerValue--;
         if (_timerValue == 0) {
           onComplete(_previousText);

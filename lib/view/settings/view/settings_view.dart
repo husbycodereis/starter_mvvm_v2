@@ -25,7 +25,7 @@ class SettingsView extends StatelessWidget {
           model.setContext(context);
           model.init();
         },
-        onDispose: () {},
+        
         onPageBuilder: (BuildContext context, SettingsViewModel viewModel) => Scaffold(
               body: Padding(
                 padding: const EdgeInsets.all(8.0),

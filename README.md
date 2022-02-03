@@ -12,6 +12,17 @@ You are expected to use the public APIs “​The Movie DB​” as the followin
 * Movie Details screen should show banner, title, rating, and overview of the clicked movie as shown in the screenshots. Clicking favorites and watchlist icon, adds movie to related list.
 * Use git as the source code version control system. Please do not push your project with only one commit because it can be considered as cheating.
 
+## Westerops Implementation
+* Login screen: Use this email and password for succesful login. (email: eve.holt@reqres.in / password: cityslicka)
+  
+  1. A functional Login screen with a fake service request https://reqres.in. 
+  2. Email and password controller and validation
+  3. Error Snackbar  after failed response
+  4. Token Snackbar after successful response
+
+* Search Screen
+
+
 ### The Movie DB API
 The Movie DB ​has a lot of APIs that meet above functionalities. You are expected to discover these APIs.
 * API brief: ​https://www.themoviedb.org/documentation/api
@@ -21,7 +32,7 @@ The Movie DB ​has a lot of APIs that meet above functionalities. You are expec
 
 ### Optional Implementations(Bonus)
 * ​Offline Cache
-* ​Unit Test 
+* ​Unit Test
 
 ### Output
 * ​Provide us with a zip file that contains the root folder of the project and the local .git repository or you can upload your project to your github and share its link.

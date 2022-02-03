@@ -24,6 +24,21 @@ mixin _$SearchViewModel on _SearchViewModelBase, Store {
     });
   }
 
+  final _$searchQueryAtom = Atom(name: '_SearchViewModelBase.searchQuery');
+
+  @override
+  String get searchQuery {
+    _$searchQueryAtom.reportRead();
+    return super.searchQuery;
+  }
+
+  @override
+  set searchQuery(String value) {
+    _$searchQueryAtom.reportWrite(value, super.searchQuery, () {
+      super.searchQuery = value;
+    });
+  }
+
   final _$searchResultListAtom =
       Atom(name: '_SearchViewModelBase.searchResultList');
 
@@ -52,6 +67,17 @@ mixin _$SearchViewModel on _SearchViewModelBase, Store {
       ActionController(name: '_SearchViewModelBase');
 
   @override
+  void setSearchQueryAndSearch(String value) {
+    final _$actionInfo = _$_SearchViewModelBaseActionController.startAction(
+        name: '_SearchViewModelBase.setSearchQueryAndSearch');
+    try {
+      return super.setSearchQueryAndSearch(value);
+    } finally {
+      _$_SearchViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setLoading() {
     final _$actionInfo = _$_SearchViewModelBaseActionController.startAction(
         name: '_SearchViewModelBase.setLoading');
@@ -66,6 +92,7 @@ mixin _$SearchViewModel on _SearchViewModelBase, Store {
   String toString() {
     return '''
 loading: ${loading},
+searchQuery: ${searchQuery},
 searchResultList: ${searchResultList}
     ''';
   }

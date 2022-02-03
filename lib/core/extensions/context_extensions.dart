@@ -63,6 +63,9 @@ extension RadiusExtension on BuildContext {
   Radius get lowRadius => Radius.circular(width * 0.02);
   Radius get normalRadius => Radius.circular(width * 0.05);
   Radius get highadius => Radius.circular(width * 0.1);
+  BorderRadius get borderlowRadius => BorderRadius.circular(width * 0.02);
+  BorderRadius get bordernormalRadius => BorderRadius.circular(width * 0.05);
+  BorderRadius get borderhighadius => BorderRadius.circular(width * 0.1);
 }
 
 extension ColorExtension on BuildContext {
