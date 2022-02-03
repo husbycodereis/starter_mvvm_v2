@@ -11,8 +11,8 @@ void main() {
   late Database db;
   late LocalDatabaseManager localDatabaseManagerFake;
   final List<MovieResultModel?> movieResultList = [
-    MovieResultModel(id: 1, title: 'first'),
-    MovieResultModel(id: 2, title: 'second')
+    MovieResultModel(movieId: 1, title: 'first'),
+    MovieResultModel(movieId: 2, title: 'second')
   ];
   setUp(() async {
     localDatabaseFake = LocalDatabaseFake();
@@ -48,7 +48,7 @@ void main() {
   });
 
   test('Insert item', () async {
-    final key = await localDatabaseManagerFake.insert(MovieResultModel(id: 1, title: 'hello'));
+    final key = await localDatabaseManagerFake.insert(MovieResultModel(movieId: 1, title: 'hello'));
     final res = await localDatabaseManagerFake.store.record(key).get(db);
     expect(res!['title'], 'hello');
   });
@@ -61,12 +61,12 @@ void main() {
 
   test('Delete method', () async {
     //create an object in db
-    final insertKey = await localDatabaseManagerFake.insert(MovieResultModel(id: 1, title: 'hello'));
+    final insertKey = await localDatabaseManagerFake.insert(MovieResultModel(movieId: 1, title: 'hello'));
     final insertResult = await localDatabaseManagerFake.store.record(insertKey).get(db);
     //expect the object value is initial
     expect(insertResult!['title'], 'hello');
     //delete the object
-    final deleteKey = await localDatabaseManagerFake.delete(MovieResultModel(id: 1, title: 'hello'));
+    final deleteKey = await localDatabaseManagerFake.delete(MovieResultModel(movieId: 1, title: 'hello'));
     final deleteResult = await localDatabaseManagerFake.store.record(deleteKey).get(db);
     //expect the object value is null
     expect(deleteResult, isNull);

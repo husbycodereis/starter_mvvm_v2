@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_catalog/core/init/cache/local_database.dart';
 import 'package:movies_catalog/core/init/provider/notifiers/theme_notifier.dart';
 import 'package:provider/provider.dart';
 
@@ -34,5 +35,6 @@ Future<void> _init() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefsManager.preferencesInit();
   await EasyLocalization.ensureInitialized();
+  await LocalDatabase.instance.database;
   await di.init();
 }

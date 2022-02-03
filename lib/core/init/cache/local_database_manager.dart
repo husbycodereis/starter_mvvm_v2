@@ -3,7 +3,7 @@ import 'package:movies_catalog/view/search/model/movie_result.dart';
 import 'package:sembast/sembast.dart';
 
 abstract class LocalDatabaseModel {
-  int? id;
+  int? localId;
 
   Map<String, dynamic>? toJson();
 }
@@ -19,7 +19,7 @@ class LocalDatabaseManager<T extends LocalDatabaseModel?> {
   }
 
   Future<int> insert(T obj) async {
-    assert(obj!.id != null);
+    assert(obj!.localId != null);
     return store.add(await LocalDatabase.instance.database, obj!.toJson()!);
   }
 
@@ -28,13 +28,13 @@ class LocalDatabaseManager<T extends LocalDatabaseModel?> {
   }
 
   Future<int> update(T obj) async {
-    final finder = Finder(filter: Filter.byKey(obj!.id));
+    final finder = Finder(filter: Filter.byKey(obj!.localId));
     return store.update(await LocalDatabase.instance.database, obj.toJson()!, finder: finder);
     // Filter.equals('id', obj!.id)
   }
 
   Future<int> delete(T obj) async {
-    final finder = Finder(filter: Filter.byKey(obj!.id));
+    final finder = Finder(filter: Filter.byKey(obj!.localId));
     return store.delete(await LocalDatabase.instance.database, finder: finder);
   }
 
@@ -47,7 +47,7 @@ class LocalDatabaseManager<T extends LocalDatabaseModel?> {
 
     return recordSnapshots.map((snapshot) {
       final requests = MovieResultModel.fromJson(snapshot.value);
-      requests.id = snapshot.key;
+      requests.localId = snapshot.key;
       return requests;
     }).toList();
   }

@@ -25,10 +25,9 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
   Widget build(BuildContext context) {
     return BaseView<SearchViewModel>(
       viewModel: SearchViewModel(),
-      onModelReady: (model) {
+      onModelReady: (model) async {
         model.setContext(context);
-        model.init();
-        widget.movie.isFavorite ??= false;
+        checkFavorite();
       },
       onPageBuilder: (BuildContext context, SearchViewModel model) => Scaffold(
           appBar: AppBar(),
@@ -37,7 +36,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
             children: [
               Center(child: Text(widget.movie.title ?? 'No Title Found')),
               NormalButton(
-                  child: Text('Save to Favorites'),
+                  child: const Text('Save to Favorites'),
                   onPressed: () {
                     setState(() {
                       serviceLocator<FavoritesViewModel>().setFavorite(widget.movie);
@@ -47,5 +46,9 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
             ],
           )),
     );
+  }
+
+  void checkFavorite() {
+    widget.movie.isFavorite = serviceLocator<FavoritesViewModel>().checkFavorite(widget.movie);
   }
 }

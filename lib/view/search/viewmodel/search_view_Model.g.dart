@@ -43,13 +43,13 @@ mixin _$SearchViewModel on _SearchViewModelBase, Store {
       Atom(name: '_SearchViewModelBase.searchResultList');
 
   @override
-  List<MovieResultModel>? get searchResultList {
+  List<MovieResultModel> get searchResultList {
     _$searchResultListAtom.reportRead();
     return super.searchResultList;
   }
 
   @override
-  set searchResultList(List<MovieResultModel>? value) {
+  set searchResultList(List<MovieResultModel> value) {
     _$searchResultListAtom.reportWrite(value, super.searchResultList, () {
       super.searchResultList = value;
     });

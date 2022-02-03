@@ -10,8 +10,10 @@ class MovieResultModel extends LocalDatabaseModel {
   String? overview;
   @JsonKey(name: 'release_date')
   String? releaseDate;
+  @JsonKey(name: 'id')
+  int? movieId;
   @override
-  int? id;
+  int? localId;
   @JsonKey(name: 'original_title)')
   String? originalTitle;
   @JsonKey(name: 'original_language')
@@ -26,22 +28,22 @@ class MovieResultModel extends LocalDatabaseModel {
   @JsonKey(name: 'vote_average')
   double? voteAverage;
   bool? isFavorite;
-  MovieResultModel({
-    this.posterPath,
-    this.adult,
-    this.overview,
-    this.releaseDate,
-    this.id,
-    this.originalTitle,
-    this.originalLanguage,
-    this.title,
-    this.backdropPath,
-    this.popularity,
-    this.voteCount,
-    this.video,
-    this.voteAverage,
-    this.isFavorite = false
-  });
+  MovieResultModel(
+      {this.posterPath,
+      this.adult,
+      this.overview,
+      this.releaseDate,
+      this.movieId,
+      this.localId,
+      this.originalTitle,
+      this.originalLanguage,
+      this.title,
+      this.backdropPath,
+      this.popularity,
+      this.voteCount,
+      this.video,
+      this.voteAverage,
+      this.isFavorite = false});
 
   String get fullImageUrl =>
       posterPath != null ? 'https://image.tmdb.org/t/p/w200$posterPath' : 'https://i.imgur.com/SuogN3V.png';

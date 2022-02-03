@@ -28,37 +28,68 @@ class FavoritesView extends StatelessWidget {
   Widget buildBody(FavoritesViewModel viewModel, BuildContext context) {
     return Padding(
       padding: context.paddingLowAll,
-      child: Column(
-        children: [
-          context.sizedBoxHighVertical,
-          Expanded(
-            child: ListView.separated(
-              separatorBuilder: (context, index) {
-                return const Divider(
-                  thickness: 2,
-                );
-              },
-              itemCount: viewModel.favoriteMovies.length,
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    children: [
-                      Image.network(
-                        viewModel.favoriteMovies[index].fullImageUrl,
-                        width: 50,
-                        height: 100,
-                      ),
-                      context.sizedBoxMediumHorizontal,
-                      Expanded(child: Text(viewModel.favoriteMovies[index].title ?? 'No Title Found')),
-                    ],
+      child: viewModel.favoriteMovies.isEmpty
+          ? const Center(child: Text('There are no favorite movies'))
+          : Column(
+              children: [
+                context.sizedBoxHighVertical,
+                Expanded(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return const Divider(
+                        thickness: 2,
+                      );
+                    },
+                    itemCount: viewModel.favoriteMovies.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return buildDismissibleListItem(index, viewModel, context);
+                    },
                   ),
-                );
-              },
+                ),
+              ],
             ),
-          ),
-        ],
+    );
+  }
+
+  Dismissible buildDismissibleListItem(int index, FavoritesViewModel viewModel, BuildContext context) {
+    return Dismissible(
+      key: Key(index.toString()),
+      direction: DismissDirection.endToStart,
+      onDismissed: (direction) {
+        viewModel.deleteFavorite(viewModel.favoriteMovies[index]);
+      },
+      background: Container(
+        color: Colors.red,
+        child: Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+              padding: context.paddingLowAll,
+              child: Icon(
+                Icons.delete,
+                color: context.customColors.white,
+              ),
+            )),
       ),
+      child: GestureDetector(
+        onTap: () {
+          viewModel.navigateToDetails(viewModel.favoriteMovies[index]);
+        },
+        child: buildDismissibleListItemBody(viewModel, index, context),
+      ),
+    );
+  }
+
+  Row buildDismissibleListItemBody(FavoritesViewModel viewModel, int index, BuildContext context) {
+    return Row(
+      children: [
+        Image.network(
+          viewModel.favoriteMovies[index].fullImageUrl,
+          width: 50,
+          height: 100,
+        ),
+        context.sizedBoxMediumHorizontal,
+        Expanded(child: Text(viewModel.favoriteMovies[index].title ?? 'No Title Found')),
+      ],
     );
   }
 }

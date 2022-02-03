@@ -4,9 +4,9 @@
 
 ## Westerops Implementation
 
-* Login screen: Use this email and password for succesful login. (email: eve.holt@reqres.in / password: cityslicka)
+* Login screen: 
   
-  1. A functional Login screen with a fake service request => https://reqres.in. 
+  1. A functional Login screen with a fake service request => https://reqres.in.Use this email and password for succesful login. (email: eve.holt@reqres.in / password: cityslicka)
   2. Email & password controller and validation
   3. Error Snackbar after failed response
   4. Token Snackbar after successful response
@@ -14,6 +14,15 @@
 * Search Screen
   1. Search feature implemented with a throttle helper method. The method adds a delay between each keyboard entry. Once the user completes typing, then the search request with the given query is initiated.
   2. Cancel button to clean search query entry
+
+* Detail Screen
+  1. See movie details, ratings, description
+  2. Add or remove a movie from favorites
+  3. Add or remove a movie from watchlist
+  4. Get movie favorite & watchlist status from cache
+
+* Favorites Screen
+  1.
 
 
 ### Optional Implementations(Bonus)

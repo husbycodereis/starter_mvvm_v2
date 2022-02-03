@@ -18,7 +18,7 @@ class LocalDatabaseManagerFake<T extends LocalDatabaseModel?> extends Fake imple
   }
   @override
   Future<int> insert(LocalDatabaseModel? obj) async {
-    assert(obj!.id != null);
+    assert(obj!.localId != null);
     return store.add(db, obj!.toJson()!);
   }
 
@@ -29,21 +29,22 @@ class LocalDatabaseManagerFake<T extends LocalDatabaseModel?> extends Fake imple
 
   @override
   Future<int> delete(LocalDatabaseModel? obj) async {
-    final finder = sembast.Finder(filter: Filter.byKey(obj!.id));
+    final finder = sembast.Finder(filter: Filter.byKey(obj!.localId));
     return store.delete(db, finder: finder);
   }
+
   @override
   Future<int> deleteAll() async {
-   return   store.delete(db);
+    return store.delete(db);
   }
 
   @override
   Future<List<MovieResultModel>> getCachedRequests() async {
-    final recordSnapshots = await store.find( db);
+    final recordSnapshots = await store.find(db);
 
     return recordSnapshots.map((snapshot) {
       final requests = MovieResultModel.fromJson(snapshot.value);
-      requests.id = snapshot.key;
+      requests.movieId = snapshot.key;
       return requests;
     }).toList();
   }

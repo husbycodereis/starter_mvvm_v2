@@ -39,7 +39,7 @@ abstract class _SearchViewModelBase with Store, BaseViewModel {
   String searchQuery = '';
 
   @observable
-  List<MovieResultModel>? searchResultList = ObservableList.of([]);
+  List<MovieResultModel> searchResultList = ObservableList.of([]);
 
   @action
   void setSearchQueryAndSearch(String value) {
@@ -53,7 +53,8 @@ abstract class _SearchViewModelBase with Store, BaseViewModel {
   Future searchWithQuery() async {
     if (searchQuery.length >= 3) {
       final result = await searchService.fetchSearchResults(context!, searchQuery);
-      searchResultList = result!.results;
+      searchResultList = result!.results ?? [];
+      print(searchResultList.map((e) => e.movieId));
     }
   }
 
