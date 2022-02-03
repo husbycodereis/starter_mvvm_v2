@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
 import 'package:movies_catalog/core/components/widgets/button/normal_button.dart';
 import 'package:movies_catalog/core/init/di/injection_container.dart';
 import 'package:movies_catalog/view/favorites/viewmodel/favorites_view_model.dart';
-
 import 'package:movies_catalog/view/search/model/movie_result.dart';
 import 'package:movies_catalog/view/search/viewmodel/search_view_Model.dart';
 

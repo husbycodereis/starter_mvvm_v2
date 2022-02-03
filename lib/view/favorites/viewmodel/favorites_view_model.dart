@@ -10,13 +10,13 @@ part 'favorites_view_model.g.dart';
 class FavoritesViewModel = _FavoritesViewModelBase with _$FavoritesViewModel;
 
 abstract class _FavoritesViewModelBase with Store, BaseViewModel {
-  LocalDatabaseManager? _localDatabaseManager;
+  LocalDatabaseManager<MovieResultModel>? _localDatabaseManager;
 
   @override
   void setContext(BuildContext context) => this.context = context;
   @override
   Future init() async {
-    setLocaleDatabaseManager();
+    setLocalDatabaseManager();
     await fetchFavoriteMovies();
   }
 
@@ -26,13 +26,20 @@ abstract class _FavoritesViewModelBase with Store, BaseViewModel {
   @observable
   List<MovieResultModel> favoriteMovies = ObservableList.of([]);
 
-  void setLocaleDatabaseManager() {
+  void setLocalDatabaseManager() {
     _localDatabaseManager ??= LocalDatabaseManager(storeName: LocalDatabaseConstants.favorites.name);
+  }
+
+    @action
+  Future fetchFavoriteMovies() async {
+    setLoading();
+    favoriteMovies = await _localDatabaseManager!.getCachedFavorites();
+    setLoading();
   }
 
   @action
   void setFavorite(MovieResultModel movie) {
-    setLocaleDatabaseManager();
+    setLocalDatabaseManager();
     if (movie.isFavorite!) {
       movie.isFavorite = false;
 
@@ -65,12 +72,7 @@ abstract class _FavoritesViewModelBase with Store, BaseViewModel {
     loading = !loading;
   }
 
-  @action
-  Future fetchFavoriteMovies() async {
-    setLoading();
-    favoriteMovies = await _localDatabaseManager!.getCachedRequests();
-    setLoading();
-  }
+
 
    void navigateToDetails(MovieResultModel movie) {
     navigation.navigateToPage(path: NavigationConstants.MOVIE_DETAILS_VIEV, data: movie);

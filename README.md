@@ -1,11 +1,21 @@
-## Technical Challenge - Movies Catalog
+# Technical Challenge - Movies Catalog
 
+This project has the following 5 screens in phones, corresponding to screenshots above.
+* Login screen
+* Search screen
+* Detail screen
+* Favorites screen
+* Watchlist screen
 
+You are expected to use the public APIs “​The Movie DB​” as the following:
+* Clicking on a movie will show movie details.
+* Movie Details screen should show banner, title, rating, and overview of the clicked movie as shown in the screenshots. Clicking favorites and watchlist icon, adds movie to related list.
+* Use git as the source code version control system. Please do not push your project with only one commit because it can be considered as cheating.
 
 ## Westerops Implementation
 
-* Login screen: 
-  
+* Login screen:
+
   1. A functional Login screen with a fake service request => https://reqres.in.Use this email and password for succesful login. (email: eve.holt@reqres.in / password: cityslicka)
   2. Email & password controller and validation
   3. Error Snackbar after failed response
@@ -22,10 +32,17 @@
   4. Get movie favorite & watchlist status from cache
 
 * Favorites Screen
-  1.
+  1. See favorited movies in the list
+  2. tap a movie to go to details
+  3. slide a movie from right to left to remove the movie from the favorites
+
+* Watchlist Screen
+  1. See watchlist movies in the list
+  2. tap a movie to go to details
+  3. slide a movie from right to left to remove the movie from the watchlist
 
 
-### Optional Implementations(Bonus)
+### Optional WesterOps Implementations(Bonus)
 * MVVM design pattern
 * ​Offline Cache on login status, favorite and watchlist items
 * ​Unit Test of Local Database / Search Service / Login Service
@@ -34,22 +51,7 @@
 * Dark / Light Theme and it's caching
 * Lottie animations on Theme icons in Settings page
 
-
-## Challenge Definition
-
-This project has the following 5 screens in phones, corresponding to screenshots above.
-* Login screen
-* Search screen
-* Detail screen
-* Favorites screen
-* Watchlist screen
-
-You are expected to use the public APIs “​The Movie DB​” as the following:
-* Clicking on a movie will show movie details.
-* Movie Details screen should show banner, title, rating, and overview of the clicked movie as shown in the screenshots. Clicking favorites and watchlist icon, adds movie to related list.
-* Use git as the source code version control system. Please do not push your project with only one commit because it can be considered as cheating.
-
-### The Movie DB API
+## The Movie DB API
 The Movie DB ​has a lot of APIs that meet above functionalities. You are expected to discover these APIs.
 * API brief: ​https://www.themoviedb.org/documentation/api
 * Discover API documentation: ​https://developers.themoviedb.org/3/discover/movie-discover 
