@@ -25,6 +25,7 @@ class MovieResultModel extends LocalDatabaseModel {
   bool? video;
   @JsonKey(name: 'vote_average')
   double? voteAverage;
+  bool? isFavorite;
   MovieResultModel({
     this.posterPath,
     this.adult,
@@ -39,6 +40,7 @@ class MovieResultModel extends LocalDatabaseModel {
     this.voteCount,
     this.video,
     this.voteAverage,
+    this.isFavorite = false
   });
 
   String get fullImageUrl =>

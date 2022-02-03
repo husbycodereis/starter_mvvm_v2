@@ -1,44 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
-import 'package:movies_catalog/core/components/widgets/searchbar/search_field_widget.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
-import 'package:movies_catalog/view/search/viewmodel/search_view_Model.dart';
+import 'package:movies_catalog/core/init/di/injection_container.dart';
+import 'package:movies_catalog/view/favorites/viewmodel/favorites_view_model.dart';
 
-class SearchView extends StatelessWidget {
-  const SearchView({Key? key}) : super(key: key);
+class FavoritesView extends StatelessWidget {
+  const FavoritesView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<SearchViewModel>(
-        viewModel: SearchViewModel(),
+    return BaseView<FavoritesViewModel>(
+        viewModel: serviceLocator<FavoritesViewModel>(),
         onModelReady: (model) {
           model.setContext(context);
           model.init();
         },
-        onDispose: (model) {
-          model.dispose();
-        },
-        onPageBuilder: (BuildContext context, SearchViewModel viewModel) => Observer(builder: (_) {
+        onPageBuilder: (BuildContext context, FavoritesViewModel model) => Observer(builder: (_) {
               return Scaffold(
-                body: viewModel.loading ? buildLoading() : buildBody(viewModel, context),
+                body: model.loading ? buildLoading() : buildBody(model, context),
               );
             }));
   }
 
   Center buildLoading() => const Center(child: CircularProgressIndicator());
 
-  Widget buildBody(SearchViewModel viewModel, BuildContext context) {
+  Widget buildBody(FavoritesViewModel viewModel, BuildContext context) {
     return Padding(
       padding: context.paddingLowAll,
       child: Column(
         children: [
           context.sizedBoxHighVertical,
-          SearchFieldWidget(
-            controller: viewModel.searchController,
-            onPressedCancel: () => viewModel.dispose(),
-            isAbleToCancel: viewModel.searchQuery.isNotEmpty,
-          ),
           Expanded(
             child: ListView.separated(
               separatorBuilder: (context, index) {
@@ -46,19 +38,19 @@ class SearchView extends StatelessWidget {
                   thickness: 2,
                 );
               },
-              itemCount: viewModel.searchResultList!.length,
+              itemCount: viewModel.favoriteMovies.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: () => viewModel.navigateToDetails(viewModel.searchResultList![index]),
+                  onTap: () {},
                   child: Row(
                     children: [
                       Image.network(
-                        viewModel.searchResultList![index].fullImageUrl,
+                        viewModel.favoriteMovies[index].fullImageUrl,
                         width: 50,
                         height: 100,
                       ),
                       context.sizedBoxMediumHorizontal,
-                      Expanded(child: Text(viewModel.searchResultList![index].title ?? 'No Title Found')),
+                      Expanded(child: Text(viewModel.favoriteMovies[index].title ?? 'No Title Found')),
                     ],
                   ),
                 );

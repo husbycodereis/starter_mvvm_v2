@@ -2,7 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_catalog/core/init/provider/notifiers/theme_notifier.dart';
 import 'package:provider/provider.dart';
+
 import 'core/init/cache/shared_prefs_manager.dart';
+import 'core/init/di/injection_container.dart' as di;
 import 'core/init/navigation/navigation_routes.dart';
 import 'core/init/navigation/navigation_service.dart';
 import 'core/init/provider/provider_list.dart';
@@ -32,4 +34,5 @@ Future<void> _init() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefsManager.preferencesInit();
   await EasyLocalization.ensureInitialized();
+  await di.init();
 }

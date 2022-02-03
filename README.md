@@ -1,5 +1,33 @@
 ## Technical Challenge - Movies Catalog
 
+
+
+## Westerops Implementation
+
+* Login screen: Use this email and password for succesful login. (email: eve.holt@reqres.in / password: cityslicka)
+  
+  1. A functional Login screen with a fake service request => https://reqres.in. 
+  2. Email & password controller and validation
+  3. Error Snackbar after failed response
+  4. Token Snackbar after successful response
+
+* Search Screen
+  1. Search feature implemented with a throttle helper method. The method adds a delay between each keyboard entry. Once the user completes typing, then the search request with the given query is initiated.
+  2. Cancel button to clean search query entry
+
+
+### Optional Implementations(Bonus)
+* MVVM design pattern
+* ​Offline Cache on login status, favorite and watchlist items
+* ​Unit Test of Local Database / Search Service / Login Service
+* Settings page implementation to logout and change theme
+* Dependency Injection with Get_It package and Lazy Singleton class Structure
+* Dark / Light Theme and it's caching
+* Lottie animations on Theme icons in Settings page
+
+
+## Challenge Definition
+
 This project has the following 5 screens in phones, corresponding to screenshots above.
 * Login screen
 * Search screen
@@ -11,17 +39,6 @@ You are expected to use the public APIs “​The Movie DB​” as the followin
 * Clicking on a movie will show movie details.
 * Movie Details screen should show banner, title, rating, and overview of the clicked movie as shown in the screenshots. Clicking favorites and watchlist icon, adds movie to related list.
 * Use git as the source code version control system. Please do not push your project with only one commit because it can be considered as cheating.
-
-## Westerops Implementation
-* Login screen: Use this email and password for succesful login. (email: eve.holt@reqres.in / password: cityslicka)
-  
-  1. A functional Login screen with a fake service request https://reqres.in. 
-  2. Email and password controller and validation
-  3. Error Snackbar  after failed response
-  4. Token Snackbar after successful response
-
-* Search Screen
-
 
 ### The Movie DB API
 The Movie DB ​has a lot of APIs that meet above functionalities. You are expected to discover these APIs.

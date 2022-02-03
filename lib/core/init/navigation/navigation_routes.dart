@@ -26,7 +26,7 @@ class NavigationRoute {
         return normalNavigate(const HomeView());
       case NavigationConstants.MOVIE_DETAILS_VIEV:
         if (args.arguments is MovieResultModel) {
-          return normalNavigate(MovieDetailsView(model: args.arguments! as MovieResultModel));
+          return normalNavigate(MovieDetailsView(movie: args.arguments! as MovieResultModel));
         }
         throw NavigateException<SettingsDynamicModel>(args.arguments);
       case NavigationConstants.SETTINGS_WEB_VIEW:

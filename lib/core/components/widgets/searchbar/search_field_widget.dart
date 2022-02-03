@@ -34,30 +34,33 @@ class SearchFieldWidget extends StatelessWidget {
             ),
             color: context.customColors.white,
             borderRadius: context.borderlowRadius),
-        child: Row(children: [
-          context.sizedBoxLowHorizontal,
-          const Icon(Icons.search),
-          context.sizedBoxLowHorizontal,
-          Expanded(
-              child: TextFormField(
-            style: context.textTheme.bodyText1,
-            decoration: InputDecoration(
-              hintStyle: context.textTheme.bodyText2,
-              border: InputBorder.none,
-              hintText: hintText,
-            ),
-            controller: controller,
-            focusNode: focusNode,
-            onFieldSubmitted: (value) {
-              FocusScope.of(context).unfocus();
-            },
-          )),
-        ]),
+        child: Container(
+          decoration: BoxDecoration(color: context.customColors.darkGrey, borderRadius: context.borderlowRadius),
+          child: Row(children: [
+            context.sizedBoxLowHorizontal,
+            const Icon(Icons.search),
+            context.sizedBoxLowHorizontal,
+            Expanded(
+                child: TextFormField(
+              style: context.textTheme.bodyText1,
+              decoration: InputDecoration(
+                hintStyle: context.textTheme.bodyText2,
+                border: InputBorder.none,
+                hintText: hintText,
+              ),
+              controller: controller,
+              focusNode: focusNode,
+              onFieldSubmitted: (value) {
+                FocusScope.of(context).unfocus();
+              },
+            )),
+          ]),
+        ),
       ),
     );
   }
 
   IconButton buildCancelButton() {
-    return IconButton(onPressed: onPressedCancel, icon: Icon(Icons.cancel));
+    return IconButton(onPressed: onPressedCancel, icon: const Icon(Icons.cancel));
   }
 }

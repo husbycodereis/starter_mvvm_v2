@@ -21,6 +21,7 @@ MovieResultModel _$MovieResultModelFromJson(Map<String, dynamic> json) {
     voteCount: json['vote_count'] as int?,
     video: json['video'] as bool?,
     voteAverage: (json['vote_average'] as num?)?.toDouble(),
+    isFavorite: json['isFavorite'] as bool?,
   );
 }
 
@@ -39,4 +40,5 @@ Map<String, dynamic> _$MovieResultModelToJson(MovieResultModel instance) =>
       'vote_count': instance.voteCount,
       'video': instance.video,
       'vote_average': instance.voteAverage,
+      'isFavorite': instance.isFavorite,
     };

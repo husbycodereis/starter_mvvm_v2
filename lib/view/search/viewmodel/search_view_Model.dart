@@ -3,6 +3,7 @@ import 'package:mobx/mobx.dart';
 import 'package:movies_catalog/core/base/model/base_view_model.dart';
 import 'package:movies_catalog/core/components/utility/throttle_helper.dart';
 import 'package:movies_catalog/core/constants/navigation/navigation_constants.dart';
+import 'package:movies_catalog/view/favorites/viewmodel/favorites_view_model.dart';
 import 'package:movies_catalog/view/search/model/movie_result.dart';
 import 'package:movies_catalog/view/search/model/search_result.dart';
 import 'package:movies_catalog/view/search/service/ISearchService.dart';
@@ -15,6 +16,7 @@ abstract class _SearchViewModelBase with Store, BaseViewModel {
   late ISearchService searchService;
   late TextEditingController searchController;
   late ThrottleStringHelper throttleStingHelper;
+
   @override
   void setContext(BuildContext context) {
     this.context = context;
@@ -64,7 +66,7 @@ abstract class _SearchViewModelBase with Store, BaseViewModel {
     navigation.navigateToPage(path: NavigationConstants.MOVIE_DETAILS_VIEV, data: movie);
   }
 
- void dispose() {
+  void dispose() {
     searchController.clear();
   }
 }
