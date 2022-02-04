@@ -2,7 +2,7 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 import '../navigation/navigation_service.dart';
-import 'notifiers/on_board_and_login_notifier.dart';
+import 'notifiers/login_notifier.dart';
 import 'notifiers/theme_notifier.dart';
 
 class ApplicationProvider {

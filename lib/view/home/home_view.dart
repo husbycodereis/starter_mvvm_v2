@@ -59,6 +59,10 @@ class _HomeViewState extends State<HomeView> {
 
   final List<BottomNavigationBarItem> _bottomNavigationItems = [
     const BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: 'Home',
+    ),
+    const BottomNavigationBarItem(
       icon: Icon(Icons.search),
       label: 'Search',
     ),

@@ -38,19 +38,16 @@ abstract class _FavoritesViewModelBase with Store, BaseViewModel {
   }
 
   @action
-  void setFavorite(MovieResultModel movie) {
-    setLocalDatabaseManager();
+  Future setFavorite(MovieResultModel movie) async {
     if (movie.isFavorite!) {
+      final MovieResultModel deleteMovie = favoriteMovies.firstWhere((e) => e.movieId == movie.movieId);
       movie.isFavorite = false;
-
-      favoriteMovies.remove(movie);
-      _localDatabaseManager!.delete(movie);
+      await _localDatabaseManager!.delete(deleteMovie);
     } else {
       movie.isFavorite = true;
-      movie.localId = favoriteMovies.length + 1;
-      favoriteMovies.add(movie);
-      _localDatabaseManager!.insert(movie);
+      await _localDatabaseManager!.insert(movie);
     }
+    await fetchFavoriteMovies();
   }
 
   bool checkFavorite(MovieResultModel movie) {

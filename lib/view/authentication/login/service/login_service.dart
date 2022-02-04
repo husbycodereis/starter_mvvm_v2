@@ -13,7 +13,7 @@ class LoginService extends ILoginService with ServiceHelper {
   @override
   Future<LoginResponseModel?> fetchUserControl(LoginModel model, BuildContext context) async {
     final response = await manager.send<LoginResponseModel, LoginResponseModel>(
-        NetWorkRoutes.LOGIN.value(),
+        NetWorkRoutes.LOGIN.value,
         parseModel: LoginResponseModel(),
         method: RequestType.POST,
         data: model);

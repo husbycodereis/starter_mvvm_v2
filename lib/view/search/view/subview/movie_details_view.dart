@@ -27,6 +27,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
       onModelReady: (model) async {
         model.setContext(context);
         checkFavorite();
+        
       },
       onPageBuilder: (BuildContext context, SearchViewModel model) => Scaffold(
           appBar: AppBar(),

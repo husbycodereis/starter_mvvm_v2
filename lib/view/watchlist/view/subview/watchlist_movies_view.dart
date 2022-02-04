@@ -5,7 +5,6 @@ import 'package:movies_catalog/core/components/widgets/dismissible/dismissible_d
 import 'package:movies_catalog/core/components/widgets/loading/basic_loading_widget.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/core/init/di/injection_container.dart';
-import 'package:movies_catalog/view/favorites/viewmodel/favorites_view_model.dart';
 import 'package:movies_catalog/view/watchlist/model/watchlist_model.dart';
 import 'package:movies_catalog/view/watchlist/viewmodel/watchlist_view_model.dart';
 

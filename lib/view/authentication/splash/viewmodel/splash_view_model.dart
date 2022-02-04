@@ -3,7 +3,7 @@ import 'package:mobx/mobx.dart';
 import 'package:movies_catalog/core/base/model/base_view_model.dart';
 import 'package:movies_catalog/core/constants/navigation/navigation_constants.dart';
 import 'package:movies_catalog/core/init/di/injection_container.dart';
-import 'package:movies_catalog/core/init/provider/notifiers/on_board_and_login_notifier.dart';
+import 'package:movies_catalog/core/init/provider/notifiers/login_notifier.dart';
 import 'package:movies_catalog/view/authentication/splash/service/ISplashService.dart';
 import 'package:movies_catalog/view/favorites/viewmodel/favorites_view_model.dart';
 import 'package:movies_catalog/view/watchlist/viewmodel/watchlist_view_model.dart';

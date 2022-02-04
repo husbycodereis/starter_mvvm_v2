@@ -45,7 +45,7 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
           LoginModel(email: emailController.text, password: passwordController.text), context!);
       if (response != null) {
         await sharedPrefManager.setStringValue(SharedPrefKeys.TOKEN, response.token!);
-        await context!.showSnackBar('response token: ${response.token!}');
+        await context!.showSnackBar('Login Successful!');
         await navigation.navigateToPage(
           path: NavigationConstants.HOME,
         );

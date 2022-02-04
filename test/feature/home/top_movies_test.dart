@@ -9,22 +9,22 @@ import 'package:vexana/vexana.dart';
 
 void main() {
   late INetworkManager networkManager;
-  const String movieQuery = 'lord of the rings';
+
   setUp(() {
     networkManager =
         NetworkManager(isEnableLogger: true, options: BaseOptions(baseUrl: 'https://api.themoviedb.org/3'));
   });
-  test('Search Success', () async {
-    final data = await networkManager.send<SearchResultModel, SearchResultModel>(
-        NetWorkRoutes.SEARCH.value,
+  test('Top Movies Fetch Success', () async {
+    final data = await networkManager.send<SearchResultModel, SearchResultModel>(NetWorkRoutes.TOP_MOVIES.value,
         method: RequestType.GET,
         parseModel: SearchResultModel(),
         queryParameters: {
           'api_key': ApplicationConstants.movieApi,
-          'query': movieQuery,
-          'language': 'en-US',
-          'page': '1',
-          'include_adult': false
+          'sort_by': 'vote_average.desc',
+          'include_adult': false,
+          'include_video': false,
+          'vote_count.gte': 2000,
+          'page': 1
         });
 
     debugPrint('total results are: ${data.data!.results!.length}');

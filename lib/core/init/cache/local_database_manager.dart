@@ -1,5 +1,4 @@
 import 'package:movies_catalog/core/init/cache/local_database.dart';
-import 'package:movies_catalog/view/watchlist/model/watchlist_model.dart';
 import 'package:sembast/sembast.dart';
 
 abstract class LocalDatabaseModel<T> {
