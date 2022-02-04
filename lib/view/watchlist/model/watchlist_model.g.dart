@@ -20,5 +20,5 @@ Map<String, dynamic> _$WatchListModelToJson(WatchListModel instance) =>
     <String, dynamic>{
       'localId': instance.localId,
       'name': instance.name,
-      'movies': instance.movies,
+      'movies': instance.movies?.map((e) => e.toJson()).toList(),
     };

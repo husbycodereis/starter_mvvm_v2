@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movies_catalog/core/base/model/base_view_model.dart';
-import 'package:movies_catalog/core/components/widgets/bottom_sheet/modal_bottom_sheet_container.dart';
-import 'package:movies_catalog/core/components/widgets/dismissible/dismissible_delete_widget.dart';
 import 'package:movies_catalog/core/constants/local_database/local_database_constants.dart';
+import 'package:movies_catalog/core/constants/navigation/navigation_constants.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/core/init/cache/local_database_manager.dart';
+import 'package:movies_catalog/view/search/model/movie_result.dart';
 import 'package:movies_catalog/view/watchlist/model/watchlist_model.dart';
 import 'package:movies_catalog/view/watchlist/view/subview/watchlist_modal_bottom_sheet.dart';
 
@@ -56,7 +56,7 @@ abstract class _WatchListViewModelBase with Store, BaseViewModel {
   Future createWatchList() async {
     if (watchlistController.text.length < 30) {
       if (watchlistList.where((e) => e.name! == watchlistController.text).isEmpty) {
-        await _localDatabaseManager!.insert(WatchListModel(name: watchlistController.text));
+        await _localDatabaseManager!.insert(WatchListModel(name: watchlistController.text, movies: []));
         await fetchWatchList();
       } else {
         context!.showSnackBar('this watchlist exists!');
@@ -67,10 +67,21 @@ abstract class _WatchListViewModelBase with Store, BaseViewModel {
   }
 
   @action
-  Future addMovieToWatchList(String value) async {
+  Future addMovieToWatchList(MovieResultModel movie, String value, BuildContext context) async {
     final WatchListModel updateItem = watchlistList.firstWhere((e) => e.name == value);
-    await _localDatabaseManager!.update(updateItem);
-    await fetchWatchList();
+    // if (updateItem.movies.where((e) => e.mo)) {
+
+    // }
+    try {
+      updateItem.movies!.add(movie);
+      await _localDatabaseManager!.update(updateItem);
+      await fetchWatchList();
+      await navigation.pop();
+      context.showSnackBar('movie added to $value');
+    } on Exception catch (_) {
+      await navigation.pop();
+      context.showSnackBar('an error occured');
+    }
   }
 
   @action
@@ -82,7 +93,7 @@ abstract class _WatchListViewModelBase with Store, BaseViewModel {
     setLoading();
   }
 
-  Future showWatchlistBottomSheet(BuildContext context) async {
+  Future showWatchlistBottomSheet(MovieResultModel movie, BuildContext context) async {
     return showModalBottomSheet(
         context: context,
         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
@@ -90,8 +101,12 @@ abstract class _WatchListViewModelBase with Store, BaseViewModel {
         isDismissible: true,
         backgroundColor: Colors.transparent,
         builder: (context) {
-          return const WatchListModalBottomSheet();
+          return WatchListModalBottomSheet(movie: movie);
         });
+  }
+
+  void navigateToMoviesView(WatchListModel watchlist) {
+    navigation.navigateToPage(path: NavigationConstants.WATCHLIST_MOVIES_VIEW, data: watchlist);
   }
 
   void unfocusKeyboard() {

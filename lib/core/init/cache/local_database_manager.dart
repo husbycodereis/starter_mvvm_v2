@@ -20,7 +20,6 @@ class LocalDatabaseManager<T extends LocalDatabaseModel?> {
   }
 
   Future<int> insert(T obj) async {
-    // assert(obj!.localId != null);
     return store.add(await LocalDatabase.instance.database, obj!.toJson()!);
   }
 
@@ -49,7 +48,7 @@ class LocalDatabaseManager<T extends LocalDatabaseModel?> {
     return recordSnapshots.map((snapshot) {
       final requests = obj!.fromJson(snapshot.value) as T;
       requests!.localId = snapshot.key;
-      return requests ;
+      return requests;
     }).toList();
   }
 }

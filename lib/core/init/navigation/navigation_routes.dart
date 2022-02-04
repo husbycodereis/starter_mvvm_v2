@@ -5,6 +5,8 @@ import 'package:movies_catalog/view/search/model/movie_result.dart';
 import 'package:movies_catalog/view/search/view/subview/movie_details_view.dart';
 import 'package:movies_catalog/view/settings/model/settings_dynamic_model.dart';
 import 'package:movies_catalog/view/settings/view/subview/settings_dynamic_view.dart';
+import 'package:movies_catalog/view/watchlist/model/watchlist_model.dart';
+import 'package:movies_catalog/view/watchlist/view/subview/watchlist_movies_view.dart';
 import '../../../view/authentication/login/view/login_view.dart';
 import '../../../view/home/home_view.dart';
 import '../../components/widgets/cards/not_found_navigation.dart';
@@ -27,6 +29,11 @@ class NavigationRoute {
       case NavigationConstants.MOVIE_DETAILS_VIEV:
         if (args.arguments is MovieResultModel) {
           return normalNavigate(MovieDetailsView(movie: args.arguments! as MovieResultModel));
+        }
+        throw NavigateException<SettingsDynamicModel>(args.arguments);
+      case NavigationConstants.WATCHLIST_MOVIES_VIEW:
+        if (args.arguments is WatchListModel) {
+          return normalNavigate(WatchListMoviesView(watchlist: args.arguments! as WatchListModel));
         }
         throw NavigateException<SettingsDynamicModel>(args.arguments);
       case NavigationConstants.SETTINGS_WEB_VIEW:

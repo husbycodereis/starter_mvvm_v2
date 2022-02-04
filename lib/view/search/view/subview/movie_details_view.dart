@@ -46,7 +46,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                   child: const Text('Add to a watchlist'),
                   onPressed: () {
                     setState(() {
-                      serviceLocator<WatchListViewModel>().showWatchlistBottomSheet(context);
+                      serviceLocator<WatchListViewModel>().showWatchlistBottomSheet(widget.movie, context);
                     });
                   }),
             ],

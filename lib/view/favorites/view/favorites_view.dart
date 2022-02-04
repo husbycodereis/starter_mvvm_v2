@@ -20,7 +20,7 @@ class FavoritesView extends StatelessWidget {
         },
         onPageBuilder: (BuildContext context, FavoritesViewModel model) => Observer(builder: (_) {
               return Scaffold(
-                body: model.loading ? BasicLoadingWidget() : buildBody(model, context),
+                body: model.loading ? const BasicLoadingWidget() : buildBody(model, context),
               );
             }));
   }
