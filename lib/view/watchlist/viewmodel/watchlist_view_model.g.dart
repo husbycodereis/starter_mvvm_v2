@@ -52,9 +52,8 @@ mixin _$WatchListViewModel on _WatchListViewModelBase, Store {
       AsyncAction('_WatchListViewModelBase.createWatchList');
 
   @override
-  Future<dynamic> createWatchList(BuildContext context) {
-    return _$createWatchListAsyncAction
-        .run(() => super.createWatchList(context));
+  Future<dynamic> createWatchList() {
+    return _$createWatchListAsyncAction.run(() => super.createWatchList());
   }
 
   final _$addMovieToWatchListAsyncAction =

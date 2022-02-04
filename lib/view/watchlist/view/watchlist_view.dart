@@ -36,48 +36,59 @@ class WatchListView extends StatelessWidget {
       child: Column(
         children: [
           context.sizedBoxHighVertical,
-          TextFormField(
-            style: context.textTheme.bodyText1,
-            decoration: InputDecoration(
-              hintStyle: context.textTheme.bodyText2,
-              border: InputBorder.none,
-              hintText: 'Enter a Watchlist name',
-            ),
-            controller: viewModel.watchlistController,
-            focusNode: viewModel.watchlistFocus,
-            onFieldSubmitted: (value) {
-              viewModel.unfocusKeyboard();
-            },
-          ),
+          buildTextFormField(context, viewModel),
           NormalButton(
               child: const Text('create'),
               onPressed: () {
-                viewModel.createWatchList(context);
+                viewModel.createWatchList();
               }),
           context.sizedBoxHighVertical,
           if (viewModel.watchlistList.isEmpty)
             const Center(child: Text('Create a watchlist'))
           else
-            Expanded(
-              child: ListView.separated(
-                separatorBuilder: (context, index) {
-                  return const Divider(
-                    thickness: 2,
-                  );
-                },
-                itemCount: viewModel.watchlistList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return DismissibleDeleteWidget(
-                      keyString: index.toString(),
-                      onDismissed: (direction) {
-                        viewModel.deleteWatchlist(viewModel.watchlistList[index]);
-                      },
-                      child: Text(viewModel.watchlistList[index].name!));
-                },
-              ),
-            ),
+            buildWatchlistView(viewModel),
         ],
       ),
     );
+  }
+
+  TextFormField buildTextFormField(BuildContext context, WatchListViewModel viewModel) {
+    return TextFormField(
+          style: context.textTheme.bodyText1,
+          decoration: InputDecoration(
+            hintStyle: context.textTheme.bodyText2,
+            border: InputBorder.none,
+            hintText: 'Enter a Watchlist name',
+          ),
+          controller: viewModel.watchlistController,
+          focusNode: viewModel.watchlistFocus,
+          onFieldSubmitted: (value) {
+            viewModel.unfocusKeyboard();
+          },
+        );
+  }
+
+  Expanded buildWatchlistView(WatchListViewModel viewModel) {
+    return Expanded(
+            child: ListView.separated(
+              separatorBuilder: (context, index) {
+                return const Divider(
+                  thickness: 2,
+                );
+              },
+              itemCount: viewModel.watchlistList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return DismissibleDeleteWidget(
+                    keyString: index.toString(),
+                    onDismissed: (direction) {
+                      viewModel.deleteWatchlist(viewModel.watchlistList[index]);
+                    },
+                    child: Padding(
+                      padding: context.paddingNormalVertical,
+                      child: Text(viewModel.watchlistList[index].name!),
+                    ));
+              },
+            ),
+          );
   }
 }

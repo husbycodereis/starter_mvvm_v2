@@ -5,6 +5,7 @@ import 'package:movies_catalog/core/init/di/injection_container.dart';
 import 'package:movies_catalog/view/favorites/viewmodel/favorites_view_model.dart';
 import 'package:movies_catalog/view/search/model/movie_result.dart';
 import 'package:movies_catalog/view/search/viewmodel/search_view_Model.dart';
+import 'package:movies_catalog/view/watchlist/viewmodel/watchlist_view_model.dart';
 
 class MovieDetailsView extends StatefulWidget {
   final MovieResultModel movie;
@@ -40,7 +41,14 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
                       serviceLocator<FavoritesViewModel>().setFavorite(widget.movie);
                     });
                   }),
-              Text(widget.movie.isFavorite.toString())
+              Text(widget.movie.isFavorite.toString()),
+              NormalButton(
+                  child: const Text('Add to a watchlist'),
+                  onPressed: () {
+                    setState(() {
+                      serviceLocator<WatchListViewModel>().showWatchlistBottomSheet(context);
+                    });
+                  }),
             ],
           )),
     );
