@@ -75,8 +75,8 @@ class _HomeViewState extends State<HomeView> {
       label: 'Watchlist',
     ),
     const BottomNavigationBarItem(
-      icon: Icon(Icons.settings),
-      label: 'Settings',
+      icon: Icon(Icons.person),
+      label: 'Profile',
     ),
   ];
 

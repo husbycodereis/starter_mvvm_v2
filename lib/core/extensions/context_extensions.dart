@@ -13,8 +13,8 @@ extension MediaQueryExtension on BuildContext {
   double get width => mediaQuery.size.width;
 
   double get lowValue => height * 0.01;
-  double get normalValue => height * 0.02;
-  double get mediumValue => height * 0.04;
+  double get normalValue => width * 0.04;
+  double get mediumValue => height * 0.033;
   double get highValue => height * 0.1;
 
   double dynamicWidth(double val) => width * val;
@@ -33,11 +33,13 @@ extension EmptySpaceExtension on BuildContext {
   SizedBox get sizedBoxNormalVertical => SizedBox(height: normalValue);
   SizedBox get sizedBoxMediumVertical => SizedBox(height: mediumValue);
   SizedBox get sizedBoxHighVertical => SizedBox(height: highValue);
+  SizedBox sizedBoxCustomVertical(double val) => SizedBox(height: dynamicHeight(val));
 
   SizedBox get sizedBoxLowHorizontal => SizedBox(width: lowValue);
   SizedBox get sizedBoxNormalHorizontal => SizedBox(width: normalValue);
   SizedBox get sizedBoxMediumHorizontal => SizedBox(width: mediumValue);
   SizedBox get sizedBoxHighHorizontal => SizedBox(width: highValue);
+  SizedBox sizedBoxCustomHorizontal(double val) => SizedBox(height: dynamicWidth(val));
 }
 
 extension PaddingExtensionAll on BuildContext {

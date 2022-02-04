@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../app_theme.dart';
 import 'theme_interface_light.dart';
 
@@ -13,11 +14,11 @@ class AppThemeLight extends AppTheme with ILightTheme {
   @override
   ThemeData get theme => ThemeData(
       brightness: Brightness.light,
-      fontFamily: '',
+      fontFamily: GoogleFonts.poppins().fontFamily,
       colorScheme: colorThemeLight!.colorScheme,
       primaryColor: colorThemeLight!.azure, //changes the color of focused label text in textfield
-      backgroundColor: colorThemeLight!.lightGrey,
-      scaffoldBackgroundColor: colorThemeLight!.lightGrey,
+      backgroundColor: colorThemeLight!.whiteShade,
+      scaffoldBackgroundColor: colorThemeLight!.whiteShade,
       inputDecorationTheme: inputDecorationTheme(),
       appBarTheme: appBarTheme(),
       iconTheme: iconTheme(),
@@ -40,13 +41,13 @@ class AppThemeLight extends AppTheme with ILightTheme {
   IconThemeData iconTheme() => IconThemeData(color: colorThemeLight!.black);
 
   TabBarTheme tabBarTheme() => TabBarTheme(
-      labelColor: colorThemeLight!.orange,
       labelStyle: textThemeLight!.bodyText1,
       unselectedLabelStyle: textThemeLight!.bodyText2,
       unselectedLabelColor: colorThemeLight!.darkGrey,
-      indicator: BoxDecoration(border: Border(bottom: BorderSide(width: 2, color: colorThemeLight!.orange))));
+      indicator: const BoxDecoration(border: Border(bottom: BorderSide(width: 2))));
 
   TextTheme textTheme() => TextTheme(
+    
         headline1: textThemeLight!.headline1,
         headline2: textThemeLight!.headline2,
         headline3: textThemeLight!.headline3,
@@ -57,5 +58,6 @@ class AppThemeLight extends AppTheme with ILightTheme {
       );
 
   BottomNavigationBarThemeData bottomNavigationBarTheme() => BottomNavigationBarThemeData(
-      backgroundColor: colorThemeLight!.lightGrey, selectedItemColor: colorThemeLight!.orange);
+        backgroundColor: colorThemeLight!.lightGrey,
+      );
 }

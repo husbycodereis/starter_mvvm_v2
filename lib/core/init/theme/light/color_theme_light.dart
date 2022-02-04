@@ -16,22 +16,22 @@ class ColorThemeLight {
   final Color lightGrey = const Color(0xffF1F3F8);
   final Color darkGrey = const Color(0xff676870);
   final Color black = const Color(0xff020306);
-  final Color azure = const Color(0xff27928d);
-  final Color orange = const Color(0xffD56B21);
-  final Color yellow = const Color(0xffEBBC36);
+   final Color azure = const Color(0xff3fc4eb);
+  final Color darkBlue = const Color(0xff040f24);
+  final Color whiteShade = const Color(0xffedf1fc);
 
   ColorScheme get colorScheme => ColorScheme(
-      primary: orange, //xx
-      primaryVariant: red,
-      secondary: red, //xx
-      secondaryVariant: orange, //xx
-      surface: yellow,
-      background: lightGrey, //xx
-      error: Colors.red[900]!,
-      onPrimary: lightGrey, //changes the color of text inside elevated button
+      primary: whiteShade, //xx
+      primaryVariant: whiteShade,
+      secondary: azure, //xx
+      secondaryVariant: azure, //xx
+      surface: darkBlue,
+      background: darkBlue, //xx
+      error: red,
+      onPrimary: azure, //changes the color of text inside elevated button
       onSecondary: Colors.black,
       onSurface: Colors.white30,
-      onBackground: grey,
+      onBackground: whiteShade,
       onError: Colors.green,
       brightness: Brightness.light);
 }

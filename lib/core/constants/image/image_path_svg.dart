@@ -9,4 +9,5 @@ class SVGImagePaths {
   SVGImagePaths.init();
 
   final loginGirlSVG = 'login_girl'.toSVG;
+  final cameraSVG = 'camera'.toSVG;
 }

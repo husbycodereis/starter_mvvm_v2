@@ -26,66 +26,48 @@ class LoginView extends StatelessWidget {
   Scaffold buildBody(BuildContext context, LoginViewModel viewModel) => Scaffold(
         key: viewModel.scaffoldState,
         body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildAnimatedContainer(context),
-              buildTabBar(context),
-              Expanded(
-                  flex: 6,
-                  child: Padding(
-                    padding: context.paddingNormalAll,
-                    child: buildForm(viewModel, context),
-                  ))
-            ],
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: context.paddingNormalAll,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  context.sizedBoxCustomVertical(0.08),
+                  SvgPicture.asset(
+                    SVGImagePaths.instance!.cameraSVG,
+                    width: context.dynamicWidth(0.25),
+                  ),
+                  context.sizedBoxCustomVertical(0.028),
+                  Text('The Movie Manager', style: context.textTheme.headline1),
+                  context.sizedBoxCustomVertical(0.04),
+                  Text('Login with Email', style: context.textTheme.bodyText1),
+                  buildForm(viewModel, context)
+                ],
+              ),
+            ),
           ),
         ),
       );
-
-  AnimatedContainer buildAnimatedContainer(BuildContext context) {
-    return AnimatedContainer(
-        color: context.customColors.white,
-        duration: context.shortDuration,
-        height: context.mediaQuery.viewInsets.bottom > 0 ? 0 : context.height * 0.3,
-        child: Center(child: SvgPicture.asset(SVGImagePaths.instance!.loginGirlSVG)));
-  }
-
-  Container buildTabBar(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: context.customColors.white, borderRadius: const BorderRadius.vertical(bottom: Radius.circular(50))),
-      child: Padding(
-        padding: EdgeInsets.only(left: context.highValue, right: context.highValue, bottom: context.lowValue),
-        child: TabBar(
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorColor: context.colors.secondary,
-            indicatorWeight: 3,
-            labelStyle: context.textTheme.bodyText1,
-            labelColor: context.customColors.black,
-            tabs: const [Tab(icon: Text('Login')), Tab(icon: Text('Register'))]),
-      ),
-    );
-  }
 
   Form buildForm(LoginViewModel viewModel, BuildContext context) {
     return Form(
       key: viewModel.formState,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Spacer(
-            flex: 6,
-          ),
           buildTextFormFieldEmail(context, viewModel),
+          context.sizedBoxNormalVertical,
           buildTextFormFieldPassword(context, viewModel),
-          const Spacer(),
-          buildForgotPassword(),
-          const Spacer(
-            flex: 6,
-          ),
+          context.sizedBoxNormalVertical,
           buildLoginButton(context, viewModel),
-          const Spacer()
+          // context.sizedBoxNormalVertical,
+          SizedBox(
+            height: 32,
+          ),
+          buildForgotPassword(),
         ],
       ),
     );
@@ -125,7 +107,7 @@ class LoginView extends StatelessWidget {
         ));
   }
 
-  Widget buildForgotPassword() => const Align(alignment: Alignment.centerRight, child: Text('Forgot Password?'));
+  Widget buildForgotPassword() => const Align(child: Text('Forgot Password?'));
 
   Widget buildLoginButton(BuildContext context, LoginViewModel viewModel) {
     return Observer(builder: (_) {

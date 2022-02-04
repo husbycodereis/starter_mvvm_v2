@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../app_theme.dart';
 import 'theme_interface_dark.dart';
@@ -13,11 +14,11 @@ class AppThemeDark extends AppTheme with IDarkTheme {
 
   @override
   ThemeData get theme => ThemeData(
-        fontFamily: '',
-        primaryColor: colorThemeDark!.red,
-       // colorScheme: colorThemeDark!.colorScheme,
-        backgroundColor: Colors.grey[800],
-        scaffoldBackgroundColor: Colors.grey[800],
+        fontFamily: GoogleFonts.poppins().fontFamily,
+        primaryColor: colorThemeDark!.darkBlue,
+        colorScheme: colorThemeDark!.colorScheme,
+        backgroundColor: colorThemeDark!.darkBlue,
+        scaffoldBackgroundColor: colorThemeDark!.darkBlue,
         brightness: Brightness.dark,
         textTheme: textTheme(),
       );
