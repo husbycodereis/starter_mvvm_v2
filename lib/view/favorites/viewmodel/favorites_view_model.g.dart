@@ -49,6 +49,14 @@ mixin _$FavoritesViewModel on _FavoritesViewModelBase, Store {
         .run(() => super.fetchFavoriteMovies());
   }
 
+  final _$deleteFavoriteAsyncAction =
+      AsyncAction('_FavoritesViewModelBase.deleteFavorite');
+
+  @override
+  Future<dynamic> deleteFavorite(MovieResultModel movie) {
+    return _$deleteFavoriteAsyncAction.run(() => super.deleteFavorite(movie));
+  }
+
   final _$_FavoritesViewModelBaseActionController =
       ActionController(name: '_FavoritesViewModelBase');
 
@@ -58,17 +66,6 @@ mixin _$FavoritesViewModel on _FavoritesViewModelBase, Store {
         name: '_FavoritesViewModelBase.setFavorite');
     try {
       return super.setFavorite(movie);
-    } finally {
-      _$_FavoritesViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void deleteFavorite(MovieResultModel movie) {
-    final _$actionInfo = _$_FavoritesViewModelBaseActionController.startAction(
-        name: '_FavoritesViewModelBase.deleteFavorite');
-    try {
-      return super.deleteFavorite(movie);
     } finally {
       _$_FavoritesViewModelBaseActionController.endAction(_$actionInfo);
     }

@@ -62,7 +62,7 @@ class LoginView extends StatelessWidget {
             indicatorWeight: 3,
             labelStyle: context.textTheme.bodyText1,
             labelColor: context.customColors.black,
-            tabs: [Tab(icon: Text('LocaleKeys.login_tabOne.locale')), Tab(icon: Text('LocaleKeys.login_tabTwo.locale'))]),
+            tabs: const [Tab(icon: Text('Login')), Tab(icon: Text('Register'))]),
       ),
     );
   }
@@ -95,9 +95,8 @@ class LoginView extends StatelessWidget {
     return TextFormField(
       controller: viewModel.emailController,
       validator: (value) => value!.isValidEmail,
-      decoration: InputDecoration(
-          labelText: 'email (eve.holt@reqres.in)',
-          icon: buildContainerIconField(context, Icons.email)),
+      decoration:
+          InputDecoration(labelText: 'email (eve.holt@reqres.in)', icon: buildContainerIconField(context, Icons.email)),
     );
   }
 
@@ -126,7 +125,7 @@ class LoginView extends StatelessWidget {
         ));
   }
 
-  Widget buildForgotPassword() => Align(alignment: Alignment.centerRight, child: Text('Forgot Password?'));
+  Widget buildForgotPassword() => const Align(alignment: Alignment.centerRight, child: Text('Forgot Password?'));
 
   Widget buildLoginButton(BuildContext context, LoginViewModel viewModel) {
     return Observer(builder: (_) {
@@ -148,5 +147,4 @@ class LoginView extends StatelessWidget {
       );
     });
   }
-
 }

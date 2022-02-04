@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:movies_catalog/core/init/cache/local_database_manager.dart';
 import 'package:movies_catalog/view/search/model/movie_result.dart';
-import 'package:movies_catalog/view/search/view/subview/movie_details_view.dart';
+
 part 'watchlist_model.g.dart';
 
 @JsonSerializable()
-class WatchListModel extends LocalDatabaseModel {
+class WatchListModel extends LocalDatabaseModel<WatchListModel> {
   @override
   int? localId;
   String? name;
@@ -19,4 +19,9 @@ class WatchListModel extends LocalDatabaseModel {
   factory WatchListModel.fromJson(Map<String, dynamic> json) => _$WatchListModelFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$WatchListModelToJson(this);
+
+   @override
+   WatchListModel fromJson(Map<String, dynamic> json) {
+    return  _$WatchListModelFromJson(json);
+  }
 }

@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movies_catalog/core/constants/app/app_constants.dart';
 import 'package:movies_catalog/core/constants/enums/network_route_enum.dart';
 import 'package:movies_catalog/view/search/model/search_result.dart';
 import 'package:vexana/vexana.dart';

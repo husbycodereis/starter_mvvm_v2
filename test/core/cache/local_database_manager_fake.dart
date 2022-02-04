@@ -1,13 +1,14 @@
 import 'package:mockito/mockito.dart';
 import 'package:movies_catalog/core/init/cache/local_database_manager.dart';
-import 'package:movies_catalog/view/search/model/movie_result.dart';
 import 'package:sembast/sembast.dart' as sembast;
 import 'package:sembast/sembast.dart';
 
 class LocalDatabaseManagerFake<T extends LocalDatabaseModel?> extends Fake implements LocalDatabaseManager {
   final sembast.Database db;
 
+  @override
   late sembast.StoreRef<int, Map<String, dynamic>> store;
+  @override
   String? storeName;
 
   LocalDatabaseManagerFake({
@@ -46,13 +47,23 @@ class LocalDatabaseManagerFake<T extends LocalDatabaseModel?> extends Fake imple
   }
 
   @override
-  Future<List<MovieResultModel>> getCachedFavorites() async {
+  Future<List<LocalDatabaseModel<dynamic>?>> getCachedData(LocalDatabaseModel<dynamic>? obj) async {
     final recordSnapshots = await store.find(db);
 
     return recordSnapshots.map((snapshot) {
-      final requests = MovieResultModel.fromJson(snapshot.value);
-      requests.movieId = snapshot.key;
+      final requests = obj!.fromJson(snapshot.value) as LocalDatabaseModel<dynamic>?;
+      requests!.localId = snapshot.key;
       return requests;
     }).toList();
   }
+
+  // Future<List<T>> getCachedFavorites(T obj) async {
+  //   final recordSnapshots = await store.find(await LocalDatabase.instance.database);
+
+  //   return recordSnapshots.map((snapshot) {
+  //     final requests = obj!.fromJson(snapshot.value) as T;
+  //     requests!.localId = snapshot.key;
+  //     return requests ;
+  //   }).toList();
+  // }
 }

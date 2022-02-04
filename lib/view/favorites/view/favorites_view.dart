@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
+import 'package:movies_catalog/core/components/widgets/dismissible/dismissible_delete_widget.dart';
+import 'package:movies_catalog/core/components/widgets/loading/basic_loading_widget.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/core/init/di/injection_container.dart';
 import 'package:movies_catalog/view/favorites/viewmodel/favorites_view_model.dart';
@@ -18,12 +20,10 @@ class FavoritesView extends StatelessWidget {
         },
         onPageBuilder: (BuildContext context, FavoritesViewModel model) => Observer(builder: (_) {
               return Scaffold(
-                body: model.loading ? buildLoading() : buildBody(model, context),
+                body: model.loading ? BasicLoadingWidget() : buildBody(model, context),
               );
             }));
   }
-
-  Center buildLoading() => const Center(child: CircularProgressIndicator());
 
   Widget buildBody(FavoritesViewModel viewModel, BuildContext context) {
     return Padding(
@@ -51,25 +51,12 @@ class FavoritesView extends StatelessWidget {
     );
   }
 
-  Dismissible buildDismissibleListItem(int index, FavoritesViewModel viewModel, BuildContext context) {
-    return Dismissible(
-      key: Key(index.toString()),
-      direction: DismissDirection.endToStart,
+  Widget buildDismissibleListItem(int index, FavoritesViewModel viewModel, BuildContext context) {
+    return DismissibleDeleteWidget(
+      keyString: index.toString(),
       onDismissed: (direction) {
         viewModel.deleteFavorite(viewModel.favoriteMovies[index]);
       },
-      background: Container(
-        color: Colors.red,
-        child: Align(
-            alignment: Alignment.centerRight,
-            child: Padding(
-              padding: context.paddingLowAll,
-              child: Icon(
-                Icons.delete,
-                color: context.customColors.white,
-              ),
-            )),
-      ),
       child: GestureDetector(
         onTap: () {
           viewModel.navigateToDetails(viewModel.favoriteMovies[index]);

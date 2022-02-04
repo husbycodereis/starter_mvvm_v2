@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movies_catalog/core/base/model/base_view_model.dart';
@@ -6,7 +5,6 @@ import 'package:movies_catalog/core/components/models/user/user.dart';
 import 'package:movies_catalog/core/constants/navigation/navigation_constants.dart';
 import 'package:movies_catalog/core/init/provider/notifiers/theme_notifier.dart';
 import 'package:provider/provider.dart';
-
 
 import '../model/settings_dynamic_model.dart';
 

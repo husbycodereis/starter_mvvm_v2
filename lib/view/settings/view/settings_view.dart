@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
 import 'package:movies_catalog/core/constants/enums/lottie_path_enum.dart';
 import 'package:movies_catalog/core/init/provider/notifiers/theme_notifier.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/base/view/base_view.dart';
-
 import '../../../core/extensions/context_extensions.dart';
 import '../../../core/extensions/string_extensions.dart';
 import '../../../core/extensions/widget_extensions.dart';
-
 import '../../../core/init/theme/light/app_theme_light.dart';
 import '../viewmodel/settings_view_model.dart';
 
@@ -98,7 +95,7 @@ class SettingsView extends StatelessWidget {
   Widget buildProjectCore(BuildContext context, SettingsViewModel viewModel) {
     return buildCardHeader(context, viewModel, title: 'Tools', children: [
       ListTile(
-        title: Text('App Theme'),
+        title: const Text('App Theme'),
         trailing: IconButton(
             onPressed: viewModel.changeAppTheme,
             icon: context.watch<ThemeNotifier>().currentTheme == AppThemeLight.instance.theme
@@ -134,7 +131,7 @@ class SettingsView extends StatelessWidget {
       ListTile(
         onTap: viewModel.navigateToContribution,
         leading: const Icon(Icons.favorite),
-        title: Text('WesterOps Home'),
+        title: const Text('WesterOps Home'),
         trailing: const Icon(Icons.keyboard_arrow_right_outlined),
       ),
     ]);

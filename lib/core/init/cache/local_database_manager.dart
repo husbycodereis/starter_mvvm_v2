@@ -1,12 +1,12 @@
 import 'package:movies_catalog/core/init/cache/local_database.dart';
-import 'package:movies_catalog/view/search/model/movie_result.dart';
 import 'package:movies_catalog/view/watchlist/model/watchlist_model.dart';
 import 'package:sembast/sembast.dart';
 
-abstract class LocalDatabaseModel {
+abstract class LocalDatabaseModel<T> {
   int? localId;
 
   Map<String, dynamic>? toJson();
+  T fromJson(Map<String, dynamic> json);
 }
 
 class LocalDatabaseManager<T extends LocalDatabaseModel?> {
@@ -43,23 +43,13 @@ class LocalDatabaseManager<T extends LocalDatabaseModel?> {
     return store.delete(await LocalDatabase.instance.database);
   }
 
-  Future<List<MovieResultModel>> getCachedFavorites() async {
+  Future<List<T>> getCachedData(T obj) async {
     final recordSnapshots = await store.find(await LocalDatabase.instance.database);
 
     return recordSnapshots.map((snapshot) {
-      final requests = MovieResultModel.fromJson(snapshot.value);
-      requests.localId = snapshot.key;
-      return requests;
-    }).toList();
-  }
-
-  Future<List<WatchListModel>> getCachedWatchLists() async {
-    final recordSnapshots = await store.find(await LocalDatabase.instance.database);
-
-    return recordSnapshots.map((snapshot) {
-      final requests = WatchListModel.fromJson(snapshot.value);
-      requests.localId = snapshot.key;
-      return requests;
+      final requests = obj!.fromJson(snapshot.value) as T;
+      requests!.localId = snapshot.key;
+      return requests ;
     }).toList();
   }
 }

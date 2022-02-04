@@ -39,37 +39,41 @@ class SearchView extends StatelessWidget {
             onPressedCancel: () => viewModel.dispose(),
             isAbleToCancel: viewModel.searchQuery.isNotEmpty,
           ),
-          if (viewModel.searchResultList.isEmpty)
-            Padding(padding: context.paddingHighVertical, child: const Text('Search for movies'))
-          else
-            Expanded(
-              child: ListView.separated(
-                separatorBuilder: (context, index) {
-                  return const Divider(
-                    thickness: 2,
-                  );
-                },
-                itemCount: viewModel.searchResultList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () => viewModel.navigateToDetails(viewModel.searchResultList[index]),
-                    child: Row(
-                      children: [
-                        Image.network(
-                          viewModel.searchResultList[index].fullImageUrl,
-                          width: 50,
-                          height: 100,
-                        ),
-                        context.sizedBoxMediumHorizontal,
-                        Expanded(child: Text(viewModel.searchResultList[index].title ?? 'No Title Found')),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
+          if (viewModel.searchResultList.isEmpty) buildEmptyListView(context) else buildListView(viewModel),
         ],
       ),
     );
   }
+
+  Expanded buildListView(SearchViewModel viewModel) {
+    return Expanded(
+      child: ListView.separated(
+        separatorBuilder: (context, index) {
+          return const Divider(
+            thickness: 2,
+          );
+        },
+        itemCount: viewModel.searchResultList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
+            onTap: () => viewModel.navigateToDetails(viewModel.searchResultList[index]),
+            child: Row(
+              children: [
+                Image.network(
+                  viewModel.searchResultList[index].fullImageUrl,
+                  width: 50,
+                  height: 100,
+                ),
+                context.sizedBoxMediumHorizontal,
+                Expanded(child: Text(viewModel.searchResultList[index].title ?? 'No Title Found')),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Padding buildEmptyListView(BuildContext context) =>
+      Padding(padding: context.paddingHighVertical, child: const Text('Search for movies'));
 }

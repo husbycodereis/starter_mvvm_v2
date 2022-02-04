@@ -3,11 +3,10 @@ import 'package:mobx/mobx.dart';
 import 'package:movies_catalog/core/base/model/base_view_model.dart';
 import 'package:movies_catalog/core/components/utility/throttle_helper.dart';
 import 'package:movies_catalog/core/constants/navigation/navigation_constants.dart';
-import 'package:movies_catalog/view/favorites/viewmodel/favorites_view_model.dart';
 import 'package:movies_catalog/view/search/model/movie_result.dart';
-import 'package:movies_catalog/view/search/model/search_result.dart';
 import 'package:movies_catalog/view/search/service/ISearchService.dart';
 import 'package:movies_catalog/view/search/service/search_service.dart';
+
 part 'search_view_Model.g.dart';
 
 class SearchViewModel = _SearchViewModelBase with _$SearchViewModel;
@@ -54,7 +53,6 @@ abstract class _SearchViewModelBase with Store, BaseViewModel {
     if (searchQuery.length >= 3) {
       final result = await searchService.fetchSearchResults(context!, searchQuery);
       searchResultList = result!.results ?? [];
-      print(searchResultList.map((e) => e.movieId));
     }
   }
 

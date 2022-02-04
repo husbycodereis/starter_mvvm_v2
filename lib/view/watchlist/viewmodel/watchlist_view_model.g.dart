@@ -52,8 +52,9 @@ mixin _$WatchListViewModel on _WatchListViewModelBase, Store {
       AsyncAction('_WatchListViewModelBase.createWatchList');
 
   @override
-  Future<dynamic> createWatchList() {
-    return _$createWatchListAsyncAction.run(() => super.createWatchList());
+  Future<dynamic> createWatchList(BuildContext context) {
+    return _$createWatchListAsyncAction
+        .run(() => super.createWatchList(context));
   }
 
   final _$addMovieToWatchListAsyncAction =
@@ -69,7 +70,7 @@ mixin _$WatchListViewModel on _WatchListViewModelBase, Store {
       AsyncAction('_WatchListViewModelBase.deleteWatchlist');
 
   @override
-  Future<dynamic> deleteWatchlist(String value) {
+  Future<dynamic> deleteWatchlist(WatchListModel value) {
     return _$deleteWatchlistAsyncAction.run(() => super.deleteWatchlist(value));
   }
 

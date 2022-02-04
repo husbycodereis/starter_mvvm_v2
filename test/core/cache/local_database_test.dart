@@ -66,7 +66,7 @@ void main() {
     final object = await localDatabaseManagerFake.store.record(insertKey).get(db);
     //change the object
     // ignore: cast_nullable_to_non_nullable
-    final MovieResultModel movieResult = MovieResultModel.fromJson(object as Map<String, dynamic>);
+    final MovieResultModel movieResult = MovieResultModel().fromJson(object as Map<String, dynamic>);
     movieResult.title = 'changed';
     //update the object
     final updateKey = await localDatabaseManagerFake.update(MovieResultModel(movieId: 1, title: 'changed', localId: 1));
@@ -117,7 +117,7 @@ void main() {
     //expect the Result list length is equal to added requests list
     expect(insertResult.length, 2);
     //get the Cached Requests
-    final cachedRequestsList = await localDatabaseManagerFake.getCachedFavorites();
+    final cachedRequestsList = await localDatabaseManagerFake.getCachedData(MovieResultModel());
     //expect the Result list length is equal to added requests list again
     expect(cachedRequestsList.length, 2);
   });

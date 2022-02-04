@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_catalog/view/favorites/view/favorites_view.dart';
 import 'package:movies_catalog/view/search/view/search_view.dart';
 import 'package:movies_catalog/view/settings/view/settings_view.dart';
+import 'package:movies_catalog/view/watchlist/view/watchlist_view.dart';
 
 enum HomeScreenConstantsEnum {
   SEARCH_VIEW,
@@ -18,7 +19,7 @@ extension HomeScreenRouteNamesExtension on HomeScreenConstantsEnum {
       case HomeScreenConstantsEnum.FAVORITES_VIEW:
         return const FavoritesView();
       case HomeScreenConstantsEnum.WATCHLIST_VIEW:
-        return Container();
+        return const WatchListView();
       case HomeScreenConstantsEnum.SETTINGS_VIEW:
         return const SettingsView();
     }

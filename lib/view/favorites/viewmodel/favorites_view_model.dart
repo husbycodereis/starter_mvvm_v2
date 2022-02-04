@@ -30,10 +30,10 @@ abstract class _FavoritesViewModelBase with Store, BaseViewModel {
     _localDatabaseManager ??= LocalDatabaseManager(storeName: LocalDatabaseConstants.favorites.name);
   }
 
-    @action
+  @action
   Future fetchFavoriteMovies() async {
     setLoading();
-    favoriteMovies = await _localDatabaseManager!.getCachedFavorites();
+    favoriteMovies = await _localDatabaseManager!.getCachedData(MovieResultModel());
     setLoading();
   }
 
@@ -63,8 +63,11 @@ abstract class _FavoritesViewModelBase with Store, BaseViewModel {
   }
 
   @action
-  void deleteFavorite(MovieResultModel movie) {
-    _localDatabaseManager!.delete(movie);
+  Future deleteFavorite(MovieResultModel movie) async {
+    setLoading();
+    await _localDatabaseManager!.delete(movie);
+    await fetchFavoriteMovies();
+    setLoading();
   }
 
   @action
@@ -72,9 +75,7 @@ abstract class _FavoritesViewModelBase with Store, BaseViewModel {
     loading = !loading;
   }
 
-
-
-   void navigateToDetails(MovieResultModel movie) {
+  void navigateToDetails(MovieResultModel movie) {
     navigation.navigateToPage(path: NavigationConstants.MOVIE_DETAILS_VIEV, data: movie);
   }
 }
