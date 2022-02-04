@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/base/view/base_view.dart';
@@ -19,7 +20,7 @@ class LoginView extends StatelessWidget {
           model.setContext(context);
           model.init();
         },
-        onPageBuilder: (BuildContext context, LoginViewModel viewModel) =>
+        onPageBuilder: (LoginViewModel viewModel) =>
             DefaultTabController(length: 2, child: buildBody(context, viewModel)));
   }
 
@@ -33,6 +34,7 @@ class LoginView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(height: 50.h),
                   context.sizedBoxCustomVertical(0.08),
                   SvgPicture.asset(
                     SVGImagePaths.instance!.cameraSVG,

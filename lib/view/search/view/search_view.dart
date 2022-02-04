@@ -19,7 +19,7 @@ class SearchView extends StatelessWidget {
         onDispose: (model) {
           model.dispose();
         },
-        onPageBuilder: (BuildContext context, SearchViewModel viewModel) => Observer(builder: (_) {
+        onPageBuilder: ( SearchViewModel viewModel) => Observer(builder: (_) {
               return Scaffold(
                 body: viewModel.loading ? buildLoading() : buildBody(viewModel, context),
               );

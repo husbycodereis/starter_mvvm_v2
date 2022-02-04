@@ -19,7 +19,7 @@ class WatchListModalBottomSheet extends StatelessWidget {
         model.setContext(context);
         model.init();
       },
-      onPageBuilder: (BuildContext context, WatchListViewModel model) => ModalBottomSheetContainer(
+      onPageBuilder: (WatchListViewModel model) => ModalBottomSheetContainer(
           height: context.dynamicHeight(0.55),
           child: model.watchlistList.isEmpty
               ? const Center(child: Text('Create a Watchlist'))

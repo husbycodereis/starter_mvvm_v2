@@ -18,7 +18,7 @@ class FavoritesView extends StatelessWidget {
           model.setContext(context);
           model.init();
         },
-        onPageBuilder: (BuildContext context, FavoritesViewModel model) => Observer(builder: (_) {
+        onPageBuilder: (FavoritesViewModel model) => Observer(builder: (_) {
               return Scaffold(
                 body: model.loading ? const BasicLoadingWidget() : buildBody(model, context),
               );

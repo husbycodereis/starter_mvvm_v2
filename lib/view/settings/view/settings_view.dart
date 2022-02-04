@@ -23,7 +23,7 @@ class SettingsView extends StatelessWidget {
           model.init();
         },
         
-        onPageBuilder: (BuildContext context, SettingsViewModel viewModel) => Scaffold(
+        onPageBuilder: ( SettingsViewModel viewModel) => Scaffold(
               body: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CustomScrollView(

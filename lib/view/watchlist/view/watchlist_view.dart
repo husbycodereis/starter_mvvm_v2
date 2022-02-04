@@ -22,7 +22,7 @@ class WatchListView extends StatelessWidget {
         onDispose: (model) {
           model.dispose();
         },
-        onPageBuilder: (BuildContext context, WatchListViewModel model) => Observer(builder: (_) {
+        onPageBuilder: ( WatchListViewModel model) => Observer(builder: (_) {
               return Scaffold(
                 body: model.loading ? const BasicLoadingWidget() : buildBody(model, context),
               );

@@ -29,7 +29,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
         checkFavorite();
         
       },
-      onPageBuilder: (BuildContext context, SearchViewModel model) => Scaffold(
+      onPageBuilder: ( SearchViewModel model) => Scaffold(
           appBar: AppBar(),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,

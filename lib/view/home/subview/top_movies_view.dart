@@ -13,7 +13,7 @@ class TopMoviesView extends StatelessWidget{
     model.setContext(context);
     model.init();
    },
-   onPageBuilder: (BuildContext context,HomeViewModel model) => Scaffold(),
+   onPageBuilder: (HomeViewModel model) => Scaffold(),
   );
  }
 }

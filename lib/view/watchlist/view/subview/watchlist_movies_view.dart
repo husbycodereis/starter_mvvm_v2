@@ -21,7 +21,7 @@ class WatchListMoviesView extends StatelessWidget {
           model.setContext(context);
           model.init();
         },
-        onPageBuilder: (BuildContext context, WatchListViewModel model) => Observer(builder: (_) {
+        onPageBuilder: ( WatchListViewModel model) => Observer(builder: (_) {
               return Scaffold(
                 appBar: AppBar(),
                 body: model.loading ? const BasicLoadingWidget() : buildBody(model, context),
