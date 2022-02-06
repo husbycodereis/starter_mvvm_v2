@@ -4,7 +4,6 @@ import 'package:movies_catalog/core/constants/app/app_constants.dart';
 import 'package:movies_catalog/core/constants/enums/network_route_enum.dart';
 import 'package:movies_catalog/view/home/service/IHomeService.dart';
 import 'package:movies_catalog/view/search/model/search_result.dart';
-import 'package:movies_catalog/view/search/service/ISearchService.dart';
 import 'package:vexana/vexana.dart';
 
 class HomeService extends IHomeService with ServiceHelper {

@@ -1,9 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:movies_catalog/core/init/cache/local_database_manager.dart';
+import 'package:vexana/vexana.dart';
 part 'movie_result.g.dart';
 
 @JsonSerializable()
-class MovieResultModel extends LocalDatabaseModel<MovieResultModel> {
+class MovieResultModel extends LocalDatabaseModel<MovieResultModel> with INetworkModel<MovieResultModel> {
   @JsonKey(name: 'poster_path')
   String? posterPath;
   bool? adult;

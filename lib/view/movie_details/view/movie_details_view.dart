@@ -3,8 +3,8 @@ import 'package:movies_catalog/core/base/view/base_view.dart';
 import 'package:movies_catalog/core/components/widgets/button/normal_button.dart';
 import 'package:movies_catalog/core/init/di/injection_container.dart';
 import 'package:movies_catalog/view/favorites/viewmodel/favorites_view_model.dart';
+import 'package:movies_catalog/view/movie_details/view_model/movie_details_view_model.dart';
 import 'package:movies_catalog/view/search/model/movie_result.dart';
-import 'package:movies_catalog/view/search/viewmodel/search_view_Model.dart';
 import 'package:movies_catalog/view/watchlist/viewmodel/watchlist_view_model.dart';
 
 class MovieDetailsView extends StatefulWidget {
@@ -22,14 +22,14 @@ class MovieDetailsView extends StatefulWidget {
 class _MovieDetailsViewState extends State<MovieDetailsView> {
   @override
   Widget build(BuildContext context) {
-    return BaseView<SearchViewModel>(
-      viewModel: SearchViewModel(),
+    return BaseView<MovieDetailsViewModel>(
+      viewModel: MovieDetailsViewModel(),
       onModelReady: (model) async {
         model.setContext(context);
         checkFavorite();
         
       },
-      onPageBuilder: ( SearchViewModel model) => Scaffold(
+      onPageBuilder: ( MovieDetailsViewModel model) => Scaffold(
           appBar: AppBar(),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
