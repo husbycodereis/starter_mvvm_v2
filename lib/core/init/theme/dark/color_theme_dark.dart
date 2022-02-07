@@ -13,7 +13,7 @@ class ColorThemeDark {
   final Color white = const Color(0xffffffff);
   final Color gray = const Color(0xffa5a6ae);
   final Color lightGray = const Color(0xfff7f7f7);
-  final Color darkGray = const Color(0xff676870);
+  final Color darkGrey = const Color(0xff535965);
   final Color black = const Color(0xff020306);
   final Color azure = const Color(0xff3fc4eb);
   final Color darkBlue = const Color(0xff040f24);

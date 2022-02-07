@@ -25,11 +25,12 @@ class AppThemeDark extends AppTheme with IDarkTheme {
 
   TextTheme textTheme() {
     return TextTheme(
-      headline1: textThemeDark!.headline1,
-      headline2: textThemeDark!.headline2,
-      headline3: textThemeDark!.headline3,
-      headline4: textThemeDark!.headline4,
-      overline: textThemeDark!.overline,
-    );
+        headline1: textThemeDark!.headline1,
+        headline2: textThemeDark!.headline2,
+        headline3: textThemeDark!.headline3,
+        headline4: textThemeDark!.headline4,
+        overline: textThemeDark!.overline,
+        bodyText1: textThemeDark!.bodyText1,
+        bodyText2: textThemeDark!.bodyText2);
   }
 }

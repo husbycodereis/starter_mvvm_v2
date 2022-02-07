@@ -14,7 +14,7 @@ class ColorThemeLight {
   final Color white = const Color(0xffffffff);
   final Color grey = const Color(0xffF1F3F8);
   final Color lightGrey = const Color(0xffF1F3F8);
-  final Color darkGrey = const Color(0xff676870);
+  final Color darkGrey = const Color(0xff535965);
   final Color black = const Color(0xff020306);
    final Color azure = const Color(0xff3fc4eb);
   final Color darkBlue = const Color(0xff040f24);

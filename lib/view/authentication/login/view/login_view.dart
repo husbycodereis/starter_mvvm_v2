@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:movies_catalog/core/components/widgets/text_form_field/custom_text_form_field.dart';
 
 import '../../../../core/base/view/base_view.dart';
 import '../../../../core/constants/image/image_path_svg.dart';
@@ -26,31 +27,48 @@ class LoginView extends StatelessWidget {
 
   Scaffold buildBody(BuildContext context, LoginViewModel viewModel) => Scaffold(
         key: viewModel.scaffoldState,
-        body: SafeArea(
-          child: SingleChildScrollView(
+        body: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: context.height),
             child: Padding(
               padding: context.paddingNormalAll,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 50.h),
-                  context.sizedBoxCustomVertical(0.08),
-                  SvgPicture.asset(
-                    SVGImagePaths.instance!.cameraSVG,
-                    width: context.dynamicWidth(0.25),
-                  ),
-                  context.sizedBoxCustomVertical(0.028),
+                  SizedBox(height: 120.h),
+                  buildImage(),
+                  context.sizedBoxNormalVertical,
                   Text('The Movie Manager', style: context.textTheme.headline1),
-                  context.sizedBoxCustomVertical(0.04),
+                  SizedBox(height: 50.h),
                   Text('Login with Email', style: context.textTheme.bodyText1),
-                  buildForm(viewModel, context)
+                  context.sizedBoxNormalVertical,
+                  buildForm(viewModel, context),
+                  context.sizedBoxNormalVertical,
+                  buildForgotPassword(context),
+                  const Spacer(),
+                  buildBottomText(context)
                 ],
               ),
             ),
           ),
         ),
       );
+
+  Text buildBottomText(BuildContext context) {
+    return Text(
+      'This product uses the TMDb API but is not endorsed or certified by TMDb.',
+      textAlign: TextAlign.center,
+      style: context.textTheme.bodyText2,
+    );
+  }
+
+  SvgPicture buildImage() {
+    return SvgPicture.asset(
+      SVGImagePaths.instance!.cameraSVG,
+      width: 107.w,
+    );
+  }
 
   Form buildForm(LoginViewModel viewModel, BuildContext context) {
     return Form(
@@ -65,51 +83,37 @@ class LoginView extends StatelessWidget {
           buildTextFormFieldPassword(context, viewModel),
           context.sizedBoxNormalVertical,
           buildLoginButton(context, viewModel),
-          // context.sizedBoxNormalVertical,
-          SizedBox(
-            height: 32,
-          ),
-          buildForgotPassword(),
         ],
       ),
     );
   }
 
-  TextFormField buildTextFormFieldEmail(BuildContext context, LoginViewModel viewModel) {
-    return TextFormField(
+  Widget buildTextFormFieldEmail(BuildContext context, LoginViewModel viewModel) {
+    return CustomTextFormField(
       controller: viewModel.emailController,
       validator: (value) => value!.isValidEmail,
-      decoration:
-          InputDecoration(labelText: 'email (eve.holt@reqres.in)', icon: buildContainerIconField(context, Icons.email)),
+      labelText: 'Email (eve.holt@reqres.in)',
     );
   }
 
   Widget buildTextFormFieldPassword(BuildContext context, LoginViewModel viewModel) => Observer(builder: (_) {
-        return TextFormField(
-          controller: viewModel.passwordController,
-          validator: (value) => value!.isNotEmpty ? null : 'enter password',
-          obscureText: viewModel.isLockOpen,
-          decoration: InputDecoration(
-              suffix: GestureDetector(
-                onTap: () => viewModel.isLockStateChange(),
-                child: Icon(viewModel.isLockOpen ? Icons.remove_red_eye_outlined : Icons.remove_red_eye),
+        return CustomTextFormField(
+            controller: viewModel.passwordController,
+            validator: (value) => value!.isNotEmpty ? null : 'enter password',
+            obscureText: viewModel.isLockOpen,
+            labelText: 'password (cityslicka)',
+            suffix: GestureDetector(
+              onTap: () => viewModel.isLockStateChange(),
+              child: Icon(
+                viewModel.isLockOpen ? Icons.remove_red_eye_outlined : Icons.remove_red_eye,
+                color: context.customColors.darkGrey,
               ),
-              labelText: 'password (cityslicka)',
-              icon: buildContainerIconField(context, Icons.lock)),
-        );
+            ));
       });
 
-  Container buildContainerIconField(BuildContext context, IconData icon) {
-    return Container(
-        padding: context.paddingLowAll,
-        color: context.colors.secondary,
-        child: Icon(
-          icon,
-          color: context.customColors.white,
-        ));
+  Widget buildForgotPassword(BuildContext context) {
+    return Align(child: Text('Forgot Password?', style: context.textTheme.bodyText1));
   }
-
-  Widget buildForgotPassword() => const Align(child: Text('Forgot Password?'));
 
   Widget buildLoginButton(BuildContext context, LoginViewModel viewModel) {
     return Observer(builder: (_) {
@@ -122,7 +126,7 @@ class LoginView extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           primary: context.colors.secondary,
           shape: const StadiumBorder(),
-          padding: context.paddingMediumAll,
+          padding: EdgeInsets.all(16.h),
         ),
         child: Text(
           'Login',

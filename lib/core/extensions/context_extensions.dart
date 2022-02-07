@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../init/theme/light/color_theme_light.dart';
 
@@ -13,7 +14,7 @@ extension MediaQueryExtension on BuildContext {
   double get width => mediaQuery.size.width;
 
   double get lowValue => height * 0.01;
-  double get normalValue => width * 0.04;
+  double get normalValue => 30.w;
   double get mediumValue => height * 0.033;
   double get highValue => height * 0.1;
 
