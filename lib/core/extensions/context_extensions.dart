@@ -82,7 +82,7 @@ extension DurationExtension on BuildContext {
 
 extension SnackBarExtension on BuildContext {
   dynamic showSnackBar(String text) => ScaffoldMessenger.of(this).showSnackBar(SnackBar(
-        content: Text(text),
+        content: Text(text, style: textTheme.bodyText1),
         backgroundColor: customColors.darkGrey,
       ));
 }

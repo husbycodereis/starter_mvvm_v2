@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_catalog/view/favorites/view/favorites_view.dart';
-import 'package:movies_catalog/view/home/subview/top_movies_view.dart';
+import 'package:movies_catalog/view/home/view/subview/top_movies_view.dart';
 import 'package:movies_catalog/view/search/view/search_view.dart';
 import 'package:movies_catalog/view/settings/view/settings_view.dart';
 import 'package:movies_catalog/view/watchlist/view/watchlist_view.dart';

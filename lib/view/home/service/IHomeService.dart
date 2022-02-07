@@ -7,5 +7,5 @@ abstract class IHomeService {
 
   IHomeService({required this.manager});
 
-  Future<SearchResultModel?> fetchTopMovies(BuildContext context, String movieQuery);
+  Future<SearchResultModel?> fetchTopMovies(BuildContext context, int page);
 }

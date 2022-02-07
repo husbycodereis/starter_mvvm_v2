@@ -47,7 +47,6 @@ class AppThemeLight extends AppTheme with ILightTheme {
       indicator: const BoxDecoration(border: Border(bottom: BorderSide(width: 2))));
 
   TextTheme textTheme() => TextTheme(
-    
         headline1: textThemeLight!.headline1,
         headline2: textThemeLight!.headline2,
         headline3: textThemeLight!.headline3,
@@ -58,6 +57,6 @@ class AppThemeLight extends AppTheme with ILightTheme {
       );
 
   BottomNavigationBarThemeData bottomNavigationBarTheme() => BottomNavigationBarThemeData(
-        backgroundColor: colorThemeLight!.lightGrey,
+        backgroundColor: colorThemeLight!.whiteShade,
       );
 }

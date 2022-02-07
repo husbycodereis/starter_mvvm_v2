@@ -9,7 +9,7 @@ import 'package:vexana/vexana.dart';
 class HomeService extends IHomeService with ServiceHelper {
   HomeService(INetworkManager manager) : super(manager: manager);
   @override
-  Future<SearchResultModel?> fetchTopMovies(BuildContext context, String movieQuery) async {
+  Future<SearchResultModel?> fetchTopMovies(BuildContext context, int page) async {
     final response = await manager.send<SearchResultModel, SearchResultModel>(NetWorkRoutes.TOP_MOVIES.value,
         method: RequestType.GET,
         parseModel: SearchResultModel(),
@@ -19,7 +19,7 @@ class HomeService extends IHomeService with ServiceHelper {
           'include_adult': false,
           'include_video': false,
           'vote_count.gte': 2000,
-          'page': '1'
+          'page': page
         });
     showMessage(response.error, context);
     if (response.data is SearchResultModel) {

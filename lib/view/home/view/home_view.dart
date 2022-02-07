@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/constants/navigation/homsecreen_constants.dart';
+import '../../../core/constants/navigation/homsecreen_constants.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);

@@ -19,6 +19,7 @@ class AppThemeDark extends AppTheme with IDarkTheme {
         colorScheme: colorThemeDark!.colorScheme,
         backgroundColor: colorThemeDark!.darkBlue,
         scaffoldBackgroundColor: colorThemeDark!.darkBlue,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(backgroundColor: colorThemeDark!.darkBlue),
         brightness: Brightness.dark,
         textTheme: textTheme(),
       );
