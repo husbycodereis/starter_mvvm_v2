@@ -29,6 +29,7 @@ class TopMoviesView extends StatelessWidget {
                   : Padding(
                       padding: context.paddingNormalHorizontal,
                       child: GridView.builder(
+                          controller: model.movieScrollController,
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 16.w,

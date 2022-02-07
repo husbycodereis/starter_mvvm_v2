@@ -10,13 +10,29 @@ class HomeViewModel = _HomeViewModelBase with _$HomeViewModel;
 
 abstract class _HomeViewModelBase with Store, BaseViewModel {
   late IHomeService homeService;
+  late ScrollController movieScrollController;
+  
   @override
   void setContext(BuildContext context) => this.context = context;
   @override
   void init() {
     homeService = HomeService(vexanaManager.networkManager);
+    movieScrollController = ScrollController();
+    listenToMovieScrollController();
     fetchTopMovies();
   }
+
+  void listenToMovieScrollController() {
+     movieScrollController.addListener(() {
+      if (movieScrollController.position.pixels == movieScrollController.position.maxScrollExtent) {
+        moviePageNumber++;
+        fetchTopMovies();
+      }
+    });
+  }
+
+  @observable
+  int moviePageNumber = 1;
 
   @observable
   bool loading = false;
@@ -31,9 +47,7 @@ abstract class _HomeViewModelBase with Store, BaseViewModel {
 
   @action
   Future fetchTopMovies() async {
-    setLoading();
-    final result = await homeService.fetchTopMovies(context!, 1);
-    topMoviesList = result!.results ?? [];
-    setLoading();
+    final result = await homeService.fetchTopMovies(context!, moviePageNumber);
+    topMoviesList.addAll(result!.results ?? []);
   }
 }
