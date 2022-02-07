@@ -22,10 +22,9 @@ class SettingsView extends StatelessWidget {
           model.setContext(context);
           model.init();
         },
-        
-        onPageBuilder: ( SettingsViewModel viewModel) => Scaffold(
+        onPageBuilder: (SettingsViewModel viewModel) => Scaffold(
               body: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: context.paddingNormalHorizontal,
                 child: CustomScrollView(
                   slivers: [
                     buildSliverAppBar(context),
@@ -42,17 +41,15 @@ class SettingsView extends StatelessWidget {
             ));
   }
 
-  Padding buildLogoutButton(BuildContext context, SettingsViewModel viewModel) {
-    return Padding(
-        padding: context.paddingLowAll * 0.4,
-        child: TextButton.icon(
-            style: TextButton.styleFrom(
-                backgroundColor: context.customColors.white,
-                shape: const StadiumBorder(),
-                padding: context.paddingNormalVertical),
-            onPressed: viewModel.logoutApp,
-            icon: const Icon(Icons.exit_to_app),
-            label: const Text('Logout')));
+  Widget buildLogoutButton(BuildContext context, SettingsViewModel viewModel) {
+    return TextButton.icon(
+        style: TextButton.styleFrom(
+            backgroundColor: context.customColors.azure,
+            shape: const StadiumBorder(),
+            padding: context.paddingLowVertical),
+        onPressed: viewModel.logoutApp,
+        icon: const Icon(Icons.exit_to_app),
+        label: const Text('Logout'));
   }
 
   SliverAppBar buildSliverAppBar(BuildContext context) {
@@ -85,7 +82,10 @@ class SettingsView extends StatelessWidget {
             SizedBox(
               width: context.lowValue,
             ),
-            Text(viewModel.userModel.name)
+            Text(
+              viewModel.userModel.name,
+              style: context.textTheme.bodyText1,
+            )
           ],
         ),
       ),
@@ -93,7 +93,7 @@ class SettingsView extends StatelessWidget {
   }
 
   Widget buildProjectCore(BuildContext context, SettingsViewModel viewModel) {
-    return buildCardHeader(context, viewModel, title: 'Tools', children: [
+    return buildCardHeader(context, viewModel, title: 'Preferences', children: [
       ListTile(
         title: const Text('App Theme'),
         trailing: IconButton(

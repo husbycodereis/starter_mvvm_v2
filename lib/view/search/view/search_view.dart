@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
 import 'package:movies_catalog/core/components/widgets/searchbar/search_field_widget.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
@@ -19,8 +20,12 @@ class SearchView extends StatelessWidget {
         onDispose: (model) {
           model.dispose();
         },
-        onPageBuilder: ( SearchViewModel viewModel) => Observer(builder: (_) {
+        onPageBuilder: (SearchViewModel viewModel) => Observer(builder: (_) {
               return Scaffold(
+                appBar: AppBar(
+                  automaticallyImplyLeading: false,
+                  //  title: Text('Search', style: context.textTheme.headline3),
+                ),
                 body: viewModel.loading ? buildLoading() : buildBody(viewModel, context),
               );
             }));
@@ -30,15 +35,16 @@ class SearchView extends StatelessWidget {
 
   Widget buildBody(SearchViewModel viewModel, BuildContext context) {
     return Padding(
-      padding: context.paddingLowAll,
+      padding: context.paddingNormalAll,
       child: Column(
         children: [
-          context.sizedBoxHighVertical,
           SearchFieldWidget(
             controller: viewModel.searchController,
+            hintText: 'Search',
             onPressedCancel: () => viewModel.dispose(),
             isAbleToCancel: viewModel.searchQuery.isNotEmpty,
           ),
+          context.sizedBoxLowVertical,
           if (viewModel.searchResultList.isEmpty) buildEmptyListView(context) else buildListView(viewModel),
         ],
       ),
@@ -49,24 +55,21 @@ class SearchView extends StatelessWidget {
     return Expanded(
       child: ListView.separated(
         separatorBuilder: (context, index) {
-          return const Divider(
+          return Divider(
             thickness: 2,
+            color: context.customColors.darkGrey,
           );
         },
         itemCount: viewModel.searchResultList.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () => viewModel.navigateToDetails(viewModel.searchResultList[index]),
-            child: Row(
-              children: [
-                Image.network(
-                  viewModel.searchResultList[index].fullImageUrl,
-                  width: 50,
-                  height: 100,
-                ),
-                context.sizedBoxMediumHorizontal,
-                Expanded(child: Text(viewModel.searchResultList[index].title ?? 'No Title Found')),
-              ],
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.h),
+              child: Text(
+                viewModel.searchResultList[index].title ?? 'No Title Found',
+                style: context.textTheme.bodyText1!.copyWith(fontSize: 14.sp),
+              ),
             ),
           );
         },
@@ -74,6 +77,6 @@ class SearchView extends StatelessWidget {
     );
   }
 
-  Padding buildEmptyListView(BuildContext context) =>
-      Padding(padding: context.paddingHighVertical, child: const Text('Search for movies'));
+  Padding buildEmptyListView(BuildContext context) => Padding(
+      padding: context.paddingHighVertical, child: Text('Search for movies', style: context.textTheme.bodyText1));
 }

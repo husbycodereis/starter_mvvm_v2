@@ -52,7 +52,7 @@ class _HomeViewState extends State<HomeView> {
         padding: EdgeInsets.only(top: 4.h, bottom: 4.h),
         child: SvgPicture.asset(
           imagePath,
-          color: context.customColors.white,
+          color: context.brightness == Brightness.dark ? context.customColors.white : context.customColors.darkGrey,
           height: 28.h,
         ),
       ),
@@ -82,8 +82,6 @@ class _HomeViewState extends State<HomeView> {
         showSelectedLabels: true,
         type: BottomNavigationBarType.fixed,
         currentIndex: pageIndex,
-        selectedFontSize: context.textTheme.bodyText2!.fontSize!,
-        unselectedFontSize: context.textTheme.bodyText2!.fontSize!,
         onTap: _onItemTapped,
         items: _bottomNavigationItems);
   }

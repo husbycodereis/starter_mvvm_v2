@@ -12,7 +12,7 @@ class ThrottleStringHelper {
   void onDelayTouch(String text, Function(String? text) onComplete) {
     _previousText = text;
     if (_timerValue == _maxTimerValue) {
-      Timer.periodic(const Duration(milliseconds: 150), (timer) {
+      Timer.periodic(const Duration(milliseconds: 100), (timer) {
         _timerValue--;
         if (_timerValue == 0) {
           onComplete(_previousText);

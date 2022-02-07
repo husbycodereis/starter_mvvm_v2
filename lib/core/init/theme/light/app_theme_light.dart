@@ -19,22 +19,12 @@ class AppThemeLight extends AppTheme with ILightTheme {
       primaryColor: colorThemeLight!.azure, //changes the color of focused label text in textfield
       backgroundColor: colorThemeLight!.whiteShade,
       scaffoldBackgroundColor: colorThemeLight!.whiteShade,
-      inputDecorationTheme: inputDecorationTheme(),
       appBarTheme: appBarTheme(),
       iconTheme: iconTheme(),
       tabBarTheme: tabBarTheme(),
       textTheme: textTheme(),
+      bottomSheetTheme: bottomSheetTheme(),
       bottomNavigationBarTheme: bottomNavigationBarTheme());
-
-  InputDecorationTheme inputDecorationTheme() {
-    return InputDecorationTheme(
-      focusColor: colorThemeLight!.black,
-      labelStyle: textThemeLight!.bodyText1,
-      hintStyle: textThemeLight!.bodyText1,
-      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: colorThemeLight!.azure)),
-      focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: colorThemeLight!.azure)),
-    );
-  }
 
   AppBarTheme appBarTheme() => AppBarTheme(color: colorThemeLight!.colorScheme.primary, iconTheme: iconTheme());
 
@@ -58,5 +48,14 @@ class AppThemeLight extends AppTheme with ILightTheme {
 
   BottomNavigationBarThemeData bottomNavigationBarTheme() => BottomNavigationBarThemeData(
         backgroundColor: colorThemeLight!.whiteShade,
+        selectedItemColor: colorThemeLight!.azure,
       );
+
+  BottomSheetThemeData bottomSheetTheme() {
+    return BottomSheetThemeData(
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+      backgroundColor: colorThemeLight!.whiteShade,
+      modalBackgroundColor: colorThemeLight!.whiteShade,
+    );
+  }
 }

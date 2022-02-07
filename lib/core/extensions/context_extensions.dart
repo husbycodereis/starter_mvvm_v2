@@ -13,8 +13,8 @@ extension MediaQueryExtension on BuildContext {
   double get height => mediaQuery.size.height;
   double get width => mediaQuery.size.width;
 
-  double get lowValue => height * 0.01;
-  double get normalValue => 30.w;
+  double get lowValue => 16.w;
+  double get normalValue => 28.w;
   double get mediumValue => height * 0.033;
   double get highValue => height * 0.1;
 
@@ -27,6 +27,7 @@ extension ThemeExtension on BuildContext {
   ColorScheme get colors => theme.colorScheme;
   ColorThemeLight get customColors => ColorThemeLight.instance;
   TextTheme get textTheme => theme.textTheme;
+  Brightness get brightness => theme.brightness;
 }
 
 extension EmptySpaceExtension on BuildContext {
@@ -83,6 +84,6 @@ extension DurationExtension on BuildContext {
 extension SnackBarExtension on BuildContext {
   dynamic showSnackBar(String text) => ScaffoldMessenger.of(this).showSnackBar(SnackBar(
         content: Text(text, style: textTheme.bodyText1),
-        backgroundColor: customColors.darkGrey,
+        backgroundColor: brightness == Brightness.dark ? customColors.darkBlue : customColors.whiteShade,
       ));
 }

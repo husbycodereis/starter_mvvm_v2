@@ -12,11 +12,12 @@ class ColorThemeDark {
   final Color red = const Color(0xffc10e0e);
   final Color white = const Color(0xffffffff);
   final Color gray = const Color(0xffa5a6ae);
-  final Color lightGray = const Color(0xfff7f7f7);
+  final Color lightGray = const Color(0xfffffeff);
   final Color darkGrey = const Color(0xff535965);
   final Color black = const Color(0xff020306);
   final Color azure = const Color(0xff3fc4eb);
   final Color darkBlue = const Color(0xff040f24);
+  final Color darkBlueShade = const Color(0xFF081D45);
   final Color whiteShade = const Color(0xffedf1fc);
 
   ColorScheme get colorScheme => ColorScheme(

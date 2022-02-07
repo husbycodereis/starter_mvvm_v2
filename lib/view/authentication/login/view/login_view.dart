@@ -37,7 +37,7 @@ class LoginView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(height: 120.h),
-                  buildImage(),
+                  buildImage(context),
                   context.sizedBoxNormalVertical,
                   Text('The Movie Manager', style: context.textTheme.headline1),
                   SizedBox(height: 50.h),
@@ -63,10 +63,11 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  SvgPicture buildImage() {
+  SvgPicture buildImage(BuildContext context) {
     return SvgPicture.asset(
       SVGImagePaths.instance!.cameraSVG,
       width: 107.w,
+      color: context.brightness == Brightness.dark ? context.customColors.white : context.customColors.darkBlue,
     );
   }
 

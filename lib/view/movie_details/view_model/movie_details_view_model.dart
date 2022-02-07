@@ -17,6 +17,7 @@ abstract class _MovieDetailsViewModelBase with Store, BaseViewModel {
   @override
   void init() {
     movieDetailsService = MovieDetailsService(vexanaManager.networkManager);
+
   }
 
   @observable

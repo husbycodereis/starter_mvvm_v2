@@ -96,10 +96,8 @@ abstract class _WatchListViewModelBase with Store, BaseViewModel {
   Future showWatchlistBottomSheet(MovieResultModel movie, BuildContext context) async {
     return showModalBottomSheet(
         context: context,
-        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
         enableDrag: false,
         isDismissible: true,
-        backgroundColor: Colors.transparent,
         builder: (context) {
           return WatchListModalBottomSheet(movie: movie);
         });

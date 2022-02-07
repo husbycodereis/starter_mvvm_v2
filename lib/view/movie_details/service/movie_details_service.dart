@@ -20,7 +20,7 @@ class MovieDetailsService extends IMovieDetailsService with ServiceHelper {
           'language': 'en-US',
         });
     showMessage(response.error, context);
-    if (response.data is MovieResultModel) {
+    if (response.data is MovieCastResponse) {
       return response.data;
     } else {
       return null;

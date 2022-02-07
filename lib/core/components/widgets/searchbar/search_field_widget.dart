@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_catalog/core/components/widgets/text_form_field/custom_text_form_field.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
+import 'package:path/path.dart';
 
 class SearchFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
@@ -20,47 +23,32 @@ class SearchFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [buildSearchBox(context), context.sizedBoxLowVertical, if (isAbleToCancel) buildCancelButton()],
+      children: [buildSearchBox(context), context.sizedBoxLowVertical, if (isAbleToCancel) buildCancelButton(context)],
     );
   }
 
   Widget buildSearchBox(BuildContext context) {
     return Expanded(
       child: Container(
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: context.customColors.grey,
-              width: 0.5,
-            ),
-            color: context.customColors.white,
-            borderRadius: context.borderlowRadius),
-        child: Container(
-          decoration: BoxDecoration(color: context.customColors.darkGrey, borderRadius: context.borderlowRadius),
-          child: Row(children: [
-            context.sizedBoxLowHorizontal,
-            const Icon(Icons.search),
-            context.sizedBoxLowHorizontal,
-            Expanded(
-                child: TextFormField(
-              style: context.textTheme.bodyText1,
-              decoration: InputDecoration(
-                hintStyle: context.textTheme.bodyText2,
-                border: InputBorder.none,
-                hintText: hintText,
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: context.customColors.grey,
+                width: 0.5,
               ),
-              controller: controller,
-              focusNode: focusNode,
-              onFieldSubmitted: (value) {
-                FocusScope.of(context).unfocus();
-              },
-            )),
-          ]),
-        ),
-      ),
+              color: context.customColors.white,
+              borderRadius: context.borderlowRadius),
+          child: CustomTextFormField(
+            controller: controller!,
+            focusNode: focusNode,
+            labelText: hintText,
+            onFieldSubmitted: (value) {
+              FocusScope.of(context).unfocus();
+            },
+          )),
     );
   }
 
-  IconButton buildCancelButton() {
-    return IconButton(onPressed: onPressedCancel, icon: const Icon(Icons.cancel));
+  IconButton buildCancelButton(BuildContext context) {
+    return IconButton(onPressed: onPressedCancel, icon: Icon(Icons.cancel, color: context.customColors.azure));
   }
 }
