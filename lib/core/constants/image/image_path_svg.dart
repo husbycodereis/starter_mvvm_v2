@@ -8,6 +8,10 @@ class SVGImagePaths {
 
   SVGImagePaths.init();
 
-  final loginGirlSVG = 'login_girl'.toSVG;
   final cameraSVG = 'camera'.toSVG;
+  final heart = 'heart'.toSVG;
+  final home = 'home'.toSVG;
+  final list = 'list'.toSVG;
+  final profile = 'profile'.toSVG;
+  final search = 'search'.toSVG;
 }

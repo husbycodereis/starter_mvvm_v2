@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:movies_catalog/core/constants/image/image_path_svg.dart';
+import 'package:movies_catalog/core/extensions/context_extensions.dart';
 
 import '../../../core/constants/navigation/homsecreen_constants.dart';
 
@@ -25,7 +29,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: buildPageViewBody,
-      bottomNavigationBar: _buildBottomNavigationBar,
+      bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
 
@@ -39,13 +43,47 @@ class _HomeViewState extends State<HomeView> {
         });
   }
 
-  BottomNavigationBar get _buildBottomNavigationBar {
+  BottomNavigationBarItem _buildBottomNavigationBarItem(
+    String imagePath,
+    String name,
+  ) {
+    return BottomNavigationBarItem(
+      icon: Padding(
+        padding: EdgeInsets.only(top: 4.h, bottom: 4.h),
+        child: SvgPicture.asset(
+          imagePath,
+          color: context.customColors.white,
+          height: 28.h,
+        ),
+      ),
+      activeIcon: Padding(
+        padding: EdgeInsets.only(top: 4.h, bottom: 4.h),
+        child: SvgPicture.asset(
+          imagePath,
+          color: context.customColors.azure,
+          height: 28.h,
+        ),
+      ),
+      label: name,
+    );
+  }
+
+  BottomNavigationBar _buildBottomNavigationBar(BuildContext context) {
+    final List<BottomNavigationBarItem> _bottomNavigationItems = [
+      _buildBottomNavigationBarItem(SVGImagePaths.instance!.home, 'Home'),
+      _buildBottomNavigationBarItem(SVGImagePaths.instance!.search, 'Search'),
+      _buildBottomNavigationBarItem(SVGImagePaths.instance!.heart, 'Favorites'),
+      _buildBottomNavigationBarItem(SVGImagePaths.instance!.list, 'Watchlist'),
+      _buildBottomNavigationBarItem(SVGImagePaths.instance!.profile, 'Profile'),
+    ];
+
     return BottomNavigationBar(
         elevation: 0,
         showSelectedLabels: true,
         type: BottomNavigationBarType.fixed,
         currentIndex: pageIndex,
-        unselectedItemColor: Colors.grey,
+        selectedFontSize: context.textTheme.bodyText2!.fontSize!,
+        unselectedFontSize: context.textTheme.bodyText2!.fontSize!,
         onTap: _onItemTapped,
         items: _bottomNavigationItems);
   }
@@ -56,29 +94,6 @@ class _HomeViewState extends State<HomeView> {
       pageIndex = selectedIndex;
     });
   }
-
-  final List<BottomNavigationBarItem> _bottomNavigationItems = [
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.home),
-      label: 'Home',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.search),
-      label: 'Search',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.favorite),
-      label: 'Favorites',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.list),
-      label: 'Watchlist',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.person),
-      label: 'Profile',
-    ),
-  ];
 
   @override
   void dispose() {
