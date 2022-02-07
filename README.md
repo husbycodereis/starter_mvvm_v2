@@ -14,19 +14,27 @@ You are expected to use the public APIs “​The Movie DB​” as the followin
 
 ## Westerops Implementation
 
-* Login screen:
+* Login Screen
 
   1. A functional Login screen with a fake service request => https://reqres.in.Use this email and password for succesful login. (email: eve.holt@reqres.in / password: cityslicka)
   2. Email & password controller and validation
   3. Error Snackbar after failed response
   4. Token Snackbar after successful response
 
+* Home Screen
+  1. Dashboard of top movies
+  2. Scroll to see more results
+  3. 20 results in each scroll. When the end of the list is reached, a new request with next 20 movies is initiated.
+  4. Tap to see a movie details
+
 * Search Screen
   1. Search feature implemented with a throttle helper method. The method adds a delay between each keyboard entry. Once the user completes typing, then the search request with the given query is initiated.
   2. Cancel button to clean search query entry
+  3. Tap to see movie details
 
 * Detail Screen
   1. See movie details, ratings, description
+  2. Fetch casts and see the cast list in horizontal scroll view
   2. Add or remove a movie from favorites
   3. Add or remove a movie from watchlist
   4. Get movie favorite & watchlist status from cache
@@ -37,17 +45,25 @@ You are expected to use the public APIs “​The Movie DB​” as the followin
   3. slide a movie from right to left to remove the movie from the favorites
 
 * Watchlist Screen
-  1. See watchlist movies in the list
-  2. tap a movie to go to details
-  3. slide a movie from right to left to remove the movie from the watchlist
+  1. Create custom watchlists.
+  2. Slide a watchlist to left to delete it.
+  3. Tap on a watchlist to see added movies.
+  4. tap a movie to go to details
+  5. slide a movie from right to left to remove the movie from the watchlist
+
+* Profile Screen
+  1. See user information
+  2. Toggle dark / light theme
+  3. Open a webpage in webview
+  4. Logout
 
 
 ### Optional WesterOps Implementations(Bonus)
 * MVVM design pattern
 * ​Offline Cache on login status, favorite and watchlist items
-* ​Unit Test of Local Database / Search Service / Login Service
+* ​Unit Test of Local Database / Search Service / Login Service / Top Movies / Movie Details
 * Settings page implementation to logout and change theme
-* Dependency Injection with Get_It package and Lazy Singleton class Structure
+* Dependency Injection with Get_It package
 * Dark / Light Theme and it's caching
 * Lottie animations on Theme icons in Settings page
 

@@ -80,6 +80,7 @@ class TopMoviesView extends StatelessWidget {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      elevation: 1,
       automaticallyImplyLeading: false,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,

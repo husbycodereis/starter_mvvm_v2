@@ -24,7 +24,7 @@ class SettingsView extends StatelessWidget {
         },
         onPageBuilder: (SettingsViewModel viewModel) => Scaffold(
               body: Padding(
-                padding: context.paddingNormalHorizontal,
+                padding: context.paddingLowHorizontal,
                 child: CustomScrollView(
                   slivers: [
                     buildSliverAppBar(context),

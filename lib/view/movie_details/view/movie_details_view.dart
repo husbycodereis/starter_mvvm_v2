@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
@@ -42,6 +43,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       centerTitle: false,
+      elevation: 1,
       title: Text(widget.movie.title ?? 'No Title Found',
           style: context.textTheme.headline4!.copyWith(color: context.customColors.azure)),
     );
@@ -217,34 +219,38 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
         ));
   }
 
-  Container buildCastList(MovieDetailsViewModel model) {
-    return Container(
-      height: 300,
-      child: ListView.separated(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: model.movieCastList.length,
-          separatorBuilder: (context, index) => context.sizedBoxLowHorizontal,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                ClipRRect(
-                  borderRadius: context.bordernormalRadius,
-                  child: Image.network(
-                    model.movieCastList[index].fullImageUrl,
-                    fit: BoxFit.cover,
-                    height: 172.h,
-                    width: 132.w,
-                    //width: 168.w,
-                  ),
-                ),
-                SizedBox(
-                  height: 8.h,
-                ),
-                Text(model.movieCastList[index].name ?? 'No name found', style: context.textTheme.bodyText2)
-              ],
-            );
-          }),
+  Widget buildCastList(MovieDetailsViewModel model) {
+    return Observer(
+      builder: (_) {
+        return Container(
+          height: 300,
+          child: ListView.separated(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: model.movieCastList.length,
+              separatorBuilder: (context, index) => context.sizedBoxLowHorizontal,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: context.bordernormalRadius,
+                      child: Image.network(
+                        model.movieCastList[index].fullImageUrl,
+                        fit: BoxFit.cover,
+                        height: 172.h,
+                        width: 132.w,
+                        //width: 168.w,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    Text(model.movieCastList[index].name ?? 'No name found', style: context.textTheme.bodyText2)
+                  ],
+                );
+              }),
+        );
+      },
     );
   }
 

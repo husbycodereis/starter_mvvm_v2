@@ -23,6 +23,7 @@ class SearchView extends StatelessWidget {
         onPageBuilder: (SearchViewModel viewModel) => Observer(builder: (_) {
               return Scaffold(
                 appBar: AppBar(
+                  elevation: 1,
                   automaticallyImplyLeading: false,
                   //  title: Text('Search', style: context.textTheme.headline3),
                 ),
@@ -35,7 +36,7 @@ class SearchView extends StatelessWidget {
 
   Widget buildBody(SearchViewModel viewModel, BuildContext context) {
     return Padding(
-      padding: context.paddingNormalAll,
+      padding: context.paddingLowAll,
       child: Column(
         children: [
           SearchFieldWidget(
