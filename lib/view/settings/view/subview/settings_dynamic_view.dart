@@ -3,7 +3,6 @@ import 'package:movies_catalog/core/components/widgets/appbar/custom_appbar.dart
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../../core/constants/app/app_constants.dart';
-import '../../../../core/extensions/context_extensions.dart';
 import '../../model/settings_dynamic_model.dart';
 
 class SettingsDynamicView extends StatelessWidget {

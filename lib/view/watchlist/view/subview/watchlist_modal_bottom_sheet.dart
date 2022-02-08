@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
 import 'package:movies_catalog/core/components/widgets/bottom_sheet/modal_bottom_sheet_container.dart';
-import 'package:movies_catalog/core/components/widgets/button/movie_details_button.dart';
 import 'package:movies_catalog/core/components/widgets/divider/custom_divider.dart';
 import 'package:movies_catalog/core/components/widgets/text_form_field/custom_text_form_field.dart';
 import 'package:movies_catalog/core/constants/image/image_path_svg.dart';
@@ -12,7 +11,6 @@ import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/core/init/di/injection_container.dart';
 import 'package:movies_catalog/view/search/model/movie_result.dart';
 import 'package:movies_catalog/view/watchlist/viewmodel/watchlist_view_model.dart';
-import 'package:path/path.dart';
 
 class WatchListModalBottomSheet extends StatelessWidget {
   final MovieResultModel movie;
@@ -77,7 +75,7 @@ class WatchListModalBottomSheet extends StatelessWidget {
         return ListView.separated(
             shrinkWrap: true,
             separatorBuilder: (context, index) {
-              return const CustomDivider();
+              return CustomDivider(context: context);
             },
             itemCount: model.watchlistReversed.length,
             itemBuilder: (BuildContext context, int index) {

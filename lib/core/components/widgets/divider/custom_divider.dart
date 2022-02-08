@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
-
-class CustomDivider extends StatelessWidget {
-  const CustomDivider({
+class CustomDivider extends Divider {
+  final BuildContext? context;
+  CustomDivider({
+    this.context,
     Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Divider(
-      thickness: 2,
-      color: context.customColors.darkGrey,
-    );
-  }
+  }) : super(key: key, thickness: 2, color: context!.customColors.darkGrey);
 }

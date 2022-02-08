@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
 import 'package:movies_catalog/core/components/widgets/appbar/custom_appbar.dart';
 import 'package:movies_catalog/core/components/widgets/cards/movie_list_card.dart';
@@ -39,7 +38,7 @@ class FavoritesView extends StatelessWidget {
               shrinkWrap: true,
               reverse: true,
               separatorBuilder: (context, index) {
-                return const CustomDivider();
+                return CustomDivider(context: context);
               },
               itemCount: viewModel.favoriteMovies.length,
               itemBuilder: (BuildContext context, int index) {

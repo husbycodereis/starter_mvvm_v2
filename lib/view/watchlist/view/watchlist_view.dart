@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:movies_catalog/core/base/view/base_view.dart';
 import 'package:movies_catalog/core/components/widgets/appbar/custom_appbar.dart';
 import 'package:movies_catalog/core/components/widgets/button/movie_details_button.dart';
-import 'package:movies_catalog/core/components/widgets/button/normal_button.dart';
 import 'package:movies_catalog/core/components/widgets/dismissible/dismissible_delete_widget.dart';
 import 'package:movies_catalog/core/components/widgets/divider/custom_divider.dart';
 import 'package:movies_catalog/core/components/widgets/loading/basic_loading_widget.dart';
@@ -88,7 +86,7 @@ class WatchListView extends StatelessWidget {
         children: [
           context.sizedBoxNormalVertical,
           Text('Movie Lists', style: context.textTheme.headline4!.copyWith(color: context.customColors.azure)),
-          const CustomDivider(),
+          CustomDivider(context: context),
           Expanded(
             child: ListView.separated(
               shrinkWrap: true,

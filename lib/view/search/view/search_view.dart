@@ -57,7 +57,7 @@ class SearchView extends StatelessWidget {
     return Expanded(
       child: ListView.separated(
         separatorBuilder: (context, index) {
-          return const CustomDivider();
+          return CustomDivider(context: context);
         },
         itemCount: viewModel.searchResultList.length,
         itemBuilder: (BuildContext context, int index) {
