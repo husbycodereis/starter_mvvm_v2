@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
-import 'package:movies_catalog/core/components/widgets/button/normal_button.dart';
+import 'package:movies_catalog/core/components/widgets/button/movie_details_button.dart';
+import 'package:movies_catalog/core/components/widgets/list_view/movie_cast_list_view.dart';
 import 'package:movies_catalog/core/constants/image/image_path_svg.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/core/init/di/injection_container.dart';
@@ -75,16 +75,12 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
     );
   }
 
-  Text buildCastAndCrewHeader(BuildContext context) =>
-      Text('Cast and Crew', style: context.textTheme.bodyText1!.copyWith(color: context.customColors.azure));
-
-  Text buildStoryOverview(BuildContext context) {
-    return Text(widget.movie.overview ?? 'No Story available',
-        textAlign: TextAlign.justify, style: context.textTheme.overline);
+  Widget buildMovieInfoRow(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [buildPoster(context), context.sizedBoxLowHorizontal, buildInfoColumn(context)],
+    );
   }
-
-  Text buildStoryHeader(BuildContext context) =>
-      Text('Story', style: context.textTheme.bodyText1!.copyWith(color: context.customColors.azure));
 
   Row buildButtonsRow(BuildContext context) {
     return Row(
@@ -93,12 +89,16 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
     );
   }
 
-  Widget buildMovieInfoRow(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [buildPoster(context), context.sizedBoxLowHorizontal, buildInfoColumn(context)],
-    );
+  Text buildStoryHeader(BuildContext context) =>
+      Text('Story', style: context.textTheme.bodyText1!.copyWith(color: context.customColors.azure));
+
+  Text buildStoryOverview(BuildContext context) {
+    return Text(widget.movie.overview ?? 'No Story available',
+        textAlign: TextAlign.justify, style: context.textTheme.overline);
   }
+
+  Text buildCastAndCrewHeader(BuildContext context) =>
+      Text('Cast and Crew', style: context.textTheme.bodyText1!.copyWith(color: context.customColors.azure));
 
   Widget buildInfoColumn(BuildContext context) {
     return Expanded(
@@ -147,109 +147,33 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
     );
   }
 
-  ElevatedButton buildFavoriteButton(BuildContext context) {
-    return ElevatedButton(
+  Widget buildFavoriteButton(BuildContext context) {
+    return MovieDetailsButton(
+        isFavorite: widget.movie.isFavorite,
         onPressed: () {
           setState(() {
             serviceLocator<FavoritesViewModel>().setFavorite(widget.movie);
           });
         },
-        style: ElevatedButton.styleFrom(
-          primary: context.brightness == Brightness.dark
-              ? widget.movie.isFavorite!
-                  ? context.customColors.whiteShade
-                  : context.customColors.darkBlue
-              : widget.movie.isFavorite!
-                  ? context.customColors.darkBlue
-                  : context.customColors.whiteShade,
-          shape: RoundedRectangleBorder(
-            borderRadius: context.borderhighadius,
-            side: BorderSide(
-              color: context.customColors.azure,
-              width: 2.0,
-            ),
-          ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(10.0.w),
-          child: Row(
-            children: [
-              SvgPicture.asset(
-                SVGImagePaths.instance!.heart,
-                color: context.customColors.azure,
-                width: 21.w,
-              ),
-              context.sizedBoxNormalHorizontal,
-              const Text('Favorite')
-            ],
-          ),
-        ));
+        assetName: SVGImagePaths.instance!.heart,
+        text: 'Favorite');
   }
 
-  ElevatedButton buildWatchlistButton(BuildContext context) {
-    return ElevatedButton(
+  Widget buildWatchlistButton(BuildContext context) {
+    return MovieDetailsButton(
         onPressed: () {
           setState(() {
             serviceLocator<WatchListViewModel>().showWatchlistBottomSheet(widget.movie, context);
           });
         },
-        style: ElevatedButton.styleFrom(
-          primary: context.brightness == Brightness.dark ? context.customColors.darkBlue : context.customColors.azure,
-          shape: RoundedRectangleBorder(
-            borderRadius: context.borderhighadius,
-            side: BorderSide(
-              color: context.customColors.azure,
-              width: 2.0,
-            ),
-          ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(10.0.w),
-          child: Row(
-            children: [
-              SvgPicture.asset(
-                SVGImagePaths.instance!.list,
-                color: context.customColors.azure,
-                width: 21.w,
-              ),
-              context.sizedBoxNormalHorizontal,
-              const Text('Watchlist')
-            ],
-          ),
-        ));
+        assetName: SVGImagePaths.instance!.list,
+        text: 'Watchlist');
   }
 
   Widget buildCastList(MovieDetailsViewModel model) {
     return Observer(
       builder: (_) {
-        return Container(
-          height: 300,
-          child: ListView.separated(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: model.movieCastList.length,
-              separatorBuilder: (context, index) => context.sizedBoxLowHorizontal,
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: context.bordernormalRadius,
-                      child: Image.network(
-                        model.movieCastList[index].fullImageUrl,
-                        fit: BoxFit.cover,
-                        height: 172.h,
-                        width: 132.w,
-                        //width: 168.w,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    Text(model.movieCastList[index].name ?? 'No name found', style: context.textTheme.bodyText2)
-                  ],
-                );
-              }),
-        );
+        return MovieCastListView(movieCastList: model.movieCastList);
       },
     );
   }

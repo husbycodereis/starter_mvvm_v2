@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
+import 'package:movies_catalog/core/components/widgets/divider/custom_divider.dart';
 import 'package:movies_catalog/core/components/widgets/searchbar/search_field_widget.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/view/search/viewmodel/search_view_Model.dart';
@@ -56,10 +57,7 @@ class SearchView extends StatelessWidget {
     return Expanded(
       child: ListView.separated(
         separatorBuilder: (context, index) {
-          return Divider(
-            thickness: 2,
-            color: context.customColors.darkGrey,
-          );
+          return const CustomDivider();
         },
         itemCount: viewModel.searchResultList.length,
         itemBuilder: (BuildContext context, int index) {
@@ -81,3 +79,4 @@ class SearchView extends StatelessWidget {
   Padding buildEmptyListView(BuildContext context) => Padding(
       padding: context.paddingHighVertical, child: Text('Search for movies', style: context.textTheme.bodyText1));
 }
+

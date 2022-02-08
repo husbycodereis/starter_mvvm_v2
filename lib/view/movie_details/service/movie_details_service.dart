@@ -4,7 +4,6 @@ import 'package:movies_catalog/core/constants/app/app_constants.dart';
 import 'package:movies_catalog/core/constants/enums/network_route_enum.dart';
 import 'package:movies_catalog/view/movie_details/model/movie_cast_result.dart';
 import 'package:movies_catalog/view/movie_details/service/IMovieDetailsService.dart';
-import 'package:movies_catalog/view/search/model/movie_result.dart';
 import 'package:vexana/vexana.dart';
 
 class MovieDetailsService extends IMovieDetailsService with ServiceHelper {

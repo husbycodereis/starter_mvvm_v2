@@ -1,8 +1,6 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_catalog/core/components/widgets/text_form_field/custom_text_form_field.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
-import 'package:path/path.dart';
 
 class SearchFieldWidget extends StatelessWidget {
   final TextEditingController? controller;

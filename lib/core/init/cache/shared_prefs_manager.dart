@@ -27,5 +27,5 @@ class SharedPrefsManager {
 
   String getStringValue(SharedPrefKeys key) => _preferences!.getString(key.name) ?? '';
 
-  bool getBoolValue(SharedPrefKeys key) => _preferences!.getBool(key.name) ?? false;
+  bool getBoolValue(SharedPrefKeys key) => _preferences!.getBool(key.name) ?? true;
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
+import 'package:movies_catalog/core/components/widgets/cards/movie_list_card.dart';
 import 'package:movies_catalog/core/components/widgets/dismissible/dismissible_delete_widget.dart';
+import 'package:movies_catalog/core/components/widgets/divider/custom_divider.dart';
 import 'package:movies_catalog/core/components/widgets/loading/basic_loading_widget.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/core/init/di/injection_container.dart';
@@ -20,33 +23,34 @@ class FavoritesView extends StatelessWidget {
         },
         onPageBuilder: (FavoritesViewModel model) => Observer(builder: (_) {
               return Scaffold(
+                appBar: buildAppBar(context),
                 body: model.loading ? const BasicLoadingWidget() : buildBody(model, context),
               );
             }));
   }
 
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+        elevation: 1,
+        title: Text(
+          'Favorites',
+          style: context.textTheme.headline4!.copyWith(color: context.customColors.azure),
+        ));
+  }
+
   Widget buildBody(FavoritesViewModel viewModel, BuildContext context) {
     return Padding(
-      padding: context.paddingLowAll,
+      padding: context.paddingNormalHorizontal,
       child: viewModel.favoriteMovies.isEmpty
           ? const Center(child: Text('There are no favorite movies'))
-          : Column(
-              children: [
-                context.sizedBoxHighVertical,
-                Expanded(
-                  child: ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return const Divider(
-                        thickness: 2,
-                      );
-                    },
-                    itemCount: viewModel.favoriteMovies.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return buildDismissibleListItem(index, viewModel, context);
-                    },
-                  ),
-                ),
-              ],
+          : ListView.separated(
+              separatorBuilder: (context, index) {
+                return const CustomDivider();
+              },
+              itemCount: viewModel.favoriteMovies.length,
+              itemBuilder: (BuildContext context, int index) {
+                return buildDismissibleListItem(index, viewModel, context);
+              },
             ),
     );
   }
@@ -61,22 +65,8 @@ class FavoritesView extends StatelessWidget {
         onTap: () {
           viewModel.navigateToDetails(viewModel.favoriteMovies[index]);
         },
-        child: buildDismissibleListItemBody(viewModel, index, context),
+        child: MovieListCard(movie: viewModel.favoriteMovies[index]),
       ),
-    );
-  }
-
-  Row buildDismissibleListItemBody(FavoritesViewModel viewModel, int index, BuildContext context) {
-    return Row(
-      children: [
-        Image.network(
-          viewModel.favoriteMovies[index].fullImageUrl,
-          width: 50,
-          height: 100,
-        ),
-        context.sizedBoxMediumHorizontal,
-        Expanded(child: Text(viewModel.favoriteMovies[index].title ?? 'No Title Found')),
-      ],
     );
   }
 }

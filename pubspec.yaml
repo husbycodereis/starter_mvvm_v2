@@ -12,7 +12,6 @@ dependencies:
   animations: ^2.0.0
   cupertino_icons: ^1.0.2
   dio: ^4.0.0
-  easy_localization: ^3.0.0
   flutter:
     sdk: flutter
   flutter_mobx: ^2.0.0
@@ -30,7 +29,6 @@ dependencies:
   provider: ^5.0.0
   sembast: ^3.1.2
   shared_preferences: ^2.0.6
-  shimmer: ^2.0.0
   vexana: ^2.2.1
   webview_flutter: ^2.0.10
 
