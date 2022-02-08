@@ -28,15 +28,12 @@ LocalDatabase.init();
     }
   }
 
-
   Future clear() async {
     final db = await database;
     await db.close();
     await databaseFactoryIo.deleteDatabase(db.path);
     isDatabaseOpen = false;
   }
-
- 
 
   Future<Database> _openDatabase() async {
     final appDocumentDir = await getApplicationDocumentsDirectory();

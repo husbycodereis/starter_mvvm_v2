@@ -65,7 +65,10 @@ class FavoritesView extends StatelessWidget {
         onTap: () {
           viewModel.navigateToDetails(viewModel.favoriteMovies[index]);
         },
-        child: MovieListCard(movie: viewModel.favoriteMovies[index]),
+        child: Padding(
+          padding: context.paddingLowVertical,
+          child: MovieListCard(movie: viewModel.favoriteMovies[index]),
+        ),
       ),
     );
   }

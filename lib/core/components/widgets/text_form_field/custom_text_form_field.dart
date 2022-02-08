@@ -29,14 +29,20 @@ class CustomTextFormField extends StatelessWidget {
       focusNode: focusNode,
       validator: validator,
       obscureText: obscureText ?? false,
-      style: context.textTheme.bodyText1!.copyWith(color: context.customColors.darkGrey),
+      style: context.textTheme.bodyText1!.copyWith(
+          color: context.brightness == Brightness.dark ? context.customColors.white : context.customColors.darkGrey),
       decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+            borderRadius: context.borderlowRadius, borderSide: BorderSide(color: context.customColors.azure)),
         hintText: labelText ?? '',
         hintStyle: context.textTheme.bodyText1!.copyWith(color: context.customColors.darkGrey),
-        border: OutlineInputBorder(borderRadius: context.borderlowRadius),
+        border: OutlineInputBorder(
+            borderRadius: context.borderlowRadius, borderSide: BorderSide(color: context.customColors.azure)),
         filled: true,
         isDense: true,
-        fillColor: context.customColors.whiteShade,
+        fillColor: context.brightness == Brightness.dark
+            ? context.customColors.darkBlueSecondary
+            : context.customColors.whiteShade,
         suffix: suffix,
       ),
     );

@@ -18,7 +18,7 @@ class HomeService extends IHomeService with ServiceHelper {
           'sort_by': 'vote_average.desc',
           'include_adult': false,
           'include_video': false,
-          'vote_count.gte': 2000,
+          'vote_count.gte': 5000,
           'page': page
         });
     showMessage(response.error, context);

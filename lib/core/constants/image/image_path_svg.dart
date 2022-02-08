@@ -14,4 +14,5 @@ class SVGImagePaths {
   final list = 'list'.toSVG;
   final profile = 'profile'.toSVG;
   final search = 'search'.toSVG;
+  final plus = 'plus'.toSVG;
 }

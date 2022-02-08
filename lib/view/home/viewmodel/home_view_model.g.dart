@@ -9,6 +9,22 @@ part of 'home_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeViewModel on _HomeViewModelBase, Store {
+  final _$moviePageNumberAtom =
+      Atom(name: '_HomeViewModelBase.moviePageNumber');
+
+  @override
+  int get moviePageNumber {
+    _$moviePageNumberAtom.reportRead();
+    return super.moviePageNumber;
+  }
+
+  @override
+  set moviePageNumber(int value) {
+    _$moviePageNumberAtom.reportWrite(value, super.moviePageNumber, () {
+      super.moviePageNumber = value;
+    });
+  }
+
   final _$loadingAtom = Atom(name: '_HomeViewModelBase.loading');
 
   @override
@@ -64,6 +80,7 @@ mixin _$HomeViewModel on _HomeViewModelBase, Store {
   @override
   String toString() {
     return '''
+moviePageNumber: ${moviePageNumber},
 loading: ${loading},
 topMoviesList: ${topMoviesList}
     ''';

@@ -17,16 +17,17 @@ class WatchListMoviesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseView<WatchListViewModel>(
         viewModel: serviceLocator<WatchListViewModel>(),
-        onModelReady: (model) {
+        onModelReady: (model) async {
           model.setContext(context);
-          model.init();
         },
-        onPageBuilder: ( WatchListViewModel model) => Observer(builder: (_) {
-              return Scaffold(
-                appBar: AppBar(),
-                body: model.loading ? const BasicLoadingWidget() : buildBody(model, context),
-              );
-            }));
+        onPageBuilder: (WatchListViewModel model) => Scaffold(
+              appBar: AppBar(),
+              body: Observer(
+                builder: (_) {
+                  return model.loading ? const BasicLoadingWidget() : buildBody(model, context);
+                },
+              ),
+            ));
   }
 
   Widget buildBody(WatchListViewModel viewModel, BuildContext context) {

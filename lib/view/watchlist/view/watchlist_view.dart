@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
+import 'package:movies_catalog/core/components/widgets/button/movie_details_button.dart';
 import 'package:movies_catalog/core/components/widgets/button/normal_button.dart';
 import 'package:movies_catalog/core/components/widgets/dismissible/dismissible_delete_widget.dart';
 import 'package:movies_catalog/core/components/widgets/loading/basic_loading_widget.dart';
+import 'package:movies_catalog/core/components/widgets/text_form_field/custom_text_form_field.dart';
+import 'package:movies_catalog/core/constants/image/image_path_svg.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/core/init/di/injection_container.dart';
 import 'package:movies_catalog/view/watchlist/viewmodel/watchlist_view_model.dart';
@@ -36,14 +41,19 @@ class WatchListView extends StatelessWidget {
         children: [
           context.sizedBoxHighVertical,
           buildTextFormField(context, viewModel),
-          NormalButton(
-              child: const Text('create'),
-              onPressed: () {
-                viewModel.createWatchList();
-              }),
+          context.sizedBoxLowVertical,
+          SizedBox(
+            width: 200.w,
+            child: MovieDetailsButton(
+                onPressed: () {
+                  viewModel.createWatchList();
+                },
+                assetName: SVGImagePaths.instance!.plus,
+                text: 'Create'),
+          ),
           context.sizedBoxHighVertical,
           if (viewModel.watchlistList.isEmpty)
-            const Center(child: Text('Create a watchlist'))
+            Center(child: Text('Create a watchlist', style: context.textTheme.bodyText1))
           else
             buildWatchlistView(viewModel),
         ],
@@ -51,15 +61,10 @@ class WatchListView extends StatelessWidget {
     );
   }
 
-  TextFormField buildTextFormField(BuildContext context, WatchListViewModel viewModel) {
-    return TextFormField(
-      style: context.textTheme.bodyText1,
-      decoration: InputDecoration(
-        hintStyle: context.textTheme.bodyText2,
-        border: InputBorder.none,
-        hintText: 'Enter a Watchlist name',
-      ),
+  Widget buildTextFormField(BuildContext context, WatchListViewModel viewModel) {
+    return CustomTextFormField(
       controller: viewModel.watchlistController,
+      labelText: 'Enter a Watchlist name',
       focusNode: viewModel.watchlistFocus,
       onFieldSubmitted: (value) {
         viewModel.unfocusKeyboard();
@@ -88,7 +93,17 @@ class WatchListView extends StatelessWidget {
                 },
                 child: Padding(
                   padding: context.paddingNormalVertical,
-                  child: Text(viewModel.watchlistList[index].name!),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        SVGImagePaths.instance!.list,
+                        width: 23.w,
+                        color: context.customColors.azure,
+                      ),
+                      context.sizedBoxLowHorizontal,
+                      Text(viewModel.watchlistList[index].name!, style: context.textTheme.bodyText1),
+                    ],
+                  ),
                 ),
               ));
         },

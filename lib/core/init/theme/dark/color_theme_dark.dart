@@ -19,6 +19,8 @@ class ColorThemeDark {
   final Color darkBlue = const Color(0xff040f24);
   final Color darkBlueShade = const Color(0xFF081D45);
   final Color whiteShade = const Color(0xffedf1fc);
+  final Color darkBlueSecondary = const Color(0xff19223C);
+  final Color darkBlueSecondaryShade = const Color(0xff2C3B5A);
 
   ColorScheme get colorScheme => ColorScheme(
       primary: darkBlue, //xx
