@@ -4,6 +4,7 @@ import 'package:movies_catalog/core/components/exceptions/navigate_model_excepti
 import 'package:movies_catalog/view/authentication/splash/view/splash_view.dart';
 import 'package:movies_catalog/view/movie_details/view/movie_details_view.dart';
 import 'package:movies_catalog/view/search/model/movie_result.dart';
+import 'package:movies_catalog/view/search/view/search_view.dart';
 import 'package:movies_catalog/view/settings/model/settings_dynamic_model.dart';
 import 'package:movies_catalog/view/settings/view/subview/settings_dynamic_view.dart';
 import 'package:movies_catalog/view/watchlist/model/watchlist_model.dart';
@@ -28,6 +29,8 @@ class NavigationRoute {
         return normalNavigate(const LoginView());
       case NavigationConstants.HOME:
         return normalNavigate(const HomeView());
+      case NavigationConstants.SEARCH:
+        return normalNavigate(const SearchView());
       case NavigationConstants.MOVIE_DETAILS_VIEV:
         if (args.arguments is MovieResultModel) {
           return normalNavigate(MovieDetailsView(movie: args.arguments! as MovieResultModel));

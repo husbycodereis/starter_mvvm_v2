@@ -39,7 +39,7 @@ class TopMoviesView extends StatelessWidget {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 16.w,
-            mainAxisSpacing: 10.h,
+            mainAxisSpacing: 28.h,
             childAspectRatio: 0.6,
           ),
           itemCount: model.topMoviesList.length,
@@ -50,21 +50,16 @@ class TopMoviesView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: context.bordernormalRadius,
-                      ),
-                      child: ClipRRect(
-                        borderRadius: context.bordernormalRadius,
-                        child: Image.network(
-                          model.topMoviesList[index].fullImageUrl,
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                        ),
+                    child: ClipRRect(
+                      borderRadius: context.bordernormalRadius,
+                      child: Image.network(
+                        model.topMoviesList[index].fullImageUrl,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
                       ),
                     ),
                   ),
-                  context.sizedBoxLowVertical,
+                  SizedBox(height: 8.h),
                   Text(
                     model.topMoviesList[index].title!.length > 20
                         ? '${model.topMoviesList[index].title!.substring(0, 20)}...'

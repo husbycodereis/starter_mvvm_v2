@@ -61,7 +61,11 @@ class FavoritesView extends StatelessWidget {
         },
         child: Padding(
           padding: context.paddingLowVertical,
-          child: MovieListCard(movie: viewModel.favoriteMovies[index]),
+          child: MovieListCard(
+              onTap: () {
+                viewModel.deleteFavorite(viewModel.favoriteMovies[index]);
+              },
+              movie: viewModel.favoriteMovies[index]),
         ),
       ),
     );

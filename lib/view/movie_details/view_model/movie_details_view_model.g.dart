@@ -40,6 +40,21 @@ mixin _$MovieDetailsViewModel on _MovieDetailsViewModelBase, Store {
     });
   }
 
+  final _$isScrollAtom = Atom(name: '_MovieDetailsViewModelBase.isScroll');
+
+  @override
+  bool get isScroll {
+    _$isScrollAtom.reportRead();
+    return super.isScroll;
+  }
+
+  @override
+  set isScroll(bool value) {
+    _$isScrollAtom.reportWrite(value, super.isScroll, () {
+      super.isScroll = value;
+    });
+  }
+
   final _$fetchMovieCastListAsyncAction =
       AsyncAction('_MovieDetailsViewModelBase.fetchMovieCastList');
 
@@ -67,7 +82,8 @@ mixin _$MovieDetailsViewModel on _MovieDetailsViewModelBase, Store {
   String toString() {
     return '''
 movieCastList: ${movieCastList},
-loading: ${loading}
+loading: ${loading},
+isScroll: ${isScroll}
     ''';
   }
 }

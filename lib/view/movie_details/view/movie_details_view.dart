@@ -44,34 +44,39 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
 
   AppBar buildAppBar(BuildContext context) {
     return CustomAppBar(
+      automaticallyImplyLeading: true,
       centerTitle: false,
       text: widget.movie.title ?? TextConstants.movie_no_title,
       context: context,
     );
   }
 
-  Padding buildBody(MovieDetailsViewModel model, BuildContext context) {
-    return Padding(
-      padding: context.paddingNormalHorizontal,
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            context.sizedBoxLowVertical,
-            buildMovieInfoRow(context),
-            context.sizedBoxLowVertical,
-            buildButtonsRow(context),
-            context.sizedBoxNormalVertical,
-            buildStoryHeader(context),
-            context.sizedBoxLowVertical,
-            buildStoryOverview(context),
-            context.sizedBoxNormalVertical,
-            buildCastAndCrewHeader(context),
-            context.sizedBoxLowVertical,
-            buildCastList(model)
-          ],
-        ),
+  Widget buildBody(MovieDetailsViewModel model, BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: context.paddingNormalHorizontal,
+            child: Column(
+              children: [
+                context.sizedBoxLowVertical,
+                buildMovieInfoRow(context),
+                context.sizedBoxLowVertical,
+                buildButtonsRow(context),
+                context.sizedBoxNormalVertical,
+                buildStoryHeader(context),
+                context.sizedBoxLowVertical,
+                buildStoryOverview(context),
+                context.sizedBoxNormalVertical,
+                buildCastAndCrewHeader(context),
+                context.sizedBoxLowVertical,
+              ],
+            ),
+          ),
+          buildCastList(model)
+        ],
       ),
     );
   }
@@ -175,7 +180,10 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
   Widget buildCastList(MovieDetailsViewModel model) {
     return Observer(
       builder: (_) {
-        return MovieCastListView(movieCastList: model.movieCastList);
+        return Padding(
+          padding: model.isScroll ? EdgeInsets.only(left: context.normalValue) : context.paddingNormalHorizontal,
+          child: MovieCastListView(controller: model.castScrollController, movieCastList: model.movieCastList),
+        );
       },
     );
   }

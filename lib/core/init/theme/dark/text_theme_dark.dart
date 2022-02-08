@@ -15,7 +15,8 @@ class TextThemeDark {
   final TextStyle headline2 = TextStyle(fontSize: 30.sp, fontWeight: FontWeight.w300, letterSpacing: -0.5);
   final TextStyle headline3 =
       TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600, color: ColorThemeDark.instance!.white);
-  final TextStyle headline4 = TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, letterSpacing: 0.25);
+  final TextStyle headline4 = TextStyle(
+      fontSize: 18.sp, fontWeight: FontWeight.w600, letterSpacing: 0.25, color: ColorThemeDark.instance!.white);
   final TextStyle overline = TextStyle(
       fontSize: 14.sp, fontWeight: FontWeight.w600, letterSpacing: 0.5, color: ColorThemeDark.instance!.lightGray);
   final TextStyle bodyText1 = TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600, letterSpacing: 0.5);

@@ -130,6 +130,9 @@ abstract class _WatchListViewModelBase with Store, BaseViewModel {
   void navigateToDetails(MovieResultModel movie) {
     navigation.navigateToPage(path: NavigationConstants.MOVIE_DETAILS_VIEV, data: movie);
   }
+  void navigateToSearch() {
+    navigation.navigateToPage(path: NavigationConstants.SEARCH);
+  }
 
   void unfocusKeyboard() {
     watchlistFocus.unfocus();

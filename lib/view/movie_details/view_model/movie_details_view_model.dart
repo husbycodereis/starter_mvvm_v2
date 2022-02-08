@@ -11,13 +11,28 @@ class MovieDetailsViewModel = _MovieDetailsViewModelBase with _$MovieDetailsView
 
 abstract class _MovieDetailsViewModelBase with Store, BaseViewModel {
   late IMovieDetailsService movieDetailsService;
+  late ScrollController castScrollController;
   @override
   void setContext(BuildContext context) => this.context = context;
 
   @override
   void init() {
     movieDetailsService = MovieDetailsService(vexanaManager.networkManager);
+    castScrollController = ScrollController();
+    listenToMovieScrollController();
+  }
 
+  void listenToMovieScrollController() {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      castScrollController.addListener(() {});
+      castScrollController.position.isScrollingNotifier.addListener(() {
+        if (!castScrollController.position.isScrollingNotifier.value) {
+          isScroll = false;
+        } else {
+          isScroll = true;
+        }
+      });
+    });
   }
 
   @observable
@@ -25,6 +40,9 @@ abstract class _MovieDetailsViewModelBase with Store, BaseViewModel {
 
   @observable
   bool loading = false;
+
+  @observable
+  bool isScroll = false;
 
   @action
   void setLoading() {

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:movies_catalog/core/constants/app/text_constants.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
-
 import 'package:movies_catalog/view/search/model/movie_result.dart';
 
 class MovieListCard extends StatelessWidget {
   final MovieResultModel movie;
+  final VoidCallback? onTap;
   const MovieListCard({
     Key? key,
     required this.movie,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -17,21 +19,29 @@ class MovieListCard extends StatelessWidget {
     return buildBody(context);
   }
 
-  Row buildBody(BuildContext context) {
-    return Row(
+  Widget buildBody(BuildContext context) {
+    return Stack(
       children: [
-        buildPoster(context),
-        context.sizedBoxMediumHorizontal,
-        Expanded(
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(movie.title ?? TextConstants.movie_no_title,
-                style: context.textTheme.bodyText1!.copyWith(color: context.customColors.azure)),
-            SizedBox(height: 20.h),
-            buildRatingRow(context),
-            SizedBox(height: 20.h),
-            Text(movie.releaseDate?.substring(0, 4) ?? 'No year found', style: context.textTheme.overline),
-          ]),
-        )
+        Positioned(
+            bottom: 0,
+            right: 0,
+            child: GestureDetector(onTap: onTap, child: Icon(Icons.delete, color: context.customColors.azure))),
+        Row(
+          children: [
+            buildPoster(context),
+            context.sizedBoxMediumHorizontal,
+            Expanded(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(movie.title ?? TextConstants.movie_no_title,
+                    style: context.textTheme.bodyText1!.copyWith(color: context.customColors.azure)),
+                SizedBox(height: 20.h),
+                buildRatingRow(context),
+                SizedBox(height: 20.h),
+                Text(movie.releaseDate?.substring(0, 4) ?? 'No year found', style: context.textTheme.overline),
+              ]),
+            )
+          ],
+        ),
       ],
     );
   }

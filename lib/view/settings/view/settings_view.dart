@@ -46,8 +46,12 @@ class SettingsView extends StatelessWidget {
             shape: const StadiumBorder(),
             padding: context.paddingLowVertical),
         onPressed: viewModel.logoutApp,
-        icon: const Icon(Icons.exit_to_app),
-        label: const Text(TextConstants.profile_logout));
+        icon: Icon(Icons.exit_to_app,
+            color: context.brightness == Brightness.dark ? context.customColors.white : context.customColors.black),
+        label: Text(
+          TextConstants.profile_logout,
+          style: context.textTheme.bodyText1,
+        ));
   }
 
   SliverAppBar buildSliverAppBar(BuildContext context) {
@@ -60,7 +64,7 @@ class SettingsView extends StatelessWidget {
           centerTitle: false,
           title: Text(
             TextConstants.home_profile,
-            style: context.textTheme.headline5,
+            style: context.textTheme.headline4!.copyWith(color: context.customColors.azure),
           )),
     );
   }
@@ -91,14 +95,16 @@ class SettingsView extends StatelessWidget {
   }
 
   Widget buildProjectCore(BuildContext context, SettingsViewModel viewModel) {
-    return buildCardHeader(context, viewModel, title: 'Preferences', children: [
+    return buildCardHeader(context, viewModel, title: TextConstants.profile_preferences, children: [
       ListTile(
-        title: const Text(TextConstants.profile_theme),
+        title: Text(TextConstants.profile_theme, style: context.textTheme.bodyText1),
         trailing: IconButton(
             onPressed: viewModel.changeAppTheme,
             icon: context.brightness == Brightness.light ? LottiePathEnum.SUN.toWidget : LottiePathEnum.MOON.toWidget),
-        subtitle:
-            Text(context.brightness == Brightness.light ? TextConstants.profile_light : TextConstants.profile_dark),
+        subtitle: Text(
+          context.brightness == Brightness.light ? TextConstants.profile_light : TextConstants.profile_dark,
+          style: context.textTheme.overline,
+        ),
       ),
     ]);
   }
@@ -113,7 +119,7 @@ class SettingsView extends StatelessWidget {
             padding: context.paddingLowAll,
             child: Text(
               title,
-              style: context.textTheme.headline5,
+              style: context.textTheme.headline4,
             ),
           ),
           const Divider(),
@@ -127,8 +133,8 @@ class SettingsView extends StatelessWidget {
     return buildCardHeader(context, viewModel, title: TextConstants.profile_about, children: [
       ListTile(
         onTap: viewModel.navigateToContribution,
-        leading: const Icon(Icons.favorite),
-        title: const Text(TextConstants.profile_westerops),
+        leading: Icon(Icons.favorite, color: context.customColors.azure),
+        title: Text(TextConstants.profile_westerops, style: context.textTheme.bodyText1),
         trailing: const Icon(Icons.keyboard_arrow_right_outlined),
       ),
     ]);

@@ -26,9 +26,9 @@ class SearchView extends StatelessWidget {
         onPageBuilder: (SearchViewModel viewModel) => Observer(builder: (_) {
               return Scaffold(
                 appBar: CustomAppBar(
+                  automaticallyImplyLeading: true,
                   context: context,
                   text: TextConstants.home_search,
-                  automaticallyImplyLeading: false,
                 ),
                 body: viewModel.loading ? buildLoading() : buildBody(viewModel, context),
               );

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_catalog/core/extensions/context_extensions.dart';
 
+import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/view/movie_details/model/movie_cast.dart';
 
 class MovieCastListView extends StatelessWidget {
   final List<MovieCast> movieCastList;
+  final ScrollController? controller;
   const MovieCastListView({
     Key? key,
     required this.movieCastList,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -17,6 +19,7 @@ class MovieCastListView extends StatelessWidget {
       height: 300,
       child: ListView.separated(
           shrinkWrap: true,
+          controller: controller,
           scrollDirection: Axis.horizontal,
           itemCount: movieCastList.length,
           separatorBuilder: (context, index) => context.sizedBoxLowHorizontal,

@@ -45,9 +45,11 @@ class WatchListView extends StatelessWidget {
       padding: context.paddingLowAll,
       child: Column(
         children: [
+          context.sizedBoxNormalVertical,
           buildTextFormField(context, viewModel),
           context.sizedBoxLowVertical,
           buildCreateButton(viewModel),
+          context.sizedBoxNormalVertical,
           if (viewModel.watchlistList.isEmpty)
             Center(child: Text(TextConstants.watchlist_create, style: context.textTheme.bodyText1))
           else
@@ -86,16 +88,15 @@ class WatchListView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           context.sizedBoxNormalVertical,
+          CustomDivider(context: context),
+          context.sizedBoxNormalVertical,
           Text(TextConstants.watchlist_lists,
               style: context.textTheme.headline4!.copyWith(color: context.customColors.azure)),
-          CustomDivider(context: context),
           Expanded(
             child: ListView.separated(
               shrinkWrap: true,
               separatorBuilder: (context, index) {
-                return const Divider(
-                  thickness: 2,
-                );
+                return CustomDivider(context: context);
               },
               itemCount: viewModel.watchlistReversed.length,
               itemBuilder: (BuildContext context, int index) {
@@ -130,6 +131,12 @@ class WatchListView extends StatelessWidget {
           ),
           context.sizedBoxLowHorizontal,
           Text(viewModel.watchlistReversed[index].name!, style: context.textTheme.bodyText1),
+          Spacer(),
+          GestureDetector(
+              onTap: () {
+                viewModel.deleteWatchlist(viewModel.watchlistReversed[index]);
+              },
+              child: Icon(Icons.delete, color: context.customColors.azure))
         ],
       ),
     );

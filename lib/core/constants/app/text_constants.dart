@@ -25,10 +25,11 @@ class TextConstants {
   static const profile_light = 'Light';
   static const profile_dark = 'Dark';
   static const profile_about = 'About';
+  static const profile_preferences = 'Preferences';
   static const profile_westerops = 'WesterOps Home';
   static const watchlist_create = 'Create a Watchlist';
   static const watchlist_create_word = 'Create';
-  static const watchlist_add = 'Add Movies to the List';
+  static const watchlist_add = 'Tap the icon to search and add Movies';
   static const watchlist_enter = 'Enter a Watchlist name';
   static const watchlist_lists = 'Movie Lists';
   static const watchlist_error = 'an error occured';

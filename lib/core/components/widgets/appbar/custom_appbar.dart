@@ -13,7 +13,7 @@ class CustomAppBar extends AppBar {
     this.text,
     this.context,
     this.centerTitle = true,
-    this.automaticallyImplyLeading = true,
+    this.automaticallyImplyLeading = false,
     Key? key,
   }) : super(
             key: key,
