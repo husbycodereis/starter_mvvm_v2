@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies_catalog/core/components/widgets/text_form_field/custom_text_form_field.dart';
+import 'package:movies_catalog/core/constants/app/text_constants.dart';
 
 import '../../../../core/base/view/base_view.dart';
 import '../../../../core/constants/image/image_path_svg.dart';
@@ -39,9 +40,9 @@ class LoginView extends StatelessWidget {
                   SizedBox(height: 120.h),
                   buildImage(context),
                   context.sizedBoxNormalVertical,
-                  Text('The Movie Manager', style: context.textTheme.headline1),
+                  Text(TextConstants.movie_manager, style: context.textTheme.headline1),
                   SizedBox(height: 50.h),
-                  Text('Login with Email', style: context.textTheme.bodyText1),
+                  Text(TextConstants.login_mail, style: context.textTheme.bodyText1),
                   context.sizedBoxNormalVertical,
                   buildForm(viewModel, context),
                   context.sizedBoxNormalVertical,
@@ -57,7 +58,7 @@ class LoginView extends StatelessWidget {
 
   Text buildBottomText(BuildContext context) {
     return Text(
-      'This product uses the TMDb API but is not endorsed or certified by TMDb.',
+      TextConstants.product_copyright,
       textAlign: TextAlign.center,
       style: context.textTheme.bodyText2,
     );
@@ -93,7 +94,7 @@ class LoginView extends StatelessWidget {
     return CustomTextFormField(
       controller: viewModel.emailController,
       validator: (value) => value!.isValidEmail,
-      labelText: 'Email (eve.holt@reqres.in)',
+      labelText: TextConstants.login_mail_label,
     );
   }
 
@@ -102,7 +103,7 @@ class LoginView extends StatelessWidget {
             controller: viewModel.passwordController,
             validator: (value) => value!.isNotEmpty ? null : 'enter password',
             obscureText: viewModel.isLockOpen,
-            labelText: 'password (cityslicka)',
+            labelText: TextConstants.login_password,
             suffix: GestureDetector(
               onTap: () => viewModel.isLockStateChange(),
               child: Icon(
@@ -113,7 +114,7 @@ class LoginView extends StatelessWidget {
       });
 
   Widget buildForgotPassword(BuildContext context) {
-    return Align(child: Text('Forgot Password?', style: context.textTheme.bodyText1));
+    return Align(child: Text(TextConstants.login_forgot_password, style: context.textTheme.bodyText1));
   }
 
   Widget buildLoginButton(BuildContext context, LoginViewModel viewModel) {
@@ -130,7 +131,7 @@ class LoginView extends StatelessWidget {
           padding: EdgeInsets.all(16.h),
         ),
         child: Text(
-          'Login',
+          TextConstants.login,
           style: context.textTheme.bodyText1,
         ),
       );

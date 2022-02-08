@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movies_catalog/core/base/model/base_view_model.dart';
+import 'package:movies_catalog/core/constants/app/text_constants.dart';
 import 'package:movies_catalog/core/constants/local_database/local_database_constants.dart';
 import 'package:movies_catalog/core/constants/navigation/navigation_constants.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
@@ -62,10 +63,10 @@ abstract class _WatchListViewModelBase with Store, BaseViewModel {
         await _localDatabaseManager!.insert(WatchListModel(name: watchlistController.text, movies: []));
         await fetchWatchList();
       } else {
-        context!.showSnackBar('this watchlist exists!');
+        context!.showSnackBar(TextConstants.watchlist_exist);
       }
     } else {
-      context!.showSnackBar('watchlist name is too long!');
+      context!.showSnackBar(TextConstants.watchlist_long);
     }
   }
 
@@ -78,14 +79,14 @@ abstract class _WatchListViewModelBase with Store, BaseViewModel {
         await _localDatabaseManager!.update(updateItem);
         await fetchWatchList();
         await navigation.pop();
-        context.showSnackBar('movie added to $value');
+        context.showSnackBar('${TextConstants.watchlist_added} $value');
       } on Exception catch (_) {
         await navigation.pop();
-        context.showSnackBar('an error occured');
+        context.showSnackBar(TextConstants.watchlist_error);
       }
     } else {
       await navigation.pop();
-      context.showSnackBar('The movie is already added!');
+      context.showSnackBar(TextConstants.watchlist_already);
     }
   }
 
@@ -98,7 +99,7 @@ abstract class _WatchListViewModelBase with Store, BaseViewModel {
       await _localDatabaseManager!.update(updateItem);
       await fetchWatchList();
     } on Exception catch (_) {
-      context!.showSnackBar('an error occured');
+      context!.showSnackBar(TextConstants.watchlist_error);
     }
     setLoading();
   }

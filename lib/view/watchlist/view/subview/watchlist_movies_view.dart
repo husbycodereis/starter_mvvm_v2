@@ -5,6 +5,7 @@ import 'package:movies_catalog/core/components/widgets/appbar/custom_appbar.dart
 import 'package:movies_catalog/core/components/widgets/cards/movie_list_card.dart';
 import 'package:movies_catalog/core/components/widgets/dismissible/dismissible_delete_widget.dart';
 import 'package:movies_catalog/core/components/widgets/loading/basic_loading_widget.dart';
+import 'package:movies_catalog/core/constants/app/text_constants.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/core/init/di/injection_container.dart';
 import 'package:movies_catalog/view/watchlist/model/watchlist_model.dart';
@@ -42,7 +43,7 @@ class WatchListMoviesView extends StatelessWidget {
       child: watchlist.movies!.isEmpty
           ? Center(
               child: Text(
-              'Add Movies to the List',
+              TextConstants.watchlist_add,
               style: context.textTheme.bodyText1,
             ))
           : ListView.separated(

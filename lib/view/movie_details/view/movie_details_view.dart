@@ -5,6 +5,7 @@ import 'package:movies_catalog/core/base/view/base_view.dart';
 import 'package:movies_catalog/core/components/widgets/appbar/custom_appbar.dart';
 import 'package:movies_catalog/core/components/widgets/button/movie_details_button.dart';
 import 'package:movies_catalog/core/components/widgets/list_view/movie_cast_list_view.dart';
+import 'package:movies_catalog/core/constants/app/text_constants.dart';
 import 'package:movies_catalog/core/constants/image/image_path_svg.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/core/init/di/injection_container.dart';
@@ -44,7 +45,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
   AppBar buildAppBar(BuildContext context) {
     return CustomAppBar(
       centerTitle: false,
-      text: widget.movie.title ?? 'No Title Found',
+      text: widget.movie.title ?? TextConstants.movie_no_title,
       context: context,
     );
   }
@@ -93,26 +94,27 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
       Text('Story', style: context.textTheme.bodyText1!.copyWith(color: context.customColors.azure));
 
   Text buildStoryOverview(BuildContext context) {
-    return Text(widget.movie.overview ?? 'No Story available',
+    return Text(widget.movie.overview ?? TextConstants.movie_no_story,
         textAlign: TextAlign.justify, style: context.textTheme.overline);
   }
 
   Text buildCastAndCrewHeader(BuildContext context) =>
-      Text('Cast and Crew', style: context.textTheme.bodyText1!.copyWith(color: context.customColors.azure));
+      Text(TextConstants.movie_cast, style: context.textTheme.bodyText1!.copyWith(color: context.customColors.azure));
 
   Widget buildInfoColumn(BuildContext context) {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.movie.title ?? 'No title found',
+          Text(widget.movie.title ?? TextConstants.movie_no_title,
               style: context.textTheme.bodyText1!.copyWith(color: context.customColors.azure)),
           SizedBox(height: 20.h),
           buildRatingRow(context),
           SizedBox(height: 20.h),
-          Text(widget.movie.releaseDate?.substring(0, 4) ?? 'No year found', style: context.textTheme.overline),
+          Text(widget.movie.releaseDate?.substring(0, 4) ?? TextConstants.movie_no_year,
+              style: context.textTheme.overline),
           SizedBox(height: 20.h),
-          Text(widget.movie.originalLanguage ?? 'No language available', style: context.textTheme.overline),
+          Text(widget.movie.originalLanguage ?? TextConstants.movie_no_language, style: context.textTheme.overline),
           SizedBox(height: 20.h),
         ],
       ),
@@ -128,7 +130,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
         ),
         context.sizedBoxLowHorizontal,
         Text(
-          '${widget.movie.voteAverage ?? 'No score found'}' + ' | IMDB',
+          '${widget.movie.voteAverage ?? TextConstants.movie_no_score}${TextConstants.movie_imdb}',
           style: context.textTheme.overline,
         )
       ],
@@ -156,7 +158,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
           });
         },
         assetName: SVGImagePaths.instance!.heart,
-        text: 'Favorite');
+        text: TextConstants.home_favorites);
   }
 
   Widget buildWatchlistButton(BuildContext context) {
@@ -167,7 +169,7 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
           });
         },
         assetName: SVGImagePaths.instance!.list,
-        text: 'Watchlist');
+        text: TextConstants.home_watchlist);
   }
 
   Widget buildCastList(MovieDetailsViewModel model) {

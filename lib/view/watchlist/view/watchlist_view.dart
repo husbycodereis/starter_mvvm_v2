@@ -9,6 +9,7 @@ import 'package:movies_catalog/core/components/widgets/dismissible/dismissible_d
 import 'package:movies_catalog/core/components/widgets/divider/custom_divider.dart';
 import 'package:movies_catalog/core/components/widgets/loading/basic_loading_widget.dart';
 import 'package:movies_catalog/core/components/widgets/text_form_field/custom_text_form_field.dart';
+import 'package:movies_catalog/core/constants/app/text_constants.dart';
 import 'package:movies_catalog/core/constants/image/image_path_svg.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/core/init/di/injection_container.dart';
@@ -31,7 +32,7 @@ class WatchListView extends StatelessWidget {
         onPageBuilder: (WatchListViewModel model) => Observer(builder: (_) {
               return Scaffold(
                 appBar: CustomAppBar(
-                  text: 'Watchlist',
+                  text: TextConstants.home_watchlist,
                   context: context,
                 ),
                 body: model.loading ? const BasicLoadingWidget() : buildBody(model, context),
@@ -48,11 +49,22 @@ class WatchListView extends StatelessWidget {
           context.sizedBoxLowVertical,
           buildCreateButton(viewModel),
           if (viewModel.watchlistList.isEmpty)
-            Center(child: Text('Create a watchlist', style: context.textTheme.bodyText1))
+            Center(child: Text(TextConstants.watchlist_create, style: context.textTheme.bodyText1))
           else
             buildWatchlistView(viewModel, context),
         ],
       ),
+    );
+  }
+
+  Widget buildTextFormField(BuildContext context, WatchListViewModel viewModel) {
+    return CustomTextFormField(
+      controller: viewModel.watchlistController,
+      labelText: TextConstants.watchlist_enter,
+      focusNode: viewModel.watchlistFocus,
+      onFieldSubmitted: (value) {
+        viewModel.unfocusKeyboard();
+      },
     );
   }
 
@@ -64,18 +76,7 @@ class WatchListView extends StatelessWidget {
             viewModel.createWatchList();
           },
           assetName: SVGImagePaths.instance!.plus,
-          text: 'Create'),
-    );
-  }
-
-  Widget buildTextFormField(BuildContext context, WatchListViewModel viewModel) {
-    return CustomTextFormField(
-      controller: viewModel.watchlistController,
-      labelText: 'Enter a Watchlist name',
-      focusNode: viewModel.watchlistFocus,
-      onFieldSubmitted: (value) {
-        viewModel.unfocusKeyboard();
-      },
+          text: TextConstants.watchlist_create_word),
     );
   }
 
@@ -85,7 +86,8 @@ class WatchListView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           context.sizedBoxNormalVertical,
-          Text('Movie Lists', style: context.textTheme.headline4!.copyWith(color: context.customColors.azure)),
+          Text(TextConstants.watchlist_lists,
+              style: context.textTheme.headline4!.copyWith(color: context.customColors.azure)),
           CustomDivider(context: context),
           Expanded(
             child: ListView.separated(
@@ -106,24 +108,28 @@ class WatchListView extends StatelessWidget {
                       onTap: () {
                         viewModel.navigateToMoviesView(viewModel.watchlistReversed[index]);
                       },
-                      child: Padding(
-                        padding: context.paddingNormalVertical,
-                        child: Row(
-                          children: [
-                            SvgPicture.asset(
-                              SVGImagePaths.instance!.list,
-                              width: 23.w,
-                              color: context.customColors.azure,
-                            ),
-                            context.sizedBoxLowHorizontal,
-                            Text(viewModel.watchlistReversed[index].name!, style: context.textTheme.bodyText1),
-                          ],
-                        ),
-                      ),
+                      child: buildListItem(context, viewModel, index),
                     ));
               },
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Padding buildListItem(BuildContext context, WatchListViewModel viewModel, int index) {
+    return Padding(
+      padding: context.paddingNormalVertical,
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            SVGImagePaths.instance!.list,
+            width: 23.w,
+            color: context.customColors.azure,
+          ),
+          context.sizedBoxLowHorizontal,
+          Text(viewModel.watchlistReversed[index].name!, style: context.textTheme.bodyText1),
         ],
       ),
     );

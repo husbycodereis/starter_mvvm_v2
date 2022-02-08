@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_catalog/core/constants/app/text_constants.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 
 import 'package:movies_catalog/view/search/model/movie_result.dart';
@@ -23,7 +24,7 @@ class MovieListCard extends StatelessWidget {
         context.sizedBoxMediumHorizontal,
         Expanded(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(movie.title ?? 'No title found',
+            Text(movie.title ?? TextConstants.movie_no_title,
                 style: context.textTheme.bodyText1!.copyWith(color: context.customColors.azure)),
             SizedBox(height: 20.h),
             buildRatingRow(context),

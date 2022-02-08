@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:movies_catalog/core/constants/app/text_constants.dart';
 import 'package:movies_catalog/core/constants/image/image_path_svg.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 
@@ -70,11 +71,11 @@ class _HomeViewState extends State<HomeView> {
 
   BottomNavigationBar _buildBottomNavigationBar(BuildContext context) {
     final List<BottomNavigationBarItem> _bottomNavigationItems = [
-      _buildBottomNavigationBarItem(SVGImagePaths.instance!.home, 'Home'),
-      _buildBottomNavigationBarItem(SVGImagePaths.instance!.search, 'Search'),
-      _buildBottomNavigationBarItem(SVGImagePaths.instance!.heart, 'Favorites'),
-      _buildBottomNavigationBarItem(SVGImagePaths.instance!.list, 'Watchlist'),
-      _buildBottomNavigationBarItem(SVGImagePaths.instance!.profile, 'Profile'),
+      _buildBottomNavigationBarItem(SVGImagePaths.instance!.home, TextConstants.home_home),
+      _buildBottomNavigationBarItem(SVGImagePaths.instance!.search, TextConstants.home_search),
+      _buildBottomNavigationBarItem(SVGImagePaths.instance!.heart, TextConstants.home_favorites),
+      _buildBottomNavigationBarItem(SVGImagePaths.instance!.list, TextConstants.home_watchlist),
+      _buildBottomNavigationBarItem(SVGImagePaths.instance!.profile, TextConstants.home_profile),
     ];
 
     return BottomNavigationBar(

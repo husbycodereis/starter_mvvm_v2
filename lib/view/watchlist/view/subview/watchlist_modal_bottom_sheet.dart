@@ -6,6 +6,7 @@ import 'package:movies_catalog/core/base/view/base_view.dart';
 import 'package:movies_catalog/core/components/widgets/bottom_sheet/modal_bottom_sheet_container.dart';
 import 'package:movies_catalog/core/components/widgets/divider/custom_divider.dart';
 import 'package:movies_catalog/core/components/widgets/text_form_field/custom_text_form_field.dart';
+import 'package:movies_catalog/core/constants/app/text_constants.dart';
 import 'package:movies_catalog/core/constants/image/image_path_svg.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/core/init/di/injection_container.dart';
@@ -28,7 +29,7 @@ class WatchListModalBottomSheet extends StatelessWidget {
       onPageBuilder: (WatchListViewModel model) => ModalBottomSheetContainer(
           height: context.dynamicHeight(0.55),
           child: model.watchlistReversed.isEmpty
-              ? Center(child: Text('Create a Watchlist', style: context.textTheme.bodyText1))
+              ? Center(child: Text(TextConstants.watchlist_create, style: context.textTheme.bodyText1))
               : Column(
                   children: [buildCreateWatchlist(model, context), buildListView(model)],
                 )),
@@ -60,7 +61,7 @@ class WatchListModalBottomSheet extends StatelessWidget {
     return Expanded(
       child: CustomTextFormField(
         controller: viewModel.watchlistController,
-        labelText: 'Create Watchlist',
+        labelText: TextConstants.watchlist_create,
         focusNode: viewModel.watchlistFocus,
         onFieldSubmitted: (value) {
           viewModel.unfocusKeyboard();

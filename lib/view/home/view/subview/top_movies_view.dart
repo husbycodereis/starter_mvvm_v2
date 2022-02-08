@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
 import 'package:movies_catalog/core/components/widgets/loading/basic_loading_widget.dart';
+import 'package:movies_catalog/core/constants/app/text_constants.dart';
 import 'package:movies_catalog/core/constants/image/image_path_svg.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/view/home/viewmodel/home_view_model.dart';
@@ -68,7 +68,7 @@ class TopMoviesView extends StatelessWidget {
                   Text(
                     model.topMoviesList[index].title!.length > 20
                         ? '${model.topMoviesList[index].title!.substring(0, 20)}...'
-                        : model.topMoviesList[index].title ?? 'No Title Found',
+                        : model.topMoviesList[index].title ?? TextConstants.movie_no_title,
                     style: context.textTheme.bodyText2,
                   )
                 ],
@@ -92,7 +92,7 @@ class TopMoviesView extends StatelessWidget {
           ),
           SizedBox(width: 15.w),
           Text(
-            'The Movie Manager',
+            TextConstants.movie_manager,
             style: context.textTheme.bodyText1,
           )
         ],

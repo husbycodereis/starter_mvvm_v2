@@ -5,6 +5,7 @@ import 'package:movies_catalog/core/base/view/base_view.dart';
 import 'package:movies_catalog/core/components/widgets/appbar/custom_appbar.dart';
 import 'package:movies_catalog/core/components/widgets/divider/custom_divider.dart';
 import 'package:movies_catalog/core/components/widgets/searchbar/search_field_widget.dart';
+import 'package:movies_catalog/core/constants/app/text_constants.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/view/search/viewmodel/search_view_Model.dart';
 
@@ -42,7 +43,7 @@ class SearchView extends StatelessWidget {
         children: [
           SearchFieldWidget(
             controller: viewModel.searchController,
-            hintText: 'Search',
+            hintText: TextConstants.home_search,
             onPressedCancel: () => viewModel.dispose(),
             isAbleToCancel: viewModel.searchQuery.isNotEmpty,
           ),
@@ -66,7 +67,7 @@ class SearchView extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 20.h),
               child: Text(
-                viewModel.searchResultList[index].title ?? 'No Title Found',
+                viewModel.searchResultList[index].title ?? TextConstants.movie_no_title,
                 style: context.textTheme.bodyText1!.copyWith(fontSize: 14.sp),
               ),
             ),
@@ -77,5 +78,5 @@ class SearchView extends StatelessWidget {
   }
 
   Padding buildEmptyListView(BuildContext context) => Padding(
-      padding: context.paddingHighVertical, child: Text('Search for movies', style: context.textTheme.bodyText1));
+      padding: context.paddingHighVertical, child: Text(TextConstants.search_desc, style: context.textTheme.bodyText1));
 }

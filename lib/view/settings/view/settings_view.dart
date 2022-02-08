@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
+import 'package:movies_catalog/core/constants/app/text_constants.dart';
 import 'package:movies_catalog/core/constants/enums/lottie_path_enum.dart';
-import 'package:movies_catalog/core/init/provider/notifiers/theme_notifier.dart';
-import 'package:provider/provider.dart';
 
 import '../../../core/base/view/base_view.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../core/extensions/string_extensions.dart';
 import '../../../core/extensions/widget_extensions.dart';
-import '../../../core/init/theme/light/app_theme_light.dart';
 import '../viewmodel/settings_view_model.dart';
 
 class SettingsView extends StatelessWidget {
@@ -49,7 +47,7 @@ class SettingsView extends StatelessWidget {
             padding: context.paddingLowVertical),
         onPressed: viewModel.logoutApp,
         icon: const Icon(Icons.exit_to_app),
-        label: const Text('Logout'));
+        label: const Text(TextConstants.profile_logout));
   }
 
   SliverAppBar buildSliverAppBar(BuildContext context) {
@@ -61,7 +59,7 @@ class SettingsView extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
           centerTitle: false,
           title: Text(
-            'Settings',
+            TextConstants.home_profile,
             style: context.textTheme.headline5,
           )),
     );
@@ -95,13 +93,12 @@ class SettingsView extends StatelessWidget {
   Widget buildProjectCore(BuildContext context, SettingsViewModel viewModel) {
     return buildCardHeader(context, viewModel, title: 'Preferences', children: [
       ListTile(
-        title: const Text('App Theme'),
+        title: const Text(TextConstants.profile_theme),
         trailing: IconButton(
             onPressed: viewModel.changeAppTheme,
-            icon: context.watch<ThemeNotifier>().currentTheme == AppThemeLight.instance.theme
-                ? LottiePathEnum.SUN.toWidget
-                : LottiePathEnum.MOON.toWidget),
-        subtitle: Text(context.watch<ThemeNotifier>().currentTheme == AppThemeLight.instance.theme ? 'Light' : 'Dark'),
+            icon: context.brightness == Brightness.light ? LottiePathEnum.SUN.toWidget : LottiePathEnum.MOON.toWidget),
+        subtitle:
+            Text(context.brightness == Brightness.light ? TextConstants.profile_light : TextConstants.profile_dark),
       ),
     ]);
   }
@@ -127,23 +124,13 @@ class SettingsView extends StatelessWidget {
   }
 
   Widget buildCardAbout(BuildContext context, SettingsViewModel viewModel) {
-    return buildCardHeader(context, viewModel, title: 'About', children: [
+    return buildCardHeader(context, viewModel, title: TextConstants.profile_about, children: [
       ListTile(
         onTap: viewModel.navigateToContribution,
         leading: const Icon(Icons.favorite),
-        title: const Text('WesterOps Home'),
+        title: const Text(TextConstants.profile_westerops),
         trailing: const Icon(Icons.keyboard_arrow_right_outlined),
       ),
     ]);
-  }
-
-  //alternative method for creating a sliver
-  NestedScrollView buildNestedScrollView() {
-    return NestedScrollView(
-      body: const Text('hello'),
-      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-        return [buildSliverAppBar(context)];
-      },
-    );
   }
 }
