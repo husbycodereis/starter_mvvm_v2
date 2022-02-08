@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
+import 'package:movies_catalog/core/components/widgets/appbar/custom_appbar.dart';
 import 'package:movies_catalog/core/components/widgets/button/movie_details_button.dart';
 import 'package:movies_catalog/core/components/widgets/list_view/movie_cast_list_view.dart';
 import 'package:movies_catalog/core/constants/image/image_path_svg.dart';
@@ -41,11 +42,10 @@ class _MovieDetailsViewState extends State<MovieDetailsView> {
   }
 
   AppBar buildAppBar(BuildContext context) {
-    return AppBar(
+    return CustomAppBar(
       centerTitle: false,
-      elevation: 1,
-      title: Text(widget.movie.title ?? 'No Title Found',
-          style: context.textTheme.headline4!.copyWith(color: context.customColors.azure)),
+      text: widget.movie.title ?? 'No Title Found',
+      context: context,
     );
   }
 

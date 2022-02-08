@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
+import 'package:movies_catalog/core/components/widgets/appbar/custom_appbar.dart';
+import 'package:movies_catalog/core/components/widgets/cards/movie_list_card.dart';
 import 'package:movies_catalog/core/components/widgets/dismissible/dismissible_delete_widget.dart';
 import 'package:movies_catalog/core/components/widgets/loading/basic_loading_widget.dart';
 import 'package:movies_catalog/core/extensions/context_extensions.dart';
@@ -21,7 +23,7 @@ class WatchListMoviesView extends StatelessWidget {
           model.setContext(context);
         },
         onPageBuilder: (WatchListViewModel model) => Scaffold(
-              appBar: AppBar(),
+              appBar: buildAppBar(context),
               body: Observer(
                 builder: (_) {
                   return model.loading ? const BasicLoadingWidget() : buildBody(model, context);
@@ -30,28 +32,31 @@ class WatchListMoviesView extends StatelessWidget {
             ));
   }
 
+  AppBar buildAppBar(BuildContext context) {
+    return CustomAppBar(context: context, text: watchlist.name ?? '');
+  }
+
   Widget buildBody(WatchListViewModel viewModel, BuildContext context) {
     return Padding(
       padding: context.paddingLowAll,
       child: watchlist.movies!.isEmpty
-          ? const Center(child: Text('There are no favorite movies'))
-          : Column(
-              children: [
-                context.sizedBoxHighVertical,
-                Expanded(
-                  child: ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return const Divider(
-                        thickness: 2,
-                      );
-                    },
-                    itemCount: watchlist.movies!.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return buildDismissibleListItem(index, viewModel, context);
-                    },
-                  ),
-                ),
-              ],
+          ? Center(
+              child: Text(
+              'Add Movies to the List',
+              style: context.textTheme.bodyText1,
+            ))
+          : ListView.separated(
+              shrinkWrap: true,
+              reverse: true,
+              separatorBuilder: (context, index) {
+                return const Divider(
+                  thickness: 2,
+                );
+              },
+              itemCount: watchlist.movies!.length,
+              itemBuilder: (BuildContext context, int index) {
+                return buildDismissibleListItem(index, viewModel, context);
+              },
             ),
     );
   }
@@ -60,28 +65,14 @@ class WatchListMoviesView extends StatelessWidget {
     return DismissibleDeleteWidget(
       keyString: index.toString(),
       onDismissed: (direction) {
-        //  viewModel.deleteFavorite(viewModel.favoriteMovies[index]);
+        viewModel.deleteMovieFromWatchlist(watchlist, watchlist.movies![index]);
       },
       child: GestureDetector(
         onTap: () {
-          //  viewModel.navigateToDetails(viewModel.favoriteMovies[index]);
+          viewModel.navigateToDetails(watchlist.movies![index]);
         },
-        child: buildDismissibleListItemBody(viewModel, index, context),
+        child: MovieListCard(movie: watchlist.movies![index]),
       ),
-    );
-  }
-
-  Row buildDismissibleListItemBody(WatchListViewModel viewModel, int index, BuildContext context) {
-    return Row(
-      children: [
-        Image.network(
-          watchlist.movies![index].fullImageUrl,
-          width: 50,
-          height: 100,
-        ),
-        context.sizedBoxMediumHorizontal,
-        Expanded(child: Text(watchlist.movies![index].title ?? 'No Title Found')),
-      ],
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_catalog/core/components/widgets/appbar/custom_appbar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../../core/constants/app/app_constants.dart';
@@ -15,8 +16,9 @@ class SettingsDynamicView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(model.title, style: context.textTheme.headline6),
+      appBar: CustomAppBar(
+        context: context,
+        text: model.title,
       ),
       body: WebView(
         initialUrl: model.url ?? ApplicationConstants.APP_WEB_SITE,

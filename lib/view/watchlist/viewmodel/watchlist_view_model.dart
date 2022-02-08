@@ -36,6 +36,9 @@ abstract class _WatchListViewModelBase with Store, BaseViewModel {
   @observable
   List<WatchListModel> watchlistList = ObservableList.of([]);
 
+  @computed
+  List<WatchListModel> get watchlistReversed => watchlistList.reversed.toList();
+
   @action
   void setLoading() {
     loading = !loading;
@@ -69,19 +72,35 @@ abstract class _WatchListViewModelBase with Store, BaseViewModel {
   @action
   Future addMovieToWatchList(MovieResultModel movie, String value, BuildContext context) async {
     final WatchListModel updateItem = watchlistList.firstWhere((e) => e.name == value);
-    // if (updateItem.movies.where((e) => e.mo)) {
+    if (updateItem.movies!.where((e) => e.movieId == movie.movieId).isEmpty) {
+      try {
+        updateItem.movies!.add(movie);
+        await _localDatabaseManager!.update(updateItem);
+        await fetchWatchList();
+        await navigation.pop();
+        context.showSnackBar('movie added to $value');
+      } on Exception catch (_) {
+        await navigation.pop();
+        context.showSnackBar('an error occured');
+      }
+    } else {
+      await navigation.pop();
+      context.showSnackBar('The movie is already added!');
+    }
+  }
 
-    // }
+  @action
+  Future deleteMovieFromWatchlist(WatchListModel value, MovieResultModel movie) async {
+    setLoading();
+    final WatchListModel updateItem = value;
     try {
-      updateItem.movies!.add(movie);
+      updateItem.movies!.removeWhere((e) => e.movieId == movie.movieId);
       await _localDatabaseManager!.update(updateItem);
       await fetchWatchList();
-      await navigation.pop();
-      context.showSnackBar('movie added to $value');
     } on Exception catch (_) {
-      await navigation.pop();
-      context.showSnackBar('an error occured');
+      context!.showSnackBar('an error occured');
     }
+    setLoading();
   }
 
   @action
@@ -105,6 +124,10 @@ abstract class _WatchListViewModelBase with Store, BaseViewModel {
 
   void navigateToMoviesView(WatchListModel watchlist) {
     navigation.navigateToPage(path: NavigationConstants.WATCHLIST_MOVIES_VIEW, data: watchlist);
+  }
+
+  void navigateToDetails(MovieResultModel movie) {
+    navigation.navigateToPage(path: NavigationConstants.MOVIE_DETAILS_VIEV, data: movie);
   }
 
   void unfocusKeyboard() {

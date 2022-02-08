@@ -9,6 +9,14 @@ part of 'watchlist_view_model.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$WatchListViewModel on _WatchListViewModelBase, Store {
+  Computed<List<WatchListModel>>? _$watchlistReversedComputed;
+
+  @override
+  List<WatchListModel> get watchlistReversed => (_$watchlistReversedComputed ??=
+          Computed<List<WatchListModel>>(() => super.watchlistReversed,
+              name: '_WatchListViewModelBase.watchlistReversed'))
+      .value;
+
   final _$loadingAtom = Atom(name: '_WatchListViewModelBase.loading');
 
   @override
@@ -66,6 +74,16 @@ mixin _$WatchListViewModel on _WatchListViewModelBase, Store {
         .run(() => super.addMovieToWatchList(movie, value, context));
   }
 
+  final _$deleteMovieFromWatchlistAsyncAction =
+      AsyncAction('_WatchListViewModelBase.deleteMovieFromWatchlist');
+
+  @override
+  Future<dynamic> deleteMovieFromWatchlist(
+      WatchListModel value, MovieResultModel movie) {
+    return _$deleteMovieFromWatchlistAsyncAction
+        .run(() => super.deleteMovieFromWatchlist(value, movie));
+  }
+
   final _$deleteWatchlistAsyncAction =
       AsyncAction('_WatchListViewModelBase.deleteWatchlist');
 
@@ -92,7 +110,8 @@ mixin _$WatchListViewModel on _WatchListViewModelBase, Store {
   String toString() {
     return '''
 loading: ${loading},
-watchlistList: ${watchlistList}
+watchlistList: ${watchlistList},
+watchlistReversed: ${watchlistReversed}
     ''';
   }
 }

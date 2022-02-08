@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
 import 'package:movies_catalog/core/base/view/base_view.dart';
+import 'package:movies_catalog/core/components/widgets/appbar/custom_appbar.dart';
 import 'package:movies_catalog/core/components/widgets/button/movie_details_button.dart';
 import 'package:movies_catalog/core/components/widgets/button/normal_button.dart';
 import 'package:movies_catalog/core/components/widgets/dismissible/dismissible_delete_widget.dart';
+import 'package:movies_catalog/core/components/widgets/divider/custom_divider.dart';
 import 'package:movies_catalog/core/components/widgets/loading/basic_loading_widget.dart';
 import 'package:movies_catalog/core/components/widgets/text_form_field/custom_text_form_field.dart';
 import 'package:movies_catalog/core/constants/image/image_path_svg.dart';
@@ -29,6 +32,10 @@ class WatchListView extends StatelessWidget {
         },
         onPageBuilder: (WatchListViewModel model) => Observer(builder: (_) {
               return Scaffold(
+                appBar: CustomAppBar(
+                  text: 'Watchlist',
+                  context: context,
+                ),
                 body: model.loading ? const BasicLoadingWidget() : buildBody(model, context),
               );
             }));
@@ -39,25 +46,27 @@ class WatchListView extends StatelessWidget {
       padding: context.paddingLowAll,
       child: Column(
         children: [
-          context.sizedBoxHighVertical,
           buildTextFormField(context, viewModel),
           context.sizedBoxLowVertical,
-          SizedBox(
-            width: 200.w,
-            child: MovieDetailsButton(
-                onPressed: () {
-                  viewModel.createWatchList();
-                },
-                assetName: SVGImagePaths.instance!.plus,
-                text: 'Create'),
-          ),
-          context.sizedBoxHighVertical,
+          buildCreateButton(viewModel),
           if (viewModel.watchlistList.isEmpty)
             Center(child: Text('Create a watchlist', style: context.textTheme.bodyText1))
           else
-            buildWatchlistView(viewModel),
+            buildWatchlistView(viewModel, context),
         ],
       ),
+    );
+  }
+
+  SizedBox buildCreateButton(WatchListViewModel viewModel) {
+    return SizedBox(
+      width: 165.w,
+      child: MovieDetailsButton(
+          onPressed: () {
+            viewModel.createWatchList();
+          },
+          assetName: SVGImagePaths.instance!.plus,
+          text: 'Create'),
     );
   }
 
@@ -72,41 +81,52 @@ class WatchListView extends StatelessWidget {
     );
   }
 
-  Expanded buildWatchlistView(WatchListViewModel viewModel) {
+  Widget buildWatchlistView(WatchListViewModel viewModel, BuildContext context) {
     return Expanded(
-      child: ListView.separated(
-        separatorBuilder: (context, index) {
-          return const Divider(
-            thickness: 2,
-          );
-        },
-        itemCount: viewModel.watchlistList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return DismissibleDeleteWidget(
-              keyString: index.toString(),
-              onDismissed: (direction) {
-                viewModel.deleteWatchlist(viewModel.watchlistList[index]);
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          context.sizedBoxNormalVertical,
+          Text('Movie Lists', style: context.textTheme.headline4!.copyWith(color: context.customColors.azure)),
+          const CustomDivider(),
+          Expanded(
+            child: ListView.separated(
+              shrinkWrap: true,
+              separatorBuilder: (context, index) {
+                return const Divider(
+                  thickness: 2,
+                );
               },
-              child: GestureDetector(
-                onTap: () {
-                  viewModel.navigateToMoviesView(viewModel.watchlistList[index]);
-                },
-                child: Padding(
-                  padding: context.paddingNormalVertical,
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        SVGImagePaths.instance!.list,
-                        width: 23.w,
-                        color: context.customColors.azure,
+              itemCount: viewModel.watchlistReversed.length,
+              itemBuilder: (BuildContext context, int index) {
+                return DismissibleDeleteWidget(
+                    keyString: index.toString(),
+                    onDismissed: (direction) {
+                      viewModel.deleteWatchlist(viewModel.watchlistReversed[index]);
+                    },
+                    child: GestureDetector(
+                      onTap: () {
+                        viewModel.navigateToMoviesView(viewModel.watchlistReversed[index]);
+                      },
+                      child: Padding(
+                        padding: context.paddingNormalVertical,
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              SVGImagePaths.instance!.list,
+                              width: 23.w,
+                              color: context.customColors.azure,
+                            ),
+                            context.sizedBoxLowHorizontal,
+                            Text(viewModel.watchlistReversed[index].name!, style: context.textTheme.bodyText1),
+                          ],
+                        ),
                       ),
-                      context.sizedBoxLowHorizontal,
-                      Text(viewModel.watchlistList[index].name!, style: context.textTheme.bodyText1),
-                    ],
-                  ),
-                ),
-              ));
-        },
+                    ));
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

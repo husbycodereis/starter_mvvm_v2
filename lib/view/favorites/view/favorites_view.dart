@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
+import 'package:movies_catalog/core/components/widgets/appbar/custom_appbar.dart';
 import 'package:movies_catalog/core/components/widgets/cards/movie_list_card.dart';
 import 'package:movies_catalog/core/components/widgets/dismissible/dismissible_delete_widget.dart';
 import 'package:movies_catalog/core/components/widgets/divider/custom_divider.dart';
@@ -23,19 +24,10 @@ class FavoritesView extends StatelessWidget {
         },
         onPageBuilder: (FavoritesViewModel model) => Observer(builder: (_) {
               return Scaffold(
-                appBar: buildAppBar(context),
+                appBar: CustomAppBar(text: 'Favorites', context: context),
                 body: model.loading ? const BasicLoadingWidget() : buildBody(model, context),
               );
             }));
-  }
-
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-        elevation: 1,
-        title: Text(
-          'Favorites',
-          style: context.textTheme.headline4!.copyWith(color: context.customColors.azure),
-        ));
   }
 
   Widget buildBody(FavoritesViewModel viewModel, BuildContext context) {
@@ -44,6 +36,8 @@ class FavoritesView extends StatelessWidget {
       child: viewModel.favoriteMovies.isEmpty
           ? const Center(child: Text('There are no favorite movies'))
           : ListView.separated(
+              shrinkWrap: true,
+              reverse: true,
               separatorBuilder: (context, index) {
                 return const CustomDivider();
               },

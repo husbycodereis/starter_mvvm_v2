@@ -40,6 +40,7 @@ class MovieDetailsButton extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(10.0.w),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SvgPicture.asset(
                 assetName,
