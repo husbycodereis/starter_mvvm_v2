@@ -30,7 +30,10 @@ class NavigationRoute {
       case NavigationConstants.HOME:
         return normalNavigate(const HomeView());
       case NavigationConstants.SEARCH:
-        return normalNavigate(const SearchView());
+        if (args.arguments is bool) {
+          return normalNavigate(SearchView(isSubView: args.arguments! as bool));
+        }
+        throw NavigateException<SettingsDynamicModel>(args.arguments);
       case NavigationConstants.MOVIE_DETAILS_VIEV:
         if (args.arguments is MovieResultModel) {
           return normalNavigate(MovieDetailsView(movie: args.arguments! as MovieResultModel));

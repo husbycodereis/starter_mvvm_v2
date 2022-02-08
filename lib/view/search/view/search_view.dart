@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:movies_catalog/core/base/view/base_view.dart';
 import 'package:movies_catalog/core/components/widgets/appbar/custom_appbar.dart';
 import 'package:movies_catalog/core/components/widgets/divider/custom_divider.dart';
@@ -10,7 +11,11 @@ import 'package:movies_catalog/core/extensions/context_extensions.dart';
 import 'package:movies_catalog/view/search/viewmodel/search_view_Model.dart';
 
 class SearchView extends StatelessWidget {
-  const SearchView({Key? key}) : super(key: key);
+ final bool? isSubView;
+  const SearchView({
+    Key? key,
+    this.isSubView = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class SearchView extends StatelessWidget {
         onPageBuilder: (SearchViewModel viewModel) => Observer(builder: (_) {
               return Scaffold(
                 appBar: CustomAppBar(
-                  automaticallyImplyLeading: true,
+                  automaticallyImplyLeading: isSubView ?? false,
                   context: context,
                   text: TextConstants.home_search,
                 ),

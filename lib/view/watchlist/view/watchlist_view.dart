@@ -131,7 +131,7 @@ class WatchListView extends StatelessWidget {
           ),
           context.sizedBoxLowHorizontal,
           Text(viewModel.watchlistReversed[index].name!, style: context.textTheme.bodyText1),
-          Spacer(),
+          const Spacer(),
           GestureDetector(
               onTap: () {
                 viewModel.deleteWatchlist(viewModel.watchlistReversed[index]);
