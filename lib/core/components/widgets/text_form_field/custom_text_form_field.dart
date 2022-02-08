@@ -34,6 +34,8 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
             borderRadius: context.borderlowRadius, borderSide: BorderSide(color: context.customColors.azure)),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: context.borderlowRadius, borderSide: BorderSide(color: context.customColors.azure)),
         hintText: labelText ?? '',
         hintStyle: context.textTheme.bodyText1!.copyWith(color: context.customColors.darkGrey),
         border: OutlineInputBorder(

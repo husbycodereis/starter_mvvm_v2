@@ -22,6 +22,7 @@ class MovieDetailsButton extends StatelessWidget {
     return ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
+          elevation: 0,
           primary: context.brightness == Brightness.dark
               ? isFavorite!
                   ? context.customColors.whiteShade

@@ -27,6 +27,7 @@ class SearchView extends StatelessWidget {
               return Scaffold(
                 appBar: CustomAppBar(
                   context: context,
+                  text: TextConstants.home_search,
                   automaticallyImplyLeading: false,
                 ),
                 body: viewModel.loading ? buildLoading() : buildBody(viewModel, context),

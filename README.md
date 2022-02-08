@@ -13,6 +13,8 @@ You are expected to use the public APIs “​The Movie DB​” as the followin
 * Movie Details screen should show banner, title, rating, and overview of the clicked movie as shown in the screenshots. Clicking favorites and watchlist icon, adds movie to related list.
 * Use git as the source code version control system. Please do not push your project with only one commit because it can be considered as cheating.
 
+---------- 
+
 ## Westerops Implementation
 
 * Login screen
@@ -22,6 +24,8 @@ You are expected to use the public APIs “​The Movie DB​” as the followin
 * Favorites screen
 * Watchlist screen
 * Profile screen
+
+---------- 
 
 * Login screen
 
@@ -56,7 +60,7 @@ You are expected to use the public APIs “​The Movie DB​” as the followin
 
 * Watchlist screen
   1. Create custom watchlists.
-  2. Slide a watchlist to left to delete it.
+  2. Slide a watchlist to the left and delete it.
   3. Tap on a watchlist to see added movies.
   4. tap a movie to go to details
   5. slide a movie from right to left to remove the movie from the watchlist
@@ -86,7 +90,7 @@ You are expected to use the public APIs “​The Movie DB​” as the followin
 * HTTP request ⇨ Dio & Vexana
 * Dependency Injection ⇨ Get_It
 
-
+---------- 
 ## The Movie DB API
 The Movie DB ​has a lot of APIs that meet above functionalities. You are expected to discover these APIs.
 * API brief: ​https://www.themoviedb.org/documentation/api

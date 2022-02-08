@@ -28,11 +28,15 @@ class WatchListModalBottomSheet extends StatelessWidget {
       },
       onPageBuilder: (WatchListViewModel model) => ModalBottomSheetContainer(
           height: context.dynamicHeight(0.55),
-          child: model.watchlistReversed.isEmpty
-              ? Center(child: Text(TextConstants.watchlist_create, style: context.textTheme.bodyText1))
-              : Column(
-                  children: [buildCreateWatchlist(model, context), buildListView(model)],
-                )),
+          child: Column(
+            children: [
+              buildCreateWatchlist(model, context),
+              if (model.watchlistReversed.isEmpty)
+                Center(child: Text(TextConstants.watchlist_create, style: context.textTheme.bodyText1))
+              else
+                buildListView(model)
+            ],
+          )),
     );
   }
 
