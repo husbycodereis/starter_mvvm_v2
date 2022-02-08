@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_catalog/core/extensions/context_extensions.dart';
 
 class ModalBottomSheetContainer extends StatelessWidget {
   final Widget child;
@@ -13,7 +14,7 @@ class ModalBottomSheetContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: height,
-      padding: const EdgeInsets.only(left: 25, right: 25, top: 15),
+      padding: context.paddingNormalAll,
       child: child,
     );
   }
