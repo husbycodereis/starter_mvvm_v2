@@ -17,6 +17,7 @@ class SettingsDynamicView extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         context: context,
+        automaticallyImplyLeading: true,
         text: model.title,
       ),
       body: WebView(
