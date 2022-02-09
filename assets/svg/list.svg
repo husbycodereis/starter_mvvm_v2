@@ -1,1 +1,13 @@
-<svg width="25.2" height="17.1" viewBox="0 0 28 19" xmlns="http://www.w3.org/2000/svg"><g><path stroke="#fffeff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M8 1h19M8 10h19M8 18h19M1.003 1h.014M1.003 9.5h.014M1.003 18h.014"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="34" height="23" viewBox="0 0 34 23">
+  <g id="Group_174037" data-name="Group 174037" transform="translate(-344 -1168)">
+    <rect id="Rectangle_161049" data-name="Rectangle 161049" width="34" height="23" transform="translate(344 1168)" fill="none"/>
+    <g id="list" transform="translate(347 1171)">
+      <line id="Line_487" data-name="Line 487" x2="19" transform="translate(9)" fill="none" stroke="#fffeff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <line id="Line_488" data-name="Line 488" x2="19" transform="translate(9 9)" fill="none" stroke="#fffeff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <line id="Line_489" data-name="Line 489" x2="19" transform="translate(9 17)" fill="none" stroke="#fffeff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <line id="Line_490" data-name="Line 490" x2="0.014" fill="none" stroke="#fffeff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <line id="Line_491" data-name="Line 491" x2="0.014" transform="translate(0 8.5)" fill="none" stroke="#fffeff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <line id="Line_492" data-name="Line 492" x2="0.014" transform="translate(0 17)" fill="none" stroke="#fffeff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>
