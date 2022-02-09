@@ -28,7 +28,7 @@ You are expected to use the public APIs “​The Movie DB​” as the followin
 ---------- 
 
 * Login screen
-  ![](https://imgur.com/aUOqy3f)
+  ![login](https://imgur.com/aUOqy3f)
   1. A functional Login screen with a fake API => https://reqres.in.
   Use this email and password for succesful login. (email: eve.holt@reqres.in / password: cityslicka)
   2. Email & password controller and validation
