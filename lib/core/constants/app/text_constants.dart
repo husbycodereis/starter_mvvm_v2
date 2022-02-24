@@ -11,15 +11,7 @@ class TextConstants {
   static const home_favorites = 'Favorites';
   static const home_watchlist = 'Watchlist';
   static const home_profile = 'Profile';
-  static const favorites_empty = 'There are no favorite movies';
-  static const movie_no_title = 'No Title Found';
-  static const movie_no_story = 'No Story available';
-  static const movie_cast = 'Cast and Crew';
-  static const movie_no_year = 'No year found';
-  static const movie_no_language = 'No language available';
-  static const movie_no_score = 'No score found';
-  static const movie_imdb = ' | IMDB';
-  static const search_desc = 'Search for movies';
+
   static const profile_logout = 'Logout';
   static const profile_theme = 'App Theme';
   static const profile_light = 'Light';
@@ -27,14 +19,4 @@ class TextConstants {
   static const profile_about = 'About';
   static const profile_preferences = 'Preferences';
   static const profile_westerops = 'WesterOps Home';
-  static const watchlist_create = 'Create a Watchlist';
-  static const watchlist_create_word = 'Create';
-  static const watchlist_add = 'Tap the icon to search and add Movies';
-  static const watchlist_enter = 'Enter a Watchlist name';
-  static const watchlist_lists = 'Movie Lists';
-  static const watchlist_error = 'an error occured';
-  static const watchlist_exist = 'This watchlist exists!';
-  static const watchlist_long = 'Watchlist name is too long!';
-  static const watchlist_already = 'The movie is already added!';
-  static const watchlist_added = 'movie added to';
 }

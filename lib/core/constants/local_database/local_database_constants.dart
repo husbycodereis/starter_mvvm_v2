@@ -1,4 +1,3 @@
-enum LocalDatabaseConstants {
-  favorites,
-  watchlist,
-}
+// enum LocalDatabaseConstants {
+
+// }

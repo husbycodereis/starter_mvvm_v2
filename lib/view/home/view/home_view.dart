@@ -72,9 +72,6 @@ class _HomeViewState extends State<HomeView> {
   BottomNavigationBar _buildBottomNavigationBar(BuildContext context) {
     final List<BottomNavigationBarItem> _bottomNavigationItems = [
       _buildBottomNavigationBarItem(SVGImagePaths.instance!.home, TextConstants.home_home),
-      _buildBottomNavigationBarItem(SVGImagePaths.instance!.search, TextConstants.home_search),
-      _buildBottomNavigationBarItem(SVGImagePaths.instance!.heart, TextConstants.home_favorites),
-      _buildBottomNavigationBarItem(SVGImagePaths.instance!.list, TextConstants.home_watchlist),
       _buildBottomNavigationBarItem(SVGImagePaths.instance!.profile, TextConstants.home_profile),
     ];
 
