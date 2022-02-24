@@ -104,4 +104,3 @@ The Movie DB ​has a lot of APIs that meet above functionalities. You are expec
 * Discover API documentation: ​https://developers.themoviedb.org/3/discover/movie-discover 
 * To be able to send a request to this api, you need an API key. You should be register from api link, and get your api key from there.
 * For image loading details: ​https://developers.themoviedb.org/3/getting-started/images 
-# starter_mvvm_v2

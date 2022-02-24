@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movies_catalog/core/base/model/base_view_model.dart';
 import 'package:movies_catalog/core/constants/navigation/navigation_constants.dart';
+import 'package:movies_catalog/core/init/di/injection_container.dart';
 import 'package:movies_catalog/core/init/provider/notifiers/login_notifier.dart';
 import 'package:movies_catalog/view/authentication/splash/service/ISplashService.dart';
+import 'package:movies_catalog/view/favorites/viewmodel/favorites_view_model.dart';
+import 'package:movies_catalog/view/watchlist/viewmodel/watchlist_view_model.dart';
 import 'package:provider/provider.dart';
 
 part 'splash_view_model.g.dart';
@@ -22,6 +25,8 @@ abstract class _SplashViewModelBase with Store, BaseViewModel {
   void init() {
     startAnimationOnView();
     loginNotifier = context!.watch<LoginNotifier>();
+    serviceLocator<FavoritesViewModel>().init();
+    serviceLocator<WatchListViewModel>().init();
     navigateToScreens();
   }
 
