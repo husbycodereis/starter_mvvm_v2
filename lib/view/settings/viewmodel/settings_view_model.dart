@@ -4,9 +4,9 @@ import 'package:movies_catalog/core/base/model/base_view_model.dart';
 import 'package:movies_catalog/core/components/models/user/user.dart';
 import 'package:movies_catalog/core/constants/enums/locale_keys_enum.dart';
 import 'package:movies_catalog/core/constants/navigation/navigation_constants.dart';
-import 'package:movies_catalog/core/init/provider/notifiers/theme_notifier.dart';
-import 'package:provider/provider.dart';
+import 'package:movies_catalog/core/init/di/locator.dart';
 
+import '../../../core/init/theme/view_model/theme_view_model.dart';
 import '../model/settings_dynamic_model.dart';
 
 part 'settings_view_model.g.dart';
@@ -22,8 +22,8 @@ abstract class _SettingsViewModelBase with Store, BaseViewModel {
   @override
   void init() {}
 
-  void changeAppTheme() {
-    buildContext.read<ThemeNotifier>().changeTheme();
+  void changeAppTheme(String theme) {
+    locator<ThemeViewModel>().setThemeMode(theme);
   }
 
   Future<void> logoutApp() async {

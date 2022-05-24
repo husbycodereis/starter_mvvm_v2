@@ -1,22 +1,19 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_catalog/core/init/cache/local_database.dart';
-import 'package:movies_catalog/core/init/provider/notifiers/theme_notifier.dart';
-import 'package:provider/provider.dart';
+import 'package:movies_catalog/core/init/theme/dark/app_theme_dark.dart';
 
 import 'core/init/cache/shared_prefs_manager.dart';
-import 'core/init/di/injection_container.dart' as di;
+import 'core/init/di/locator.dart' as di;
 import 'core/init/navigation/navigation_routes.dart';
 import 'core/init/navigation/navigation_service.dart';
-import 'core/init/provider/provider_list.dart';
+import 'core/init/theme/light/app_theme_light.dart';
+import 'core/init/theme/view_model/theme_view_model.dart';
 
 Future main() async {
   await _init();
-  runApp(MultiProvider(
-    providers: [...ApplicationProvider.instance.dependItems],
-    child: const MyApp(),
-  ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -24,14 +21,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(414,896),
-      builder:(context, widget)=> MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: context.watch<ThemeNotifier>().currentTheme,
-        navigatorKey: NavigationService.instance.navigatorKey,
-        onGenerateRoute: NavigationRoute.instance.generateRoute,
-      ),
-    );
+        designSize: const Size(414, 896),
+        builder: (context, widget) => Observer(
+              builder: (_) {
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  theme: AppThemeLight.instance.theme,
+                  darkTheme: AppThemeDark.instance.theme,
+                  themeMode: di.locator<ThemeViewModel>().themeMode,
+                  navigatorKey: NavigationService.instance.navigatorKey,
+                  onGenerateRoute: NavigationRoute.instance.generateRoute,
+                );
+              },
+            ));
   }
 }
 

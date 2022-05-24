@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:movies_catalog/core/init/cache/shared_prefs_manager.dart';
 
 import '../../../../core/base/model/base_view_model.dart';
 import '../../../../core/constants/enums/locale_keys_enum.dart';
@@ -21,6 +22,9 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
 
   late TextEditingController emailController;
   late TextEditingController passwordController;
+
+  final String _isLoggedIn = SharedPrefsManager.instance.getStringValue(SharedPrefKeys.TOKEN);
+  bool get isLoggedIn => _isLoggedIn.isNotEmpty;
   @override
   void setContext(BuildContext context) {
    buildContext = context;
@@ -38,6 +42,9 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
 
   @observable
   bool isLockOpen = false;
+
+
+  
   @action
   Future<void> fetchLoginService() async {
     isLoadingChange();

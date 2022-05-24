@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movies_catalog/core/base/view/base_view.dart';
 import 'package:movies_catalog/core/constants/app/text_constants.dart';
-import 'package:movies_catalog/core/constants/enums/lottie_path_enum.dart';
+import 'package:movies_catalog/core/init/di/locator.dart';
+import 'package:movies_catalog/core/init/theme/view_model/theme_view_model.dart';
 
 import '../../../core/base/view/base_view.dart';
 import '../../../core/extensions/context_extensions.dart';
@@ -96,16 +98,27 @@ class SettingsView extends StatelessWidget {
 
   Widget buildProjectCore(BuildContext context, SettingsViewModel viewModel) {
     return buildCardHeader(context, viewModel, title: TextConstants.profile_preferences, children: [
-      ListTile(
-        title: Text(TextConstants.profile_theme, style: context.textTheme.bodyText1),
-        trailing: IconButton(
-            onPressed: viewModel.changeAppTheme,
-            icon: context.brightness == Brightness.light ? LottiePathEnum.SUN.toWidget : LottiePathEnum.MOON.toWidget),
-        subtitle: Text(
-          context.brightness == Brightness.light ? TextConstants.profile_light : TextConstants.profile_dark,
-          style: context.textTheme.overline,
-        ),
-      ),
+      Observer(builder: (_) {
+        return ListView(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          children: AppThemes.values
+              .map(
+                (object) => ListTile(
+                  dense: true,
+                  title: Text(object.name,
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                          color: locator<ThemeViewModel>().theme == object.name
+                              ? Theme.of(context).colorScheme.secondary
+                              : context.customColors.darkGrey)),
+                  onTap: () {
+                    locator<ThemeViewModel>().setThemeMode(object.name);
+                  },
+                ),
+              )
+              .toList(),
+        );
+      }),
     ]);
   }
 

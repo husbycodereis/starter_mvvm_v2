@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:movies_catalog/core/base/model/base_view_model.dart';
 import 'package:movies_catalog/core/constants/navigation/navigation_constants.dart';
-import 'package:movies_catalog/core/init/provider/notifiers/login_notifier.dart';
+import 'package:movies_catalog/core/init/di/locator.dart';
+import 'package:movies_catalog/view/authentication/login/view_model/login_view_model.dart';
 import 'package:movies_catalog/view/authentication/splash/service/ISplashService.dart';
-import 'package:provider/provider.dart';
+
 
 part 'splash_view_model.g.dart';
 
@@ -12,7 +13,7 @@ class SplashViewModel = _SplashViewModelBase with _$SplashViewModel;
 
 abstract class _SplashViewModelBase with Store, BaseViewModel {
   late ISplashService splashService;
-  late LoginNotifier loginNotifier;
+  late LoginViewModel loginViewModel;
     late BuildContext buildContext; 
   _SplashViewModelBase(this.splashService);
 
@@ -21,7 +22,7 @@ abstract class _SplashViewModelBase with Store, BaseViewModel {
   @override
   void init() {
     startAnimationOnView();
-    loginNotifier = buildContext.watch<LoginNotifier>();
+    loginViewModel = locator<LoginViewModel>();
     navigateToScreens();
   }
 
@@ -36,7 +37,7 @@ abstract class _SplashViewModelBase with Store, BaseViewModel {
   Future<void> navigateToScreens() async {
     await Future.delayed(const Duration(milliseconds: 2000));
     await navigation.navigateToPageClear(
-        path: loginNotifier.isLoggedIn ? NavigationConstants.HOME : NavigationConstants.LOGIN_VIEW);
+        path: loginViewModel.isLoggedIn ? NavigationConstants.HOME : NavigationConstants.LOGIN_VIEW);
   }
 
   @action
