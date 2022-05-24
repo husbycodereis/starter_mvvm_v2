@@ -24,9 +24,9 @@ class ColorThemeLight {
 
   ColorScheme get colorScheme => ColorScheme(
       primary: whiteShade, //xx
-      primaryVariant: whiteShade,
+      primaryContainer: whiteShade,
       secondary: azure, //xx
-      secondaryVariant: azure, //xx
+      secondaryContainer: azure, //xx
       surface: darkBlue,
       background: darkBlue, //xx
       error: red,

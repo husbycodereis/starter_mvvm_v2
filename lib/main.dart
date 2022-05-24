@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(414,896),
-      builder:()=> MaterialApp(
+      builder:(context, widget)=> MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: context.watch<ThemeNotifier>().currentTheme,
         navigatorKey: NavigationService.instance.navigatorKey,

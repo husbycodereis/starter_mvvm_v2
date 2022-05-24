@@ -15,3 +15,9 @@ linter:
     prefer_constructors_over_static_methods: false
     use_setters_to_change_properties: false
     sort_pub_dependencies: false
+    library_private_types_in_public_api: false
+    require_trailing_commas: false
+    use_build_context_synchronously: false
+    always_use_package_imports: false
+    eol_at_end_of_file: false
+    prefer_null_aware_method_calls: false

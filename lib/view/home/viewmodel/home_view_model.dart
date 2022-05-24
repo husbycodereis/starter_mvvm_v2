@@ -9,10 +9,10 @@ class HomeViewModel = _HomeViewModelBase with _$HomeViewModel;
 
 abstract class _HomeViewModelBase with Store, BaseViewModel {
   late IHomeService homeService;
-
+  late BuildContext buildContext;
   
   @override
-  void setContext(BuildContext context) => this.context = context;
+  void setContext(BuildContext context) => buildContext = context;
   @override
   void init() {
   }

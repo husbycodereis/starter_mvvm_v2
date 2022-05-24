@@ -13,15 +13,15 @@ class SplashViewModel = _SplashViewModelBase with _$SplashViewModel;
 abstract class _SplashViewModelBase with Store, BaseViewModel {
   late ISplashService splashService;
   late LoginNotifier loginNotifier;
-
+    late BuildContext buildContext; 
   _SplashViewModelBase(this.splashService);
 
   @override
-  void setContext(BuildContext context) => this.context = context;
+  void setContext(BuildContext context) => buildContext = context;
   @override
   void init() {
     startAnimationOnView();
-    loginNotifier = context!.watch<LoginNotifier>();
+    loginNotifier = buildContext.watch<LoginNotifier>();
     navigateToScreens();
   }
 
@@ -29,7 +29,6 @@ abstract class _SplashViewModelBase with Store, BaseViewModel {
   bool isFirstInit = true;
 
   Future<void> startAnimationOnView() async {
-    if (context == null) return;
     await Future.delayed(const Duration(milliseconds: 500));
     _changeFirstInit();
   }

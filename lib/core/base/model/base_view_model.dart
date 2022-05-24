@@ -5,7 +5,7 @@ import '../../init/navigation/navigation_service.dart';
 import '../../init/network/vexana_manager.dart';
 
 abstract class BaseViewModel {
-  BuildContext? context;
+
 
   VexanaManager vexanaManager = VexanaManager.instance;
   SharedPrefsManager sharedPrefManager = SharedPrefsManager.instance;

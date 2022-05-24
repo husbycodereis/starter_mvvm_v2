@@ -16,14 +16,14 @@ class SettingsViewModel = _SettingsViewModelBase with _$SettingsViewModel;
 
 abstract class _SettingsViewModelBase with Store, BaseViewModel {
   final userModel = UserModel.fake();
-
+  late BuildContext buildContext;
   @override
-  void setContext(BuildContext context) => this.context = context;
+  void setContext(BuildContext context) => buildContext = context;
   @override
   void init() {}
 
   void changeAppTheme() {
-    context!.read<ThemeNotifier>().changeTheme();
+    buildContext.read<ThemeNotifier>().changeTheme();
   }
 
   Future<void> logoutApp() async {

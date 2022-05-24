@@ -16,13 +16,14 @@ class LoginViewModel = _LoginViewModelBase with _$LoginViewModel;
 abstract class _LoginViewModelBase with Store, BaseViewModel {
   GlobalKey<FormState> formState = GlobalKey();
   GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
+  late BuildContext buildContext;
   late ILoginService loginService;
 
   late TextEditingController emailController;
   late TextEditingController passwordController;
   @override
   void setContext(BuildContext context) {
-    this.context = context;
+   buildContext = context;
   }
 
   @override
@@ -42,10 +43,10 @@ abstract class _LoginViewModelBase with Store, BaseViewModel {
     isLoadingChange();
     if (formState.currentState!.validate()) {
       final response = await loginService.fetchUserControl(
-          LoginModel(email: emailController.text, password: passwordController.text), context!);
+          LoginModel(email: emailController.text, password: passwordController.text), buildContext);
       if (response != null) {
         await sharedPrefManager.setStringValue(SharedPrefKeys.TOKEN, response.token!);
-        await context!.showSnackBar('Login Successful!');
+        await buildContext.showSnackBar('Login Successful!');
         await navigation.navigateToPage(
           path: NavigationConstants.HOME,
         );

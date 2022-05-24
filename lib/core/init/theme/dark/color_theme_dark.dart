@@ -24,9 +24,9 @@ class ColorThemeDark {
 
   ColorScheme get colorScheme => ColorScheme(
       primary: darkBlue, //xx
-      primaryVariant: darkBlue,
+      primaryContainer: darkBlue,
       secondary: azure, //xx
-      secondaryVariant: azure, //xx
+      secondaryContainer: azure, //xx
       surface: darkBlue,
       background: darkBlue, //xx
       error: red,
